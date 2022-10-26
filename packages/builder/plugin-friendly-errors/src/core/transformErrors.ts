@@ -1,6 +1,9 @@
-'use strict';
+import type * as webpack from 'webpack5';
+import extractError from './extractWebpackError';
 
-const extractError = require('./extractWebpackError');
+export type AnnotatedError = webpack.WebpackError;
+
+export type ErrorTransformer = (error: webpack.WebpackError) => AnnotatedError;
 
 /**
  * Applies all transformers to all errors and returns "annotated"
@@ -24,11 +27,18 @@ const extractError = require('./extractWebpackError');
  *
  * If they don't have a 'type' field, the will be handled by the default formatter.
  */
-function processErrors (errors, transformers) {
-  const transform = (error, transformer) => transformer(error);
-  const applyTransformations = (error) => transformers.reduce(transform, error);
+function processErrors(
+  errors: webpack.WebpackError[],
+  transformers: ErrorTransformer[],
+) {
+  const transform = (
+    error: webpack.WebpackError,
+    transformer: ErrorTransformer,
+  ) => transformer(error);
+  const applyTransformations = (error: webpack.WebpackError) =>
+    transformers.reduce(transform, error);
 
   return errors.map(extractError).map(applyTransformations);
 }
 
-module.exports = processErrors;
+export default processErrors;

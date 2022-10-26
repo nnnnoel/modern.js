@@ -1,15 +1,10 @@
-'use strict';
-
-const path = require('path');
-const chalk = require('chalk');
-const os = require('os');
-const transformErrors = require('./core/transformErrors');
-const formatErrors = require('./core/formatErrors');
-const output = require('./output');
-const utils = require('./utils');
-
-const concat = utils.concat;
-const uniqueBy = utils.uniqueBy;
+import path from 'path';
+import os from 'os';
+import chalk from 'chalk';
+import transformErrors from './core/transformErrors';
+import formatErrors from './core/formatErrors';
+import output from './output';
+import { concat, uniqueBy } from './utils';
 
 const defaultTransformers = [
   require('./transformers/babelSyntax'),
@@ -24,19 +19,21 @@ const defaultFormatters = [
 ];
 
 class FriendlyErrorsWebpackPlugin {
-
   constructor(options) {
     options = options || {};
     this.compilationSuccessInfo = options.compilationSuccessInfo || {};
     this.onErrors = options.onErrors;
-    this.shouldClearConsole = options.clearConsole == null ? true : Boolean(options.clearConsole);
+    this.shouldClearConsole =
+      options.clearConsole == null ? true : Boolean(options.clearConsole);
     this.formatters = concat(defaultFormatters, options.additionalFormatters);
-    this.transformers = concat(defaultTransformers, options.additionalTransformers);
+    this.transformers = concat(
+      defaultTransformers,
+      options.additionalTransformers,
+    );
     this.previousEndTimes = {};
   }
 
   apply(compiler) {
-
     const doneFn = stats => {
       this.clearConsole();
 
@@ -54,7 +51,10 @@ class FriendlyErrorsWebpackPlugin {
       }
 
       if (hasWarnings) {
-        this.displayErrors(extractErrorsFromStats(stats, 'warnings'), 'warning');
+        this.displayErrors(
+          extractErrorsFromStats(stats, 'warnings'),
+          'warning',
+        );
       }
     };
 
@@ -81,11 +81,15 @@ class FriendlyErrorsWebpackPlugin {
   }
 
   displaySuccess(stats) {
-    const time = isMultiStats(stats) ? this.getMultiStatsCompileTime(stats) : this.getStatsCompileTime(stats);
-    output.title('success', 'DONE', 'Compiled successfully in ' + time + 'ms');
+    const time = isMultiStats(stats)
+      ? this.getMultiStatsCompileTime(stats)
+      : this.getStatsCompileTime(stats);
+    output.title('success', 'DONE', `Compiled successfully in ${time}ms`);
 
     if (this.compilationSuccessInfo.messages) {
-      this.compilationSuccessInfo.messages.forEach(message => output.info(message));
+      this.compilationSuccessInfo.messages.forEach(message =>
+        output.info(message),
+      );
     }
     if (this.compilationSuccessInfo.notes) {
       output.log();
@@ -99,17 +103,19 @@ class FriendlyErrorsWebpackPlugin {
     const topErrors = getMaxSeverityErrors(processedErrors);
     const nbErrors = topErrors.length;
 
-    const subtitle = severity === 'error' ?
-      `Failed to compile with ${nbErrors} ${severity}s` :
-      `Compiled with ${nbErrors} ${severity}s`;
+    const subtitle =
+      severity === 'error'
+        ? `Failed to compile with ${nbErrors} ${severity}s`
+        : `Compiled with ${nbErrors} ${severity}s`;
     output.title(severity, severity.toUpperCase(), subtitle);
 
     if (this.onErrors) {
       this.onErrors(severity, topErrors);
     }
 
-    formatErrors(topErrors, this.formatters, severity)
-      .forEach(chunk => output.log(chunk));
+    formatErrors(topErrors, this.formatters, severity).forEach(chunk =>
+      output.log(chunk),
+    );
   }
 
   getStatsCompileTime(stats, statsIndex) {
@@ -129,21 +135,26 @@ class FriendlyErrorsWebpackPlugin {
   getMultiStatsCompileTime(stats) {
     // Webpack multi compilations run in parallel so using the longest duration.
     // https://webpack.github.io/docs/configuration.html#multiple-configurations
-    return stats.stats
-      .reduce((time, stats, index) => Math.max(time, this.getStatsCompileTime(stats, index)), 0);
+    return stats.stats.reduce(
+      (time, stats, index) =>
+        Math.max(time, this.getStatsCompileTime(stats, index)),
+      0,
+    );
   }
 }
 
 function extractErrorsFromStats(stats, type) {
   if (isMultiStats(stats)) {
-    const errors = stats.stats
-      .reduce((errors, stats) => errors.concat(extractErrorsFromStats(stats, type)), []);
+    const errors = stats.stats.reduce(
+      (errors, stats) => errors.concat(extractErrorsFromStats(stats, type)),
+      [],
+    );
     // Dedupe to avoid showing the same error many times when multiple
     // compilers depend on the same module.
     return uniqueBy(errors, error => error.message);
   }
 
-  const findErrorsRecursive = (compilation) => {
+  const findErrorsRecursive = compilation => {
     const errors = compilation[type];
     if (errors.length === 0 && compilation.children) {
       for (const child of compilation.children) {
@@ -169,7 +180,7 @@ function getMaxSeverityErrors(errors) {
 function getMaxInt(collection, propertyName) {
   return collection.reduce((res, curr) => {
     return curr[propertyName] > res ? curr[propertyName] : res;
-  }, 0)
+  }, 0);
 }
 
 module.exports = FriendlyErrorsWebpackPlugin;

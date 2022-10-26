@@ -1,38 +1,39 @@
-'use strict';
+import chalk from 'chalk';
+import { Severity } from '../formatters/defaultError';
 
-const chalk = require('chalk');
-
-function formatTitle(severity, message) {
+export function formatTitle(severity: Severity, message: string) {
   return chalk[bgColor(severity)].black('', message, '');
 }
 
-function formatText(severity, message) {
+export function formatText(severity: Severity, message: string) {
   return chalk[textColor(severity)](message);
 }
 
-function bgColor(severity) {
+export function bgColor(
+  severity: Severity,
+): `bg${Capitalize<ReturnType<typeof textColor>>}` {
   const color = textColor(severity);
-  return 'bg'+ capitalizeFirstLetter(color)
+  const colorMark = capitalizeFirstLetter(color);
+  return `bg${colorMark}` as any;
 }
 
-function textColor(severity) {
+export function textColor(severity: Severity) {
   switch (severity.toLowerCase()) {
-    case 'success': return 'green';
-    case 'info': return 'blue';
-    case 'note': return 'white';
-    case 'warning': return 'yellow';
-    case 'error': return 'red';
-    default: return 'red';
+    case 'success':
+      return 'green';
+    case 'info':
+      return 'blue';
+    case 'note':
+      return 'white';
+    case 'warning':
+      return 'yellow';
+    case 'error':
+      return 'red';
+    default:
+      return 'red';
   }
 }
 
-function capitalizeFirstLetter(string) {
-  return string.charAt(0).toUpperCase() + string.slice(1);
+export function capitalizeFirstLetter(str: string) {
+  return str.charAt(0).toUpperCase() + str.slice(1);
 }
-
-module.exports = {
-  bgColor: bgColor,
-  textColor: textColor,
-  formatTitle: formatTitle,
-  formatText: formatText
-};

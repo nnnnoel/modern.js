@@ -1,43 +1,46 @@
-'use strict';
+import type * as webpack from 'webpack5';
+import { Formatter } from '../core/formatErrors';
+import { concat } from '../utils';
+import { formatTitle } from '../utils/colors';
 
-const concat = require('../utils').concat;
-const formatTitle = require('../utils/colors').formatTitle;
+export type Severity = string;
 
-function displayError(severity, error) {
+function displayError(severity: Severity, error: webpack.WebpackError) {
   const baseError = formatTitle(severity, severity);
 
   return concat(
     `${baseError} ${removeLoaders(error.file)}`,
     '',
     error.message,
-    (error.origin ? error.origin : undefined),
+    error.origin ? error.origin : undefined,
     '',
-    error.infos
+    error.infos,
   );
 }
 
-function removeLoaders(file) {
+function removeLoaders(file?: string) {
   if (!file) {
-    return "";
+    return '';
   }
   const split = file.split('!');
   const filePath = split[split.length - 1];
   return `in ${filePath}`;
 }
 
-function isDefaultError(error) {
-  return !error.type;
+function isDefaultError(error: webpack.WebpackError) {
+  return !('type' in error);
 }
 
 /**
  * Format errors without a type
  */
-function format(errors, type) {
+const format: Formatter = (errors, type) => {
   return errors
     .filter(isDefaultError)
-    .reduce((accum, error) => (
-      accum.concat(displayError(type, error))
-    ), []);
-}
+    .reduce(
+      (acc, error) => acc.concat(displayError(type, error)),
+      [] as string[],
+    );
+};
 
-module.exports = format;
+export default format;
