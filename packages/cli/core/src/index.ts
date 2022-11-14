@@ -2,6 +2,7 @@ import path from 'path';
 import {
   pkgUp,
   program,
+  Command,
   ensureAbsolutePath,
   logger,
   INTERNAL_PLUGINS,
@@ -70,6 +71,7 @@ const initAppDir = async (cwd?: string): Promise<string> => {
 };
 
 export interface CoreOptions {
+  cwd?: string;
   version?: string;
   configFile?: string;
   serverConfigFile?: string;
@@ -113,7 +115,7 @@ const createCli = () => {
 
     restartOptions = mergedOptions;
 
-    const appDirectory = await initAppDir();
+    const appDirectory = await initAppDir(options?.cwd);
 
     initCommandsMap();
     setProgramVersion(options?.version);
@@ -220,6 +222,34 @@ const createCli = () => {
     program.parse(process.argv);
   }
 
+  async function test(
+    argv: string[],
+    options?: {
+      coreOptions?: CoreOptions;
+      disableWatcher?: boolean;
+    },
+  ) {
+    const newProgram = new Command();
+    const { coreOptions } = options ?? {};
+    const { loadedConfig, appContext, resolved } = await init(
+      argv,
+      coreOptions,
+    );
+
+    await hooksRunner.commands({ program: newProgram });
+    if (!options?.disableWatcher) {
+      initWatcher(
+        loadedConfig,
+        appContext.appDirectory,
+        resolved.source.configDir,
+        hooksRunner,
+        argv,
+      );
+    }
+
+    await newProgram.parseAsync(argv);
+  }
+
   async function restart() {
     isRestart = true;
     restartWithExistingPort = isRestart ? AppContext.use().value?.port ?? 0 : 0;
@@ -247,6 +277,7 @@ const createCli = () => {
     init,
     run,
     restart,
+    test,
   };
 };
 

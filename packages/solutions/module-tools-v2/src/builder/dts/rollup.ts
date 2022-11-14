@@ -3,8 +3,11 @@ import type {
   InputOptions,
   OutputOptions,
   Plugin,
+  RollupWatcher,
 } from '../../../compiled/rollup';
 import type { BundleOptions, Entry } from '../../types';
+
+export type { RollupWatcher };
 
 type Config = {
   distDir: string;
@@ -44,6 +47,9 @@ export const runRollup = async ({
   const { default: dtsPlugin } = await import(
     '../../../compiled/rollup-plugin-dts'
   );
+  const baseUrl = path.isAbsolute(options.baseUrl || '.')
+    ? options.baseUrl
+    : path.join(path.dirname(tsconfigPath), options.baseUrl || '.');
   const inputConfig: InputOptions = {
     input: entry,
     external: externals,
@@ -55,7 +61,7 @@ export const runRollup = async ({
         respectExternal: true,
         compilerOptions: {
           ...options,
-          baseUrl: path.resolve(options.baseUrl || '.'),
+          baseUrl,
           // Ensure ".d.ts" modules are generated
           declaration: true,
           // Skip ".js" generation
@@ -85,7 +91,7 @@ export const runRollup = async ({
     const { SectionTitleStatus, BundleDtsLogPrefix } = await import(
       '../../constants/log'
     );
-    watch({
+    const watcher = watch({
       ...inputConfig,
       plugins: inputConfig.plugins,
       output: outputConfig,
@@ -105,11 +111,13 @@ export const runRollup = async ({
         // this is dts rollup plugin bug, error not complete message
       }
     });
+    return watcher;
   } else {
     try {
       const { rollup } = await import('../../../compiled/rollup');
       const bundle = await rollup(inputConfig);
       await bundle.write(outputConfig);
+      return bundle;
     } catch (e) {
       if (e instanceof Error) {
         const { InternalDTSError } = await import('../../error');
@@ -117,6 +125,7 @@ export const runRollup = async ({
           buildType: 'bundle',
         });
       }
+      throw e;
     }
   }
 };
