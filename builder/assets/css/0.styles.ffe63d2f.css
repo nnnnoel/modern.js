@@ -1816,6 +1816,17 @@ pre.vue-container em {
   color: #808080;
   font-weight: light;
 }
+table {
+  font-size: 15px;
+  line-height: 1.7;
+}
+table ul {
+  margin: 0;
+}
+th,
+.vp-doc td {
+  padding: 0.8em;
+}
 .api-group-ul.config-experimental {
   transform: scale(0.92);
   transform-origin: top left;
