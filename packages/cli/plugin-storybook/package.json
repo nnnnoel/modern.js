@@ -11,7 +11,7 @@
     "modern",
     "modern.js"
   ],
-  "version": "1.22.3",
+  "version": "1.22.4-hotfix.0",
   "jsnext:source": "./src/index.ts",
   "types": "./src/index.ts",
   "main": "./dist/js/node/index.js",
@@ -113,6 +113,11 @@
         "tests/**/*"
       ],
       "output": []
+    }
+  },
+  "pnpm": {
+    "overrides": {
+      "@modern-js/plugin-storybook": "1.22.4-hotfix.0"
     }
   }
 }
