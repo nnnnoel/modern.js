@@ -109,6 +109,7 @@ export function withBase(url = '/', base = ''): string {
     ? normalizedUrl
     : `${normalizedBase}${normalizedUrl}`;
 }
+
 export function removeBase(url: string, base: string) {
   return addLeadingSlash(url).replace(normalizeSlash(base), '');
 }
