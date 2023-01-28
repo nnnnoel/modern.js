@@ -86,8 +86,8 @@ export const PluginCompatModern = (
         .add(join(api.context.rootPath, 'node_modules'));
 
       // apply node compat
-      if (target === 'node') {
-        applyNodeCompat(chain, modernConfig, isProd);
+      if (target === 'node' || target === 'web-worker') {
+        applyNodeOrWorkerCompat(target, chain, modernConfig, isProd);
       }
 
       if (isHtmlEnabled(builderNormalizedConfig, target)) {
@@ -177,15 +177,15 @@ function applyCallbacks(
 }
 
 /**
- * compat some config, if target is `node`
+ * compat some config, if target is `node` or `worker`
  */
-function applyNodeCompat(
+function applyNodeOrWorkerCompat(
+  target: 'node' | 'web-worker',
   chain: WebpackChain,
   modernConfig: AppNormalizedConfig,
   isProd: boolean,
 ) {
-  // apply node resolve extensions
-  for (const ext of [
+  let exts = [
     '.node.js',
     '.node.jsx',
     '.node.ts',
@@ -194,7 +194,12 @@ function applyNodeCompat(
     '.server.ts',
     '.server.ts',
     '.server.tsx',
-  ]) {
+  ];
+  if (target === 'web-worker') {
+    exts = ['.worker.js', '.worker.jsx', '.worker.ts', '.worker.tsx', ...exts];
+  }
+  // apply node resolve extensions
+  for (const ext of exts) {
     chain.resolve.extensions.prepend(ext);
   }
 

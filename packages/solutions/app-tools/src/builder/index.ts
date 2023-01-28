@@ -15,6 +15,7 @@ import {
   isProd,
   isSSR,
   isUseSSRBundle,
+  isWorker,
 } from '@modern-js/utils';
 import type { AppNormalizedConfig } from '../types';
 import {
@@ -39,6 +40,12 @@ function getBuilderTargets(normalizedConfig: AppNormalizedConfig) {
 
   if (useNodeTarget) {
     targets.push('node');
+  }
+
+  const useWorkerTarget = isWorker(normalizedConfig);
+
+  if (useWorkerTarget) {
+    targets.push('web-worker');
   }
 
   return targets;
