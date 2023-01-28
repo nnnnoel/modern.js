@@ -185,7 +185,7 @@ function applyNodeOrWorkerCompat(
   modernConfig: AppNormalizedConfig,
   isProd: boolean,
 ) {
-  let exts = [
+  const exts = [
     '.node.js',
     '.node.jsx',
     '.node.ts',
@@ -196,7 +196,7 @@ function applyNodeOrWorkerCompat(
     '.server.tsx',
   ];
   if (target === 'web-worker') {
-    exts = ['.worker.js', '.worker.jsx', '.worker.ts', '.worker.tsx', ...exts];
+    exts.unshift('.worker.js', '.worker.jsx', '.worker.ts', '.worker.tsx');
   }
   // apply node resolve extensions
   for (const ext of exts) {

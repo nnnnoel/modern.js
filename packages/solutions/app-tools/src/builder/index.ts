@@ -42,7 +42,7 @@ function getBuilderTargets(normalizedConfig: AppNormalizedConfig) {
     targets.push('node');
   }
 
-  const useWorkerTarget = isWorker(normalizedConfig);
+  const useWorkerTarget = isProd() ? isWorker(normalizedConfig) : false;
 
   if (useWorkerTarget) {
     targets.push('web-worker');
