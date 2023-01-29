@@ -130,7 +130,7 @@ export const PluginCompatModern = (
       if (existNestedRoutes || routerManifest) {
         chain.plugin('route-plugin').use(RouterPlugin);
       }
-      if (target !== 'node') {
+      if (target !== 'node' && target !== 'web-worker') {
         const bareServerModuleReg = /\.(server|node)\.[tj]sx?$/;
         chain.module.rule(CHAIN_ID.RULE.JS).exclude.add(bareServerModuleReg);
         chain.module
