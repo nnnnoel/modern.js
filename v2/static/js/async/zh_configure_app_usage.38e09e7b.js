@@ -1,7 +1,7 @@
 "use strict";
-(self["webpackChunk_modern_js_main_doc_website"] = self["webpackChunk_modern_js_main_doc_website"] || []).push([[94981],{
+(self["webpackChunk_modern_js_main_doc_website"] = self["webpackChunk_modern_js_main_doc_website"] || []).push([[53694],{
 
-/***/ 5714:
+/***/ 12986:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -19,28 +19,28 @@ const frontmatter = {
   "sidebar_position": 0
 };
 const toc = [{
-  "id": "configure-in-the-configuration-file",
-  "text": "Configure in the configuration file",
+  "id": "在配置文件中配置",
+  "text": "在配置文件中配置",
   "depth": 2
 }, {
   "id": "modernconfigjs",
   "text": "modern.config.js",
   "depth": 3
 }, {
-  "id": "modernconfigts",
-  "text": "modern.config.ts",
+  "id": "modernconfigts推荐",
+  "text": "modern.config.ts（推荐）",
   "depth": 3
 }, {
-  "id": "configure-in-packagejson-not-recommended",
-  "text": "Configure in package.json (not recommended)",
+  "id": "在-packagejson-中配置不推荐",
+  "text": "在 package.json 中配置（不推荐）",
   "depth": 2
 }, {
-  "id": "note",
-  "text": "Note",
+  "id": "注意事项",
+  "text": "注意事项",
   "depth": 2
 }];
-const title = `Configure to use`;
-const content = "\"---\\nsidebar_position: 0\\n---\\n\\n# Configure to use\\n\\nThere are two configurations in the Modern.js, a compile configuration and a server runtime configuration.\\n\\nThe compile configuration can be configured in two places:\\n\\n- `package.json` file\\n- `modern.config.t(j)s` file in the root path\\n\\n:::info Warning\\nConfigurations in both package.json and modern.config.ts file are not supported for the same configuration. Configuration in modern.config.ts is recommended.\\n:::\\n\\nServer runtime configuration can be configured in the `modern.server-runtime.config.t(j)s` file in the root path.\\n\\n## Configure in the configuration file\\n\\nModern.js configuration files are defined in the root path of the project, and both `.js` and `.ts` formats are supported:\\n\\n- `modern.config.js`\\n- `modern.config.ts`\\n\\n### modern.config.js\\n\\nYou can use JavaScript syntax in the `modern.config.js` file and it is more flexible than in the `package.json` file.\\n\\nFor example, you can define configuration options for function types in `modern.config.js`:\\n\\n```js title=\\\"modern.config.js\\\"\\nexport default {\\n  source: {\\n    alias: opts => {\\n      opts['@common'] = './src/common';\\n    },\\n  },\\n};\\n```\\n\\nYou can also dynamically set it with `process.env.NODE _ENV`:\\n\\n```js title=\\\"modern.config.js\\\"\\nexport default {\\n  server: {\\n    ssr: process.env.NODE_ENV === 'development',\\n  },\\n};\\n```\\n\\n### modern.config.ts\\n\\nWe recommend using configuration files in `.ts` format, which provides friendly TypeScript type hints to help you avoid configuration errors.\\n\\nImport the `defineConfig` tool function from `@modern-js/app-tools`, which will help you with configuration type derivation and type completion:\\n\\n```ts title=\\\"modern.config.ts\\\"\\nimport { defineConfig } from '@modern-js/app-tools';\\n\\nexport default defineConfig({\\n  source: {\\n    alias: {\\n      '@common': './src/common',\\n    },\\n  },\\n});\\n```\\n\\n## Configure in package.json (not recommended)\\n\\nIn addition to configuration files, configuration options can also be set the `modernConfig` field in the `package.json`, such as:\\n\\n```json title=\\\"package.json\\\"\\n{\\n  \\\"modernConfig\\\": {\\n    \\\"source\\\": {\\n      \\\"alias\\\": {\\n        \\\"@common\\\": \\\"./src/common\\\"\\n      }\\n    }\\n  }\\n}\\n```\\n\\nDue to the limitation of the JSON file format, only simple types such as numbers, strings, boolean values, arrays, etc. can be defined in `package.json`. When we need to set the value of the function type, it is recommended to set it in the Modern.js configuration file.\\n\\n## Note\\n\\n- It is not recommended to use both `package.json` and `modern.config.t[j]s` for configuration. If both are used and a configuration conflict occurs, Modern.js will prompt error on the command line.\\n- `@modern-js/runtime` exports the [defineConfig](/apis/app/runtime/app/define-config) API of the same name, please pay attention to the distinction.\\n\"";
+const title = `配置使用`;
+const content = "\"---\\nsidebar_position: 0\\n---\\n\\n# 配置使用\\n\\nModern.js 中有两种配置，一个是编译时配置，一个是服务端运行时配置。\\n\\n编译时配置可以在两个位置进行配置：\\n\\n- `package.json` 文件\\n- 根路径下的 `modern.config.t(j)s` 文件\\n\\n:::info意\\n不支持同时在 package.json 中和 modern.config.ts 中配置同一个配置项，推荐优先在 modern.config.ts 中进行配置。如果 Modern.js 检测到重复配置导致的冲突，将会抛出警告。\\n:::\\n\\n服务端运行时配置可以在根路径下的 `modern.server-runtime.config.t(j)s` 中自定义配置选项。\\n\\n## 在配置文件中配置\\n\\nModern.js 的配置文件定义在项目的根目录下，支持 `.js`, `.ts` 和 `.mjs` 格式：\\n\\n- `modern.config.js`\\n- `modern.config.ts`\\n- `modern.config.mjs`\\n\\n### modern.config.js\\n\\n`modern.config.js` 中可以使用 JavaScript 语法，因此比 `package.json` 更加灵活。\\n\\n比如，你可以在 `modern.config.js` 中定义函数类型的配置选项：\\n\\n```js title=\\\"modern.config.js\\\"\\nexport default {\\n  source: {\\n    alias: opts => {\\n      opts['@common'] = './src/common';\\n    },\\n  },\\n};\\n```\\n\\n你也可以通过 `process.env.NODE_ENV` 进行动态设置：\\n\\n```js title=\\\"modern.config.js\\\"\\nexport default {\\n  server: {\\n    ssr: process.env.NODE_ENV === 'development',\\n  },\\n};\\n```\\n\\n### modern.config.ts（推荐）\\n\\n我们推荐使用 .ts 格式的配置文件，它提供了友好的 TypeScript 类型提示，从而帮助你避免配置中的错误。\\n\\n从 `@modern-js/app-tools` 中导入 `defineConfig` 工具函数, 它会帮助你进行配置的类型推导和类型补全：\\n\\n```ts title=\\\"modern.config.ts\\\"\\nimport { defineConfig } from '@modern-js/app-tools';\\n\\nexport default defineConfig({\\n  source: {\\n    alias: {\\n      '@common': './src/common',\\n    },\\n  },\\n});\\n```\\n\\n## 在 package.json 中配置（不推荐）\\n\\n除了配置文件外，也可以在 `package.json` 中的 `modernConfig` 字段下设置配置选项，如：\\n\\n```json title=\\\"package.json\\\"\\n{\\n  \\\"modernConfig\\\": {\\n    \\\"source\\\": {\\n      \\\"alias\\\": {\\n        \\\"@common\\\": \\\"./src/common\\\"\\n      }\\n    }\\n  }\\n}\\n```\\n\\n由于 JSON 文件格式的限制，`package.json` 中只能定义数字、字符串、布尔值、数组等简单类型的值，当我们需要设置函数类型的值时，建议在 Modern.js 配置文件中进行设置。\\n\\n## 注意事项\\n\\n- 不建议同时使用 `package.json` 和 `modern.config.js` 进行配置。如果同时使用了两者并出现配置冲突，Modern.js 会在命令行进行提示。\\n- `@modern-js/runtime` 导出了同名的 [defineConfig](/apis/app/runtime/app/define-config) API，请注意区分。\\n\"";
 function _createMdxContent(props) {
   const _components = Object.assign({
     h1: "h1",
@@ -58,56 +58,58 @@ function _createMdxContent(props) {
   }, props.components);
   return (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
     children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.h1, {
-      id: "configure-to-use",
+      id: "配置使用",
       children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.a, {
         className: "header-anchor",
         "aria-hidden": "true",
-        href: "#configure-to-use",
+        href: "#配置使用",
         children: "#"
-      }), "Configure to use"]
+      }), "配置使用"]
     }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.p, {
-      children: "There are two configurations in the Modern.js, a compile configuration and a server runtime configuration."
+      children: "Modern.js 中有两种配置，一个是编译时配置，一个是服务端运行时配置。"
     }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.p, {
-      children: "The compile configuration can be configured in two places:"
+      children: "编译时配置可以在两个位置进行配置："
     }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.ul, {
       children: ["\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.li, {
         children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
           children: "package.json"
-        }), " file"]
+        }), " 文件"]
       }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.li, {
-        children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
+        children: ["根路径下的 ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
           children: "modern.config.t(j)s"
-        }), " file in the root path"]
+        }), " 文件"]
       }), "\n"]
     }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.div, {
       className: "modern-directive info",
       children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.p, {
         className: "modern-directive-title",
-        children: "Warning"
+        children: "意"
       }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.div, {
         className: "modern-directive-content",
         children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.p, {
-          children: "\nConfigurations in both package.json and modern.config.ts file are not supported for the same configuration. Configuration in modern.config.ts is recommended."
+          children: "\n不支持同时在 package.json 中和 modern.config.ts 中配置同一个配置项，推荐优先在 modern.config.ts 中进行配置。如果 Modern.js 检测到重复配置导致的冲突，将会抛出警告。"
         })
       })]
     }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.p, {
-      children: ["Server runtime configuration can be configured in the ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
+      children: ["服务端运行时配置可以在根路径下的 ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
         children: "modern.server-runtime.config.t(j)s"
-      }), " file in the root path."]
+      }), " 中自定义配置选项。"]
     }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.h2, {
-      id: "configure-in-the-configuration-file",
+      id: "在配置文件中配置",
       children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.a, {
         className: "header-anchor",
         "aria-hidden": "true",
-        href: "#configure-in-the-configuration-file",
+        href: "#在配置文件中配置",
         children: "#"
-      }), "Configure in the configuration file"]
+      }), "在配置文件中配置"]
     }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.p, {
-      children: ["Modern.js configuration files are defined in the root path of the project, and both ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
+      children: ["Modern.js 的配置文件定义在项目的根目录下，支持 ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
         children: ".js"
-      }), " and ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
+      }), ", ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
         children: ".ts"
-      }), " formats are supported:"]
+      }), " 和 ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
+        children: ".mjs"
+      }), " 格式："]
     }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.ul, {
       children: ["\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.li, {
         children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
@@ -116,6 +118,10 @@ function _createMdxContent(props) {
       }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.li, {
         children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
           children: "modern.config.ts"
+        })
+      }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.li, {
+        children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
+          children: "modern.config.mjs"
         })
       }), "\n"]
     }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.h3, {
@@ -127,15 +133,15 @@ function _createMdxContent(props) {
         children: "#"
       }), "modern.config.js"]
     }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.p, {
-      children: ["You can use JavaScript syntax in the ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
+      children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
         children: "modern.config.js"
-      }), " file and it is more flexible than in the ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
+      }), " 中可以使用 JavaScript 语法，因此比 ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
         children: "package.json"
-      }), " file."]
+      }), " 更加灵活。"]
     }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.p, {
-      children: ["For example, you can define configuration options for function types in ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
+      children: ["比如，你可以在 ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
         children: "modern.config.js"
-      }), ":"]
+      }), " 中定义函数类型的配置选项："]
     }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.div, {
       className: "language-js",
       children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.div, {
@@ -369,9 +375,9 @@ function _createMdxContent(props) {
         })]
       })]
     }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.p, {
-      children: ["You can also dynamically set it with ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
-        children: "process.env.NODE _ENV"
-      }), ":"]
+      children: ["你也可以通过 ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
+        children: "process.env.NODE_ENV"
+      }), " 进行动态设置："]
     }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.div, {
       className: "language-js",
       children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.div, {
@@ -559,23 +565,21 @@ function _createMdxContent(props) {
         })]
       })]
     }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.h3, {
-      id: "modernconfigts",
+      id: "modernconfigts推荐",
       children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.a, {
         className: "header-anchor",
         "aria-hidden": "true",
-        href: "#modernconfigts",
+        href: "#modernconfigts推荐",
         children: "#"
-      }), "modern.config.ts"]
+      }), "modern.config.ts（推荐）"]
+    }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.p, {
+      children: "我们推荐使用 .ts 格式的配置文件，它提供了友好的 TypeScript 类型提示，从而帮助你避免配置中的错误。"
     }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.p, {
-      children: ["We recommend using configuration files in ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
-        children: ".ts"
-      }), " format, which provides friendly TypeScript type hints to help you avoid configuration errors."]
-    }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.p, {
-      children: ["Import the ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
-        children: "defineConfig"
-      }), " tool function from ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
+      children: ["从 ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
         children: "@modern-js/app-tools"
-      }), ", which will help you with configuration type derivation and type completion:"]
+      }), " 中导入 ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
+        children: "defineConfig"
+      }), " 工具函数, 它会帮助你进行配置的类型推导和类型补全："]
     }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.div, {
       className: "language-ts",
       children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.div, {
@@ -864,19 +868,19 @@ function _createMdxContent(props) {
         })]
       })]
     }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.h2, {
-      id: "configure-in-packagejson-not-recommended",
+      id: "在-packagejson-中配置不推荐",
       children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.a, {
         className: "header-anchor",
         "aria-hidden": "true",
-        href: "#configure-in-packagejson-not-recommended",
+        href: "#在-packagejson-中配置不推荐",
         children: "#"
-      }), "Configure in package.json (not recommended)"]
+      }), "在 package.json 中配置（不推荐）"]
     }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.p, {
-      children: ["In addition to configuration files, configuration options can also be set the ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
-        children: "modernConfig"
-      }), " field in the ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
+      children: ["除了配置文件外，也可以在 ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
         children: "package.json"
-      }), ", such as:"]
+      }), " 中的 ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
+        children: "modernConfig"
+      }), " 字段下设置配置选项，如："]
     }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.div, {
       className: "language-json",
       children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.div, {
@@ -1116,31 +1120,31 @@ function _createMdxContent(props) {
         })]
       })]
     }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.p, {
-      children: ["Due to the limitation of the JSON file format, only simple types such as numbers, strings, boolean values, arrays, etc. can be defined in ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
+      children: ["由于 JSON 文件格式的限制，", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
         children: "package.json"
-      }), ". When we need to set the value of the function type, it is recommended to set it in the Modern.js configuration file."]
+      }), " 中只能定义数字、字符串、布尔值、数组等简单类型的值，当我们需要设置函数类型的值时，建议在 Modern.js 配置文件中进行设置。"]
     }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.h2, {
-      id: "note",
+      id: "注意事项",
       children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.a, {
         className: "header-anchor",
         "aria-hidden": "true",
-        href: "#note",
+        href: "#注意事项",
         children: "#"
-      }), "Note"]
+      }), "注意事项"]
     }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.ul, {
       children: ["\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.li, {
-        children: ["It is not recommended to use both ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
+        children: ["不建议同时使用 ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
           children: "package.json"
-        }), " and ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
-          children: "modern.config.t[j]s"
-        }), " for configuration. If both are used and a configuration conflict occurs, Modern.js will prompt error on the command line."]
+        }), " 和 ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
+          children: "modern.config.js"
+        }), " 进行配置。如果同时使用了两者并出现配置冲突，Modern.js 会在命令行进行提示。"]
       }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.li, {
         children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
           children: "@modern-js/runtime"
-        }), " exports the ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.a, {
-          href: "/v2/en/apis/app/runtime/app/define-config.html",
+        }), " 导出了同名的 ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.a, {
+          href: "/v2/apis/app/runtime/app/define-config.html",
           children: "defineConfig"
-        }), " API of the same name, please pay attention to the distinction."]
+        }), " API，请注意区分。"]
       }), "\n"]
     })]
   });
