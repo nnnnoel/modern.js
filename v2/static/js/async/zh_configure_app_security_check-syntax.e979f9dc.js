@@ -26,17 +26,25 @@ const toc = [{
   "id": "示例",
   "text": "示例",
   "depth": 3
+}, {
+  "id": "错误日志",
+  "text": "错误日志",
+  "depth": 3
+}, {
+  "id": "解决方法",
+  "text": "解决方法",
+  "depth": 3
 }];
-const content = "\"- **类型**: `boolean | Syntax`\\n\\n```ts\\ninterface Syntax {\\n  targets: string[];\\n}\\n```\\n\\n- **默认值**: `false`\\n\\n分析生成产物中是否存在指定环境中不兼容的高级语法。如果存在，会将详细信息打印在终端。\\n\\n### 示例\\n\\n```ts\\nexport default {\\n  security: {\\n    checkSyntax: true,\\n  },\\n};\\n```\\n\\n如果将 `security.checkSyntax` 指定为 `true` 的话，则 targets 会被认定为项目设定的 browserslist。详情请参考 [设置浏览器范围](https://modernjs.dev/builder/zh/guide/advanced/browser-compatibility.html)\\n\\n开启后将在生产环境下进行检测，当检测到不兼容的高级语法后除了会将信息打印在终端的同时还会退出运行程序。\\n\"";
+const content = "\"- **类型：**\\n\\n```ts\\ntype CheckSyntax =\\n  | boolean\\n  | {\\n      targets: string[];\\n    };\\n```\\n\\n- **默认值：** `false`\\n\\n分析构建产物中是否存在当前浏览器范围下不兼容的高级语法。如果存在，会将详细信息打印在终端。\\n\\n### 示例\\n\\n```ts\\nexport default {\\n  security: {\\n    checkSyntax: true,\\n  },\\n};\\n```\\n\\n如果将 `security.checkSyntax` 指定为 `true` 的话，则 targets 会被认定为项目设定的 browserslist，详情请参考 [设置浏览器范围](https://modernjs.dev/builder/guide/advanced/browser-compatibility.html)。\\n\\n开启后将在生产环境下进行检测，当检测到不兼容的高级语法后，会将错误日志打印在终端，并退出当前构建流程。\\n\\n### 错误日志\\n\\n错误日志的格式如下所示，包含代码来源文件、产物位置、错误原因、源代码等信息：\\n\\n```bash\\nerror   [Syntax Checker] Find some syntax errors after production build:\\n\\n  ERROR#1:\\n  source - /node_modules/foo/index.js:1:0\\n  output - /Project/dist/static/js/main.3f7a4d7e.js:2:39400\\n  reason - The keyword 'const' is reserved (2:39400)\\n  code   - const foo = 'bar';\\n```\\n\\n### 解决方法\\n\\n当检测到语法错误后，你可以通过以下方式来处理：\\n\\n- 如果你希望降级该语法，以保证代码具备良好的兼容性，可以通过 `source.include` 配置来编译相应的模块。\\n- 如果你不希望降级该语法，可以调整项目的 browserslist 范围，调整至与该语法相匹配的范围。\\n\"";
 function _createMdxContent(props) {
   const _components = Object.assign({
     ul: "ul",
     li: "li",
     strong: "strong",
-    code: "code",
     div: "div",
     button: "button",
     pre: "pre",
+    code: "code",
     span: "span",
     p: "p",
     h3: "h3",
@@ -44,12 +52,10 @@ function _createMdxContent(props) {
   }, props.components);
   return (0,jsx_runtime.jsxs)(jsx_runtime.Fragment, {
     children: [(0,jsx_runtime.jsxs)(_components.ul, {
-      children: ["\n", (0,jsx_runtime.jsxs)(_components.li, {
-        children: [(0,jsx_runtime.jsx)(_components.strong, {
-          children: "类型"
-        }), ": ", (0,jsx_runtime.jsx)(_components.code, {
-          children: "boolean | Syntax"
-        })]
+      children: ["\n", (0,jsx_runtime.jsx)(_components.li, {
+        children: (0,jsx_runtime.jsx)(_components.strong, {
+          children: "类型："
+        })
       }), "\n"]
     }), "\n", (0,jsx_runtime.jsxs)(_components.div, {
       className: "language-ts",
@@ -71,7 +77,7 @@ function _createMdxContent(props) {
                 style: {
                   color: "#81A1C1"
                 },
-                children: "interface"
+                children: "type"
               }), (0,jsx_runtime.jsx)(_components.span, {
                 style: {
                   color: "#D8DEE9FF"
@@ -81,7 +87,53 @@ function _createMdxContent(props) {
                 style: {
                   color: "#8FBCBB"
                 },
-                children: "Syntax"
+                children: "CheckSyntax"
+              }), (0,jsx_runtime.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: " "
+              }), (0,jsx_runtime.jsx)(_components.span, {
+                style: {
+                  color: "#81A1C1"
+                },
+                children: "="
+              })]
+            }), "\n", (0,jsx_runtime.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,jsx_runtime.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: "  "
+              }), (0,jsx_runtime.jsx)(_components.span, {
+                style: {
+                  color: "#81A1C1"
+                },
+                children: "|"
+              }), (0,jsx_runtime.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: " "
+              }), (0,jsx_runtime.jsx)(_components.span, {
+                style: {
+                  color: "#8FBCBB"
+                },
+                children: "boolean"
+              })]
+            }), "\n", (0,jsx_runtime.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,jsx_runtime.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: "  "
+              }), (0,jsx_runtime.jsx)(_components.span, {
+                style: {
+                  color: "#81A1C1"
+                },
+                children: "|"
               }), (0,jsx_runtime.jsx)(_components.span, {
                 style: {
                   color: "#D8DEE9FF"
@@ -99,7 +151,7 @@ function _createMdxContent(props) {
                 style: {
                   color: "#D8DEE9FF"
                 },
-                children: "  targets"
+                children: "      targets"
               }), (0,jsx_runtime.jsx)(_components.span, {
                 style: {
                   color: "#81A1C1"
@@ -126,14 +178,24 @@ function _createMdxContent(props) {
                 },
                 children: ";"
               })]
-            }), "\n", (0,jsx_runtime.jsx)(_components.span, {
+            }), "\n", (0,jsx_runtime.jsxs)(_components.span, {
               className: "line",
-              children: (0,jsx_runtime.jsx)(_components.span, {
+              children: [(0,jsx_runtime.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: "    "
+              }), (0,jsx_runtime.jsx)(_components.span, {
                 style: {
                   color: "#ECEFF4"
                 },
                 children: "}"
-              })
+              }), (0,jsx_runtime.jsx)(_components.span, {
+                style: {
+                  color: "#81A1C1"
+                },
+                children: ";"
+              })]
             }), "\n", (0,jsx_runtime.jsx)(_components.span, {
               className: "line"
             })]
@@ -143,13 +205,13 @@ function _createMdxContent(props) {
     }), "\n", (0,jsx_runtime.jsxs)(_components.ul, {
       children: ["\n", (0,jsx_runtime.jsxs)(_components.li, {
         children: [(0,jsx_runtime.jsx)(_components.strong, {
-          children: "默认值"
-        }), ": ", (0,jsx_runtime.jsx)(_components.code, {
+          children: "默认值："
+        }), " ", (0,jsx_runtime.jsx)(_components.code, {
           children: "false"
         })]
       }), "\n"]
     }), "\n", (0,jsx_runtime.jsx)(_components.p, {
-      children: "分析生成产物中是否存在指定环境中不兼容的高级语法。如果存在，会将详细信息打印在终端。"
+      children: "分析构建产物中是否存在当前浏览器范围下不兼容的高级语法。如果存在，会将详细信息打印在终端。"
     }), "\n", (0,jsx_runtime.jsxs)(_components.h3, {
       id: "示例",
       children: [(0,jsx_runtime.jsx)(_components.a, {
@@ -298,14 +360,197 @@ function _createMdxContent(props) {
         children: "security.checkSyntax"
       }), " 指定为 ", (0,jsx_runtime.jsx)(_components.code, {
         children: "true"
-      }), " 的话，则 targets 会被认定为项目设定的 browserslist。详情请参考 ", (0,jsx_runtime.jsx)(_components.a, {
-        href: "https://modernjs.dev/builder/zh/guide/advanced/browser-compatibility.html",
+      }), " 的话，则 targets 会被认定为项目设定的 browserslist，详情请参考 ", (0,jsx_runtime.jsx)(_components.a, {
+        href: "https://modernjs.dev/builder/guide/advanced/browser-compatibility.html",
         target: "_blank",
         rel: "nofollow",
         children: "设置浏览器范围"
-      })]
+      }), "。"]
     }), "\n", (0,jsx_runtime.jsx)(_components.p, {
-      children: "开启后将在生产环境下进行检测，当检测到不兼容的高级语法后除了会将信息打印在终端的同时还会退出运行程序。"
+      children: "开启后将在生产环境下进行检测，当检测到不兼容的高级语法后，会将错误日志打印在终端，并退出当前构建流程。"
+    }), "\n", (0,jsx_runtime.jsxs)(_components.h3, {
+      id: "错误日志",
+      children: [(0,jsx_runtime.jsx)(_components.a, {
+        className: "header-anchor",
+        "aria-hidden": "true",
+        href: "#错误日志",
+        children: "#"
+      }), "错误日志"]
+    }), "\n", (0,jsx_runtime.jsx)(_components.p, {
+      children: "错误日志的格式如下所示，包含代码来源文件、产物位置、错误原因、源代码等信息："
+    }), "\n", (0,jsx_runtime.jsxs)(_components.div, {
+      className: "language-bash",
+      children: [(0,jsx_runtime.jsx)(_components.div, {
+        className: ""
+      }), (0,jsx_runtime.jsxs)(_components.div, {
+        className: "modern-code-content",
+        children: [(0,jsx_runtime.jsx)(_components.button, {
+          className: "copy"
+        }), (0,jsx_runtime.jsx)(_components.pre, {
+          className: "shiki",
+          style: {
+            backgroundColor: "#2e3440ff"
+          },
+          children: (0,jsx_runtime.jsxs)(_components.code, {
+            children: [(0,jsx_runtime.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,jsx_runtime.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: "error   "
+              }), (0,jsx_runtime.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: "["
+              }), (0,jsx_runtime.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: "Syntax Checker"
+              }), (0,jsx_runtime.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: "]"
+              }), (0,jsx_runtime.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: " Find some syntax errors after production build:"
+              })]
+            }), "\n", (0,jsx_runtime.jsx)(_components.span, {
+              className: "line"
+            }), "\n", (0,jsx_runtime.jsx)(_components.span, {
+              className: "line",
+              children: (0,jsx_runtime.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: "  ERROR#1:"
+              })
+            }), "\n", (0,jsx_runtime.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,jsx_runtime.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: "  "
+              }), (0,jsx_runtime.jsx)(_components.span, {
+                style: {
+                  color: "#88C0D0"
+                },
+                children: "source"
+              }), (0,jsx_runtime.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: " - /node_modules/foo/index.js:1:0"
+              })]
+            }), "\n", (0,jsx_runtime.jsx)(_components.span, {
+              className: "line",
+              children: (0,jsx_runtime.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: "  output - /Project/dist/static/js/main.3f7a4d7e.js:2:39400"
+              })
+            }), "\n", (0,jsx_runtime.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,jsx_runtime.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: "  reason - The keyword "
+              }), (0,jsx_runtime.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: "'"
+              }), (0,jsx_runtime.jsx)(_components.span, {
+                style: {
+                  color: "#A3BE8C"
+                },
+                children: "const"
+              }), (0,jsx_runtime.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: "'"
+              }), (0,jsx_runtime.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: " is reserved "
+              }), (0,jsx_runtime.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: "("
+              }), (0,jsx_runtime.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: "2:39400"
+              }), (0,jsx_runtime.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: ")"
+              })]
+            }), "\n", (0,jsx_runtime.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,jsx_runtime.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: "  code   - const foo = "
+              }), (0,jsx_runtime.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: "'"
+              }), (0,jsx_runtime.jsx)(_components.span, {
+                style: {
+                  color: "#A3BE8C"
+                },
+                children: "bar"
+              }), (0,jsx_runtime.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: "'"
+              }), (0,jsx_runtime.jsx)(_components.span, {
+                style: {
+                  color: "#81A1C1"
+                },
+                children: ";"
+              })]
+            }), "\n", (0,jsx_runtime.jsx)(_components.span, {
+              className: "line"
+            })]
+          })
+        })]
+      })]
+    }), "\n", (0,jsx_runtime.jsxs)(_components.h3, {
+      id: "解决方法",
+      children: [(0,jsx_runtime.jsx)(_components.a, {
+        className: "header-anchor",
+        "aria-hidden": "true",
+        href: "#解决方法",
+        children: "#"
+      }), "解决方法"]
+    }), "\n", (0,jsx_runtime.jsx)(_components.p, {
+      children: "当检测到语法错误后，你可以通过以下方式来处理："
+    }), "\n", (0,jsx_runtime.jsxs)(_components.ul, {
+      children: ["\n", (0,jsx_runtime.jsxs)(_components.li, {
+        children: ["如果你希望降级该语法，以保证代码具备良好的兼容性，可以通过 ", (0,jsx_runtime.jsx)(_components.code, {
+          children: "source.include"
+        }), " 配置来编译相应的模块。"]
+      }), "\n", (0,jsx_runtime.jsx)(_components.li, {
+        children: "如果你不希望降级该语法，可以调整项目的 browserslist 范围，调整至与该语法相匹配的范围。"
+      }), "\n"]
     })]
   });
 }

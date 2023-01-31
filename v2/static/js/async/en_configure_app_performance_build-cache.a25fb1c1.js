@@ -1,7 +1,7 @@
 "use strict";
-(self["webpackChunk_modern_js_main_doc_website"] = self["webpackChunk_modern_js_main_doc_website"] || []).push([[6402],{
+(self["webpackChunk_modern_js_main_doc_website"] = self["webpackChunk_modern_js_main_doc_website"] || []).push([[59117],{
 
-/***/ 34536:
+/***/ 82868:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 // ESM COMPAT FLAG
@@ -9,29 +9,21 @@ __webpack_require__.r(__webpack_exports__);
 
 // EXPORTS
 __webpack_require__.d(__webpack_exports__, {
-  "content": () => (/* binding */ sri_content),
-  "default": () => (/* binding */ security_sri),
-  "frontmatter": () => (/* binding */ sri_frontmatter),
+  "content": () => (/* binding */ build_cache_content),
+  "default": () => (/* binding */ build_cache),
+  "frontmatter": () => (/* binding */ build_cache_frontmatter),
   "title": () => (/* binding */ title),
-  "toc": () => (/* binding */ sri_toc)
+  "toc": () => (/* binding */ build_cache_toc)
 });
 
 // EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.2.0/node_modules/react/jsx-runtime.js
 var jsx_runtime = __webpack_require__(97458);
-;// CONCATENATED MODULE: ../../packages/builder/builder-doc/docs/en/config/security/sri.md
+;// CONCATENATED MODULE: ../../packages/builder/builder-doc/docs/en/config/performance/buildCache.md
 /*@jsxRuntime automatic @jsxImportSource react*/
 
 const frontmatter = (/* unused pure expression or super */ null && (undefined));
-const toc = [{
-  "id": "introduce-sri",
-  "text": "Introduce SRI",
-  "depth": 4
-}, {
-  "id": "example",
-  "text": "Example",
-  "depth": 3
-}];
-const content = "\"- **Type**:\\n\\n```ts\\ntype SRIOptions = {\\n  hashFuncNames?: []string;\\n  enabled?: \\\"auto\\\" | true | false;\\n  hashLoading?: \\\"eager\\\" | \\\"lazy\\\";\\n} | boolean;\\n```\\n\\n- **Default**: `undefined`\\n\\nAdding an integrity attribute (`integrity`) to sub-resources introduced by HTML allows the browser to verify the integrity of the introduced resource, thus preventing tampering with the downloaded resource.\\n\\nEnabling this option will set the webpack [output.crossOriginLoading](https://webpack.js.org/configuration/output/#outputcrossoriginloading) configuration item to `anonymous`.\\n\\n#### Introduce SRI\\n\\nSubresource Integrity (SRI) is a security feature that enables browsers to verify that resources they fetch (for example, from a CDN) are delivered without unexpected manipulation. It works by allowing you to provide a cryptographic hash that a fetched resource must match.\\n\\nFor script tags, the result is to refuse to execute the code; for CSS links, the result is not to load the styles.\\n\\nFor more on subresource integrity, see [Subresource Integrity - MDN](https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity).\\n\\n### Example\\n\\nBy default, `SRI` is not turned on, and when it is, its default configuration is as follows:\\n\\n```js\\n{\\n  hashFuncNames: ['sha384'];\\n  enabled: \\\"auto\\\",\\n  hashLoading: \\\"eager\\\",\\n}\\n```\\n\\nYou can customize the configuration items according to your own needs:\\n\\n```js\\nexport default {\\n  security: {\\n    sri: {\\n      hashFuncNames: ['sha-256'],\\n      enabled: true,\\n      hashLoading: 'lazy',\\n    },\\n  },\\n};\\n```\\n\"";
+const toc = (/* unused pure expression or super */ null && ([]));
+const content = "\"- **Type:**\\n\\n```ts\\ntype BuildCacheConfig =\\n  | {\\n      /**\\n       * Base directory for the filesystem cache.\\n       */\\n      cacheDirectory?: string;\\n    }\\n  | boolean;\\n```\\n\\n- **Default:**\\n\\n```js\\nconst defaultBuildCacheConfig = {\\n  cacheDirectory: './node_modules/.cache/webpack',\\n};\\n```\\n\\nControls the Builder's caching behavior during the build process.\\n\\nBuilder will enable build cache by default to improve the compile speed, the generated cache files are write to the `./node_modules/.cache/webpack` directory by default.\\n\\nYou can configure the cache path with `buildCache`, e.g.\\n\\n```js\\nexport default {\\n  performance: {\\n    buildCache: {\\n      cacheDirectory: './node_modules/.custom_cache/webpack',\\n    },\\n  },\\n};\\n```\\n\\nYou can also disable the build cache by setting it to `false`:\\n\\n```js\\nexport default {\\n  performance: {\\n    buildCache: false,\\n  },\\n};\\n```\\n\"";
 function _createMdxContent(props) {
   const _components = Object.assign({
     ul: "ul",
@@ -42,17 +34,14 @@ function _createMdxContent(props) {
     pre: "pre",
     code: "code",
     span: "span",
-    p: "p",
-    a: "a",
-    h4: "h4",
-    h3: "h3"
+    p: "p"
   }, props.components);
   return (0,jsx_runtime.jsxs)(jsx_runtime.Fragment, {
     children: [(0,jsx_runtime.jsxs)(_components.ul, {
-      children: ["\n", (0,jsx_runtime.jsxs)(_components.li, {
-        children: [(0,jsx_runtime.jsx)(_components.strong, {
-          children: "Type"
-        }), ":"]
+      children: ["\n", (0,jsx_runtime.jsx)(_components.li, {
+        children: (0,jsx_runtime.jsx)(_components.strong, {
+          children: "Type:"
+        })
       }), "\n"]
     }), "\n", (0,jsx_runtime.jsxs)(_components.div, {
       className: "language-ts",
@@ -84,7 +73,7 @@ function _createMdxContent(props) {
                 style: {
                   color: "#8FBCBB"
                 },
-                children: "SRIOptions"
+                children: "BuildCacheConfig"
               }), (0,jsx_runtime.jsx)(_components.span, {
                 style: {
                   color: "#D8DEE9FF"
@@ -95,6 +84,19 @@ function _createMdxContent(props) {
                   color: "#81A1C1"
                 },
                 children: "="
+              })]
+            }), "\n", (0,jsx_runtime.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,jsx_runtime.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: "  "
+              }), (0,jsx_runtime.jsx)(_components.span, {
+                style: {
+                  color: "#81A1C1"
+                },
+                children: "|"
               }), (0,jsx_runtime.jsx)(_components.span, {
                 style: {
                   color: "#D8DEE9FF"
@@ -112,7 +114,36 @@ function _createMdxContent(props) {
                 style: {
                   color: "#D8DEE9FF"
                 },
-                children: "  hashFuncNames"
+                children: "      "
+              }), (0,jsx_runtime.jsx)(_components.span, {
+                style: {
+                  color: "#616E88"
+                },
+                children: "/**"
+              })]
+            }), "\n", (0,jsx_runtime.jsx)(_components.span, {
+              className: "line",
+              children: (0,jsx_runtime.jsx)(_components.span, {
+                style: {
+                  color: "#616E88"
+                },
+                children: "       * Base directory for the filesystem cache."
+              })
+            }), "\n", (0,jsx_runtime.jsx)(_components.span, {
+              className: "line",
+              children: (0,jsx_runtime.jsx)(_components.span, {
+                style: {
+                  color: "#616E88"
+                },
+                children: "       */"
+              })
+            }), "\n", (0,jsx_runtime.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,jsx_runtime.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: "      cacheDirectory"
               }), (0,jsx_runtime.jsx)(_components.span, {
                 style: {
                   color: "#81A1C1"
@@ -122,7 +153,7 @@ function _createMdxContent(props) {
                 style: {
                   color: "#D8DEE9FF"
                 },
-                children: " []"
+                children: " "
               }), (0,jsx_runtime.jsx)(_components.span, {
                 style: {
                   color: "#8FBCBB"
@@ -140,158 +171,20 @@ function _createMdxContent(props) {
                 style: {
                   color: "#D8DEE9FF"
                 },
-                children: "  enabled"
+                children: "    "
               }), (0,jsx_runtime.jsx)(_components.span, {
-                style: {
-                  color: "#81A1C1"
-                },
-                children: "?:"
-              }), (0,jsx_runtime.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: " "
-              }), (0,jsx_runtime.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "\""
-              }), (0,jsx_runtime.jsx)(_components.span, {
-                style: {
-                  color: "#A3BE8C"
-                },
-                children: "auto"
-              }), (0,jsx_runtime.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "\""
-              }), (0,jsx_runtime.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: " "
-              }), (0,jsx_runtime.jsx)(_components.span, {
-                style: {
-                  color: "#81A1C1"
-                },
-                children: "|"
-              }), (0,jsx_runtime.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: " "
-              }), (0,jsx_runtime.jsx)(_components.span, {
-                style: {
-                  color: "#8FBCBB"
-                },
-                children: "true"
-              }), (0,jsx_runtime.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: " "
-              }), (0,jsx_runtime.jsx)(_components.span, {
-                style: {
-                  color: "#81A1C1"
-                },
-                children: "|"
-              }), (0,jsx_runtime.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: " "
-              }), (0,jsx_runtime.jsx)(_components.span, {
-                style: {
-                  color: "#8FBCBB"
-                },
-                children: "false"
-              }), (0,jsx_runtime.jsx)(_components.span, {
-                style: {
-                  color: "#81A1C1"
-                },
-                children: ";"
-              })]
-            }), "\n", (0,jsx_runtime.jsxs)(_components.span, {
-              className: "line",
-              children: [(0,jsx_runtime.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: "  hashLoading"
-              }), (0,jsx_runtime.jsx)(_components.span, {
-                style: {
-                  color: "#81A1C1"
-                },
-                children: "?:"
-              }), (0,jsx_runtime.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: " "
-              }), (0,jsx_runtime.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "\""
-              }), (0,jsx_runtime.jsx)(_components.span, {
-                style: {
-                  color: "#A3BE8C"
-                },
-                children: "eager"
-              }), (0,jsx_runtime.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "\""
-              }), (0,jsx_runtime.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: " "
-              }), (0,jsx_runtime.jsx)(_components.span, {
-                style: {
-                  color: "#81A1C1"
-                },
-                children: "|"
-              }), (0,jsx_runtime.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: " "
-              }), (0,jsx_runtime.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "\""
-              }), (0,jsx_runtime.jsx)(_components.span, {
-                style: {
-                  color: "#A3BE8C"
-                },
-                children: "lazy"
-              }), (0,jsx_runtime.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "\""
-              }), (0,jsx_runtime.jsx)(_components.span, {
-                style: {
-                  color: "#81A1C1"
-                },
-                children: ";"
-              })]
-            }), "\n", (0,jsx_runtime.jsxs)(_components.span, {
-              className: "line",
-              children: [(0,jsx_runtime.jsx)(_components.span, {
                 style: {
                   color: "#ECEFF4"
                 },
                 children: "}"
-              }), (0,jsx_runtime.jsx)(_components.span, {
+              })]
+            }), "\n", (0,jsx_runtime.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,jsx_runtime.jsx)(_components.span, {
                 style: {
                   color: "#D8DEE9FF"
                 },
-                children: " "
+                children: "  "
               }), (0,jsx_runtime.jsx)(_components.span, {
                 style: {
                   color: "#81A1C1"
@@ -320,57 +213,11 @@ function _createMdxContent(props) {
         })]
       })]
     }), "\n", (0,jsx_runtime.jsxs)(_components.ul, {
-      children: ["\n", (0,jsx_runtime.jsxs)(_components.li, {
-        children: [(0,jsx_runtime.jsx)(_components.strong, {
-          children: "Default"
-        }), ": ", (0,jsx_runtime.jsx)(_components.code, {
-          children: "undefined"
-        })]
+      children: ["\n", (0,jsx_runtime.jsx)(_components.li, {
+        children: (0,jsx_runtime.jsx)(_components.strong, {
+          children: "Default:"
+        })
       }), "\n"]
-    }), "\n", (0,jsx_runtime.jsxs)(_components.p, {
-      children: ["Adding an integrity attribute (", (0,jsx_runtime.jsx)(_components.code, {
-        children: "integrity"
-      }), ") to sub-resources introduced by HTML allows the browser to verify the integrity of the introduced resource, thus preventing tampering with the downloaded resource."]
-    }), "\n", (0,jsx_runtime.jsxs)(_components.p, {
-      children: ["Enabling this option will set the webpack ", (0,jsx_runtime.jsx)(_components.a, {
-        href: "https://webpack.js.org/configuration/output/#outputcrossoriginloading-3",
-        target: "_blank",
-        rel: "nofollow",
-        children: "output.crossOriginLoading"
-      }), " configuration item to ", (0,jsx_runtime.jsx)(_components.code, {
-        children: "anonymous"
-      }), "."]
-    }), "\n", (0,jsx_runtime.jsxs)(_components.h4, {
-      id: "introduce-sri",
-      children: [(0,jsx_runtime.jsx)(_components.a, {
-        className: "header-anchor",
-        "aria-hidden": "true",
-        href: "#introduce-sri",
-        children: "#"
-      }), "Introduce SRI"]
-    }), "\n", (0,jsx_runtime.jsx)(_components.p, {
-      children: "Subresource Integrity (SRI) is a security feature that enables browsers to verify that resources they fetch (for example, from a CDN) are delivered without unexpected manipulation. It works by allowing you to provide a cryptographic hash that a fetched resource must match."
-    }), "\n", (0,jsx_runtime.jsx)(_components.p, {
-      children: "For script tags, the result is to refuse to execute the code; for CSS links, the result is not to load the styles."
-    }), "\n", (0,jsx_runtime.jsxs)(_components.p, {
-      children: ["For more on subresource integrity, see ", (0,jsx_runtime.jsx)(_components.a, {
-        href: "https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity",
-        target: "_blank",
-        rel: "nofollow",
-        children: "Subresource Integrity - MDN"
-      }), "."]
-    }), "\n", (0,jsx_runtime.jsxs)(_components.h3, {
-      id: "example",
-      children: [(0,jsx_runtime.jsx)(_components.a, {
-        className: "header-anchor",
-        "aria-hidden": "true",
-        href: "#example",
-        children: "#"
-      }), "Example"]
-    }), "\n", (0,jsx_runtime.jsxs)(_components.p, {
-      children: ["By default, ", (0,jsx_runtime.jsx)(_components.code, {
-        children: "SRI"
-      }), " is not turned on, and when it is, its default configuration is as follows:"]
     }), "\n", (0,jsx_runtime.jsxs)(_components.div, {
       className: "language-js",
       children: [(0,jsx_runtime.jsx)(_components.div, {
@@ -385,21 +232,56 @@ function _createMdxContent(props) {
             backgroundColor: "#2e3440ff"
           },
           children: (0,jsx_runtime.jsxs)(_components.code, {
-            children: [(0,jsx_runtime.jsx)(_components.span, {
+            children: [(0,jsx_runtime.jsxs)(_components.span, {
               className: "line",
-              children: (0,jsx_runtime.jsx)(_components.span, {
+              children: [(0,jsx_runtime.jsx)(_components.span, {
+                style: {
+                  color: "#81A1C1"
+                },
+                children: "const"
+              }), (0,jsx_runtime.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: " "
+              }), (0,jsx_runtime.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9"
+                },
+                children: "defaultBuildCacheConfig"
+              }), (0,jsx_runtime.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: " "
+              }), (0,jsx_runtime.jsx)(_components.span, {
+                style: {
+                  color: "#81A1C1"
+                },
+                children: "="
+              }), (0,jsx_runtime.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: " "
+              }), (0,jsx_runtime.jsx)(_components.span, {
                 style: {
                   color: "#ECEFF4"
                 },
                 children: "{"
-              })
+              })]
             }), "\n", (0,jsx_runtime.jsxs)(_components.span, {
               className: "line",
               children: [(0,jsx_runtime.jsx)(_components.span, {
                 style: {
                   color: "#D8DEE9FF"
                 },
-                children: "  hashFuncNames"
+                children: "  "
+              }), (0,jsx_runtime.jsx)(_components.span, {
+                style: {
+                  color: "#88C0D0"
+                },
+                children: "cacheDirectory"
               }), (0,jsx_runtime.jsx)(_components.span, {
                 style: {
                   color: "#ECEFF4"
@@ -409,7 +291,7 @@ function _createMdxContent(props) {
                 style: {
                   color: "#D8DEE9FF"
                 },
-                children: " ["
+                children: " "
               }), (0,jsx_runtime.jsx)(_components.span, {
                 style: {
                   color: "#ECEFF4"
@@ -419,7 +301,7 @@ function _createMdxContent(props) {
                 style: {
                   color: "#A3BE8C"
                 },
-                children: "sha384"
+                children: "./node_modules/.cache/webpack"
               }), (0,jsx_runtime.jsx)(_components.span, {
                 style: {
                   color: "#ECEFF4"
@@ -427,99 +309,23 @@ function _createMdxContent(props) {
                 children: "'"
               }), (0,jsx_runtime.jsx)(_components.span, {
                 style: {
-                  color: "#D8DEE9FF"
+                  color: "#ECEFF4"
                 },
-                children: "]"
+                children: ","
+              })]
+            }), "\n", (0,jsx_runtime.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,jsx_runtime.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: "}"
               }), (0,jsx_runtime.jsx)(_components.span, {
                 style: {
                   color: "#81A1C1"
                 },
                 children: ";"
               })]
-            }), "\n", (0,jsx_runtime.jsxs)(_components.span, {
-              className: "line",
-              children: [(0,jsx_runtime.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: "  enabled"
-              }), (0,jsx_runtime.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: ":"
-              }), (0,jsx_runtime.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: " "
-              }), (0,jsx_runtime.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "\""
-              }), (0,jsx_runtime.jsx)(_components.span, {
-                style: {
-                  color: "#A3BE8C"
-                },
-                children: "auto"
-              }), (0,jsx_runtime.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "\""
-              }), (0,jsx_runtime.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: ","
-              })]
-            }), "\n", (0,jsx_runtime.jsxs)(_components.span, {
-              className: "line",
-              children: [(0,jsx_runtime.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: "  hashLoading"
-              }), (0,jsx_runtime.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: ":"
-              }), (0,jsx_runtime.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: " "
-              }), (0,jsx_runtime.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "\""
-              }), (0,jsx_runtime.jsx)(_components.span, {
-                style: {
-                  color: "#A3BE8C"
-                },
-                children: "eager"
-              }), (0,jsx_runtime.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "\""
-              }), (0,jsx_runtime.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: ","
-              })]
-            }), "\n", (0,jsx_runtime.jsx)(_components.span, {
-              className: "line",
-              children: (0,jsx_runtime.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "}"
-              })
             }), "\n", (0,jsx_runtime.jsx)(_components.span, {
               className: "line"
             })]
@@ -527,7 +333,15 @@ function _createMdxContent(props) {
         })]
       })]
     }), "\n", (0,jsx_runtime.jsx)(_components.p, {
-      children: "You can customize the configuration items according to your own needs:"
+      children: "Controls the Builder's caching behavior during the build process."
+    }), "\n", (0,jsx_runtime.jsxs)(_components.p, {
+      children: ["Builder will enable build cache by default to improve the compile speed, the generated cache files are write to the ", (0,jsx_runtime.jsx)(_components.code, {
+        children: "./node_modules/.cache/webpack"
+      }), " directory by default."]
+    }), "\n", (0,jsx_runtime.jsxs)(_components.p, {
+      children: ["You can configure the cache path with ", (0,jsx_runtime.jsx)(_components.code, {
+        children: "buildCache"
+      }), ", e.g."]
     }), "\n", (0,jsx_runtime.jsxs)(_components.div, {
       className: "language-js",
       children: [(0,jsx_runtime.jsx)(_components.div, {
@@ -581,7 +395,7 @@ function _createMdxContent(props) {
                 style: {
                   color: "#88C0D0"
                 },
-                children: "security"
+                children: "performance"
               }), (0,jsx_runtime.jsx)(_components.span, {
                 style: {
                   color: "#ECEFF4"
@@ -609,7 +423,7 @@ function _createMdxContent(props) {
                 style: {
                   color: "#88C0D0"
                 },
-                children: "sri"
+                children: "buildCache"
               }), (0,jsx_runtime.jsx)(_components.span, {
                 style: {
                   color: "#ECEFF4"
@@ -637,88 +451,7 @@ function _createMdxContent(props) {
                 style: {
                   color: "#88C0D0"
                 },
-                children: "hashFuncNames"
-              }), (0,jsx_runtime.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: ":"
-              }), (0,jsx_runtime.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: " ["
-              }), (0,jsx_runtime.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "'"
-              }), (0,jsx_runtime.jsx)(_components.span, {
-                style: {
-                  color: "#A3BE8C"
-                },
-                children: "sha-256"
-              }), (0,jsx_runtime.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "'"
-              }), (0,jsx_runtime.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: "]"
-              }), (0,jsx_runtime.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: ","
-              })]
-            }), "\n", (0,jsx_runtime.jsxs)(_components.span, {
-              className: "line",
-              children: [(0,jsx_runtime.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: "      "
-              }), (0,jsx_runtime.jsx)(_components.span, {
-                style: {
-                  color: "#88C0D0"
-                },
-                children: "enabled"
-              }), (0,jsx_runtime.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: ":"
-              }), (0,jsx_runtime.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: " "
-              }), (0,jsx_runtime.jsx)(_components.span, {
-                style: {
-                  color: "#81A1C1"
-                },
-                children: "true"
-              }), (0,jsx_runtime.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: ","
-              })]
-            }), "\n", (0,jsx_runtime.jsxs)(_components.span, {
-              className: "line",
-              children: [(0,jsx_runtime.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: "      "
-              }), (0,jsx_runtime.jsx)(_components.span, {
-                style: {
-                  color: "#88C0D0"
-                },
-                children: "hashLoading"
+                children: "cacheDirectory"
               }), (0,jsx_runtime.jsx)(_components.span, {
                 style: {
                   color: "#ECEFF4"
@@ -738,7 +471,7 @@ function _createMdxContent(props) {
                 style: {
                   color: "#A3BE8C"
                 },
-                children: "lazy"
+                children: "./node_modules/.custom_cache/webpack"
               }), (0,jsx_runtime.jsx)(_components.span, {
                 style: {
                   color: "#ECEFF4"
@@ -795,6 +528,145 @@ function _createMdxContent(props) {
           })
         })]
       })]
+    }), "\n", (0,jsx_runtime.jsxs)(_components.p, {
+      children: ["You can also disable the build cache by setting it to ", (0,jsx_runtime.jsx)(_components.code, {
+        children: "false"
+      }), ":"]
+    }), "\n", (0,jsx_runtime.jsxs)(_components.div, {
+      className: "language-js",
+      children: [(0,jsx_runtime.jsx)(_components.div, {
+        className: ""
+      }), (0,jsx_runtime.jsxs)(_components.div, {
+        className: "modern-code-content",
+        children: [(0,jsx_runtime.jsx)(_components.button, {
+          className: "copy"
+        }), (0,jsx_runtime.jsx)(_components.pre, {
+          className: "shiki",
+          style: {
+            backgroundColor: "#2e3440ff"
+          },
+          children: (0,jsx_runtime.jsxs)(_components.code, {
+            children: [(0,jsx_runtime.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,jsx_runtime.jsx)(_components.span, {
+                style: {
+                  color: "#81A1C1"
+                },
+                children: "export"
+              }), (0,jsx_runtime.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: " "
+              }), (0,jsx_runtime.jsx)(_components.span, {
+                style: {
+                  color: "#81A1C1"
+                },
+                children: "default"
+              }), (0,jsx_runtime.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: " "
+              }), (0,jsx_runtime.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: "{"
+              })]
+            }), "\n", (0,jsx_runtime.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,jsx_runtime.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: "  "
+              }), (0,jsx_runtime.jsx)(_components.span, {
+                style: {
+                  color: "#88C0D0"
+                },
+                children: "performance"
+              }), (0,jsx_runtime.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: ":"
+              }), (0,jsx_runtime.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: " "
+              }), (0,jsx_runtime.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: "{"
+              })]
+            }), "\n", (0,jsx_runtime.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,jsx_runtime.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: "    "
+              }), (0,jsx_runtime.jsx)(_components.span, {
+                style: {
+                  color: "#88C0D0"
+                },
+                children: "buildCache"
+              }), (0,jsx_runtime.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: ":"
+              }), (0,jsx_runtime.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: " "
+              }), (0,jsx_runtime.jsx)(_components.span, {
+                style: {
+                  color: "#81A1C1"
+                },
+                children: "false"
+              }), (0,jsx_runtime.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: ","
+              })]
+            }), "\n", (0,jsx_runtime.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,jsx_runtime.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: "  "
+              }), (0,jsx_runtime.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: "},"
+              })]
+            }), "\n", (0,jsx_runtime.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,jsx_runtime.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: "}"
+              }), (0,jsx_runtime.jsx)(_components.span, {
+                style: {
+                  color: "#81A1C1"
+                },
+                children: ";"
+              })]
+            }), "\n", (0,jsx_runtime.jsx)(_components.span, {
+              className: "line"
+            })]
+          })
+        })]
+      })]
     })]
   });
 }
@@ -804,19 +676,19 @@ function MDXContent(props = {}) {
     children: (0,jsx_runtime.jsx)(_createMdxContent, props)
   })) : _createMdxContent(props);
 }
-/* harmony default export */ const sri = (MDXContent);
+/* harmony default export */ const buildCache = (MDXContent);
 
-;// CONCATENATED MODULE: ../../packages/toolkit/main-doc/en/configure/app/security/sri.mdx
+;// CONCATENATED MODULE: ../../packages/toolkit/main-doc/en/configure/app/performance/build-cache.mdx
 /*@jsxRuntime automatic @jsxImportSource react*/
 
-const sri_frontmatter = {
-  "sidebar_label": "sri"
+const build_cache_frontmatter = {
+  "sidebar_label": "buildCache"
 };
 
-const sri_toc = [];
-const title = `security.sri`;
-const sri_content = "\"---\\nsidebar_label: sri\\n---\\n\\n# security.sri\\n\\n:::tip\\nThis config is provided by Modern.js Builder, more detail can see [security.sri](https://modernjs.dev/builder/en/api/config-security.html#security-sri)。\\n:::\\n\\nimport Main from '@modern-js/builder-doc/docs/en/config/security/sri.md'\\n\\n<Main />\\n\"";
-function sri_createMdxContent(props) {
+const build_cache_toc = [];
+const title = `performance.buildCache`;
+const build_cache_content = "\"---\\nsidebar_label: buildCache\\n---\\n\\n# performance.buildCache\\n\\n:::tip\\nThis config is provided by Modern.js Builder, more detail can see [performance.buildCache](https://modernjs.dev/builder/en/api/config-performance.html#performance-buildcache)。\\n:::\\n\\nimport Main from '@modern-js/builder-doc/docs/en/config/performance/buildCache.md'\\n\\n<Main />\\n\"";
+function build_cache_createMdxContent(props) {
   const _components = Object.assign({
     h1: "h1",
     a: "a",
@@ -825,13 +697,13 @@ function sri_createMdxContent(props) {
   }, props.components);
   return (0,jsx_runtime.jsxs)(jsx_runtime.Fragment, {
     children: [(0,jsx_runtime.jsxs)(_components.h1, {
-      id: "securitysri",
+      id: "performancebuildcache",
       children: [(0,jsx_runtime.jsx)(_components.a, {
         className: "header-anchor",
         "aria-hidden": "true",
-        href: "#securitysri",
+        href: "#performancebuildcache",
         children: "#"
-      }), "security.sri"]
+      }), "performance.buildCache"]
     }), "\n", (0,jsx_runtime.jsxs)(_components.div, {
       className: "modern-directive tip",
       children: [(0,jsx_runtime.jsx)(_components.p, {
@@ -841,23 +713,23 @@ function sri_createMdxContent(props) {
         className: "modern-directive-content",
         children: (0,jsx_runtime.jsxs)(_components.p, {
           children: ["\nThis config is provided by Modern.js Builder, more detail can see ", (0,jsx_runtime.jsx)(_components.a, {
-            href: "https://modernjs.dev/builder/en/api/config-security.html#security-sri-3",
+            href: "https://modernjs.dev/builder/en/api/config-performance.html#performance-buildcache-3",
             target: "_blank",
             rel: "nofollow",
-            children: "security.sri"
+            children: "performance.buildCache"
           }), "。"]
         })
       })]
-    }), "\n", "\n", (0,jsx_runtime.jsx)(sri, {})]
+    }), "\n", "\n", (0,jsx_runtime.jsx)(buildCache, {})]
   });
 }
-function sri_MDXContent(props = {}) {
+function build_cache_MDXContent(props = {}) {
   const {wrapper: MDXLayout} = props.components || ({});
   return MDXLayout ? (0,jsx_runtime.jsx)(MDXLayout, Object.assign({}, props, {
-    children: (0,jsx_runtime.jsx)(sri_createMdxContent, props)
-  })) : sri_createMdxContent(props);
+    children: (0,jsx_runtime.jsx)(build_cache_createMdxContent, props)
+  })) : build_cache_createMdxContent(props);
 }
-/* harmony default export */ const security_sri = (sri_MDXContent);
+/* harmony default export */ const build_cache = (build_cache_MDXContent);
 
 
 /***/ })

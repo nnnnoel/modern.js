@@ -1,7 +1,7 @@
 "use strict";
-(self["webpackChunk_modern_js_main_doc_website"] = self["webpackChunk_modern_js_main_doc_website"] || []).push([[82757],{
+(self["webpackChunk_modern_js_main_doc_website"] = self["webpackChunk_modern_js_main_doc_website"] || []).push([[6402],{
 
-/***/ 60662:
+/***/ 34536:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 // ESM COMPAT FLAG
@@ -18,20 +18,20 @@ __webpack_require__.d(__webpack_exports__, {
 
 // EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.2.0/node_modules/react/jsx-runtime.js
 var jsx_runtime = __webpack_require__(97458);
-;// CONCATENATED MODULE: ../../packages/builder/builder-doc/docs/zh/config/security/sri.md
+;// CONCATENATED MODULE: ../../packages/builder/builder-doc/docs/en/config/security/sri.md
 /*@jsxRuntime automatic @jsxImportSource react*/
 
 const frontmatter = (/* unused pure expression or super */ null && (undefined));
 const toc = [{
-  "id": "sri-介绍",
-  "text": "SRI 介绍",
+  "id": "introduce-sri",
+  "text": "Introduce SRI",
   "depth": 4
 }, {
-  "id": "示例",
-  "text": "示例",
+  "id": "example",
+  "text": "Example",
   "depth": 3
 }];
-const content = "\"- **类型**:\\n\\n```ts\\ntype SRIOptions = {\\n  hashFuncNames?: []string;\\n  enabled?: \\\"auto\\\" | true | false;\\n  hashLoading?: \\\"eager\\\" | \\\"lazy\\\";\\n} | boolean;\\n```\\n\\n- **默认值**: `undefined`\\n\\n为 HTML 所引入的子资源添加完整性属性 —— `integrity`，使浏览器能够验证引入资源的完整性，以此防止下载的资源被篡改。\\n\\n启动该选项后会将 webpack 的 [output.crossOriginLoading](https://webpack.docschina.org/configuration/output/#outputcrossoriginloading) 配置项设置为 `anonymous`。\\n\\n#### SRI 介绍\\n\\n子资源完整性 Subresource Integrity（SRI）是专门用来校验资源的一种方案，它读取资源标签中的 integrity 属性，将其中的信息摘要值，和资源实际的信息摘要值进行对比，如果发现无法匹配，那么浏览器就会拒绝执行资源。\\n\\n对于 script 标签来说，结果为拒绝执行其中的代码；对于 CSS link 来说，结果为不加载其中的样式。\\n\\n关于 SRI 的更多内容，可以查看 [Subresource Integrity - MDN](https://developer.mozilla.org/zh-CN/docs/Web/Security/Subresource_Integrity)。\\n\\n### 示例\\n\\n默认情况下，不会开启 `SRI`，当开启之后它的默认配置如下：\\n\\n```js\\n{\\n  hashFuncNames: ['sha384'];\\n  enabled: \\\"auto\\\",\\n  hashLoading: \\\"eager\\\",\\n}\\n```\\n\\n你可以按照你自己的需求自定义配置项:\\n\\n```js\\nexport default {\\n  security: {\\n    sri: {\\n      hashFuncNames: ['sha-256'],\\n      enabled: true,\\n      hashLoading: 'lazy',\\n    },\\n  },\\n};\\n```\\n\"";
+const content = "\"- **Type:**\\n\\n```ts\\ntype SRIOptions =\\n  | {\\n      hashFuncNames?: string[];\\n      enabled?: 'auto' | boolean;\\n      hashLoading?: 'eager' | 'lazy';\\n    }\\n  | boolean;\\n```\\n\\n- **Default:** `undefined`\\n\\nAdding an integrity attribute (`integrity`) to sub-resources introduced by HTML allows the browser to verify the integrity of the introduced resource, thus preventing tampering with the downloaded resource.\\n\\nEnabling this option will set the webpack [output.crossOriginLoading](https://webpack.js.org/configuration/output/#outputcrossoriginloading) configuration item to `anonymous`.\\n\\n#### Introduce SRI\\n\\nSubresource Integrity (SRI) is a security feature that enables browsers to verify that resources they fetch (for example, from a CDN) are delivered without unexpected manipulation. It works by allowing you to provide a cryptographic hash that a fetched resource must match.\\n\\nFor script tags, the result is to refuse to execute the code; for CSS links, the result is not to load the styles.\\n\\nFor more on subresource integrity, see [Subresource Integrity - MDN](https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity).\\n\\n### Example\\n\\nBy default, `SRI` is not turned on, and when it is, its default configuration is as follows:\\n\\n```js\\n{\\n  hashFuncNames: ['sha384'];\\n  enabled: \\\"auto\\\",\\n  hashLoading: \\\"eager\\\",\\n}\\n```\\n\\nYou can customize the configuration items according to your own needs:\\n\\n```js\\nexport default {\\n  security: {\\n    sri: {\\n      hashFuncNames: ['sha-256'],\\n      enabled: true,\\n      hashLoading: 'lazy',\\n    },\\n  },\\n};\\n```\\n\"";
 function _createMdxContent(props) {
   const _components = Object.assign({
     ul: "ul",
@@ -49,10 +49,10 @@ function _createMdxContent(props) {
   }, props.components);
   return (0,jsx_runtime.jsxs)(jsx_runtime.Fragment, {
     children: [(0,jsx_runtime.jsxs)(_components.ul, {
-      children: ["\n", (0,jsx_runtime.jsxs)(_components.li, {
-        children: [(0,jsx_runtime.jsx)(_components.strong, {
-          children: "类型"
-        }), ":"]
+      children: ["\n", (0,jsx_runtime.jsx)(_components.li, {
+        children: (0,jsx_runtime.jsx)(_components.strong, {
+          children: "Type:"
+        })
       }), "\n"]
     }), "\n", (0,jsx_runtime.jsxs)(_components.div, {
       className: "language-ts",
@@ -95,6 +95,19 @@ function _createMdxContent(props) {
                   color: "#81A1C1"
                 },
                 children: "="
+              })]
+            }), "\n", (0,jsx_runtime.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,jsx_runtime.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: "  "
+              }), (0,jsx_runtime.jsx)(_components.span, {
+                style: {
+                  color: "#81A1C1"
+                },
+                children: "|"
               }), (0,jsx_runtime.jsx)(_components.span, {
                 style: {
                   color: "#D8DEE9FF"
@@ -112,7 +125,7 @@ function _createMdxContent(props) {
                 style: {
                   color: "#D8DEE9FF"
                 },
-                children: "  hashFuncNames"
+                children: "      hashFuncNames"
               }), (0,jsx_runtime.jsx)(_components.span, {
                 style: {
                   color: "#81A1C1"
@@ -122,12 +135,17 @@ function _createMdxContent(props) {
                 style: {
                   color: "#D8DEE9FF"
                 },
-                children: " []"
+                children: " "
               }), (0,jsx_runtime.jsx)(_components.span, {
                 style: {
                   color: "#8FBCBB"
                 },
                 children: "string"
+              }), (0,jsx_runtime.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: "[]"
               }), (0,jsx_runtime.jsx)(_components.span, {
                 style: {
                   color: "#81A1C1"
@@ -140,7 +158,7 @@ function _createMdxContent(props) {
                 style: {
                   color: "#D8DEE9FF"
                 },
-                children: "  enabled"
+                children: "      enabled"
               }), (0,jsx_runtime.jsx)(_components.span, {
                 style: {
                   color: "#81A1C1"
@@ -155,7 +173,7 @@ function _createMdxContent(props) {
                 style: {
                   color: "#ECEFF4"
                 },
-                children: "\""
+                children: "'"
               }), (0,jsx_runtime.jsx)(_components.span, {
                 style: {
                   color: "#A3BE8C"
@@ -165,7 +183,7 @@ function _createMdxContent(props) {
                 style: {
                   color: "#ECEFF4"
                 },
-                children: "\""
+                children: "'"
               }), (0,jsx_runtime.jsx)(_components.span, {
                 style: {
                   color: "#D8DEE9FF"
@@ -185,27 +203,7 @@ function _createMdxContent(props) {
                 style: {
                   color: "#8FBCBB"
                 },
-                children: "true"
-              }), (0,jsx_runtime.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: " "
-              }), (0,jsx_runtime.jsx)(_components.span, {
-                style: {
-                  color: "#81A1C1"
-                },
-                children: "|"
-              }), (0,jsx_runtime.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: " "
-              }), (0,jsx_runtime.jsx)(_components.span, {
-                style: {
-                  color: "#8FBCBB"
-                },
-                children: "false"
+                children: "boolean"
               }), (0,jsx_runtime.jsx)(_components.span, {
                 style: {
                   color: "#81A1C1"
@@ -218,7 +216,7 @@ function _createMdxContent(props) {
                 style: {
                   color: "#D8DEE9FF"
                 },
-                children: "  hashLoading"
+                children: "      hashLoading"
               }), (0,jsx_runtime.jsx)(_components.span, {
                 style: {
                   color: "#81A1C1"
@@ -233,7 +231,7 @@ function _createMdxContent(props) {
                 style: {
                   color: "#ECEFF4"
                 },
-                children: "\""
+                children: "'"
               }), (0,jsx_runtime.jsx)(_components.span, {
                 style: {
                   color: "#A3BE8C"
@@ -243,7 +241,7 @@ function _createMdxContent(props) {
                 style: {
                   color: "#ECEFF4"
                 },
-                children: "\""
+                children: "'"
               }), (0,jsx_runtime.jsx)(_components.span, {
                 style: {
                   color: "#D8DEE9FF"
@@ -263,7 +261,7 @@ function _createMdxContent(props) {
                 style: {
                   color: "#ECEFF4"
                 },
-                children: "\""
+                children: "'"
               }), (0,jsx_runtime.jsx)(_components.span, {
                 style: {
                   color: "#A3BE8C"
@@ -273,7 +271,7 @@ function _createMdxContent(props) {
                 style: {
                   color: "#ECEFF4"
                 },
-                children: "\""
+                children: "'"
               }), (0,jsx_runtime.jsx)(_components.span, {
                 style: {
                   color: "#81A1C1"
@@ -284,14 +282,22 @@ function _createMdxContent(props) {
               className: "line",
               children: [(0,jsx_runtime.jsx)(_components.span, {
                 style: {
+                  color: "#D8DEE9FF"
+                },
+                children: "    "
+              }), (0,jsx_runtime.jsx)(_components.span, {
+                style: {
                   color: "#ECEFF4"
                 },
                 children: "}"
-              }), (0,jsx_runtime.jsx)(_components.span, {
+              })]
+            }), "\n", (0,jsx_runtime.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,jsx_runtime.jsx)(_components.span, {
                 style: {
                   color: "#D8DEE9FF"
                 },
-                children: " "
+                children: "  "
               }), (0,jsx_runtime.jsx)(_components.span, {
                 style: {
                   color: "#81A1C1"
@@ -322,55 +328,55 @@ function _createMdxContent(props) {
     }), "\n", (0,jsx_runtime.jsxs)(_components.ul, {
       children: ["\n", (0,jsx_runtime.jsxs)(_components.li, {
         children: [(0,jsx_runtime.jsx)(_components.strong, {
-          children: "默认值"
-        }), ": ", (0,jsx_runtime.jsx)(_components.code, {
+          children: "Default:"
+        }), " ", (0,jsx_runtime.jsx)(_components.code, {
           children: "undefined"
         })]
       }), "\n"]
     }), "\n", (0,jsx_runtime.jsxs)(_components.p, {
-      children: ["为 HTML 所引入的子资源添加完整性属性 —— ", (0,jsx_runtime.jsx)(_components.code, {
+      children: ["Adding an integrity attribute (", (0,jsx_runtime.jsx)(_components.code, {
         children: "integrity"
-      }), "，使浏览器能够验证引入资源的完整性，以此防止下载的资源被篡改。"]
+      }), ") to sub-resources introduced by HTML allows the browser to verify the integrity of the introduced resource, thus preventing tampering with the downloaded resource."]
     }), "\n", (0,jsx_runtime.jsxs)(_components.p, {
-      children: ["启动该选项后会将 webpack 的 ", (0,jsx_runtime.jsx)(_components.a, {
-        href: "https://webpack.docschina.org/configuration/output/#outputcrossoriginloading-2",
+      children: ["Enabling this option will set the webpack ", (0,jsx_runtime.jsx)(_components.a, {
+        href: "https://webpack.js.org/configuration/output/#outputcrossoriginloading-3",
         target: "_blank",
         rel: "nofollow",
         children: "output.crossOriginLoading"
-      }), " 配置项设置为 ", (0,jsx_runtime.jsx)(_components.code, {
+      }), " configuration item to ", (0,jsx_runtime.jsx)(_components.code, {
         children: "anonymous"
-      }), "。"]
+      }), "."]
     }), "\n", (0,jsx_runtime.jsxs)(_components.h4, {
-      id: "sri-介绍",
+      id: "introduce-sri",
       children: [(0,jsx_runtime.jsx)(_components.a, {
         className: "header-anchor",
         "aria-hidden": "true",
-        href: "#sri-介绍",
+        href: "#introduce-sri",
         children: "#"
-      }), "SRI 介绍"]
+      }), "Introduce SRI"]
     }), "\n", (0,jsx_runtime.jsx)(_components.p, {
-      children: "子资源完整性 Subresource Integrity（SRI）是专门用来校验资源的一种方案，它读取资源标签中的 integrity 属性，将其中的信息摘要值，和资源实际的信息摘要值进行对比，如果发现无法匹配，那么浏览器就会拒绝执行资源。"
+      children: "Subresource Integrity (SRI) is a security feature that enables browsers to verify that resources they fetch (for example, from a CDN) are delivered without unexpected manipulation. It works by allowing you to provide a cryptographic hash that a fetched resource must match."
     }), "\n", (0,jsx_runtime.jsx)(_components.p, {
-      children: "对于 script 标签来说，结果为拒绝执行其中的代码；对于 CSS link 来说，结果为不加载其中的样式。"
+      children: "For script tags, the result is to refuse to execute the code; for CSS links, the result is not to load the styles."
     }), "\n", (0,jsx_runtime.jsxs)(_components.p, {
-      children: ["关于 SRI 的更多内容，可以查看 ", (0,jsx_runtime.jsx)(_components.a, {
-        href: "https://developer.mozilla.org/zh-CN/docs/Web/Security/Subresource_Integrity",
+      children: ["For more on subresource integrity, see ", (0,jsx_runtime.jsx)(_components.a, {
+        href: "https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity",
         target: "_blank",
         rel: "nofollow",
         children: "Subresource Integrity - MDN"
-      }), "。"]
+      }), "."]
     }), "\n", (0,jsx_runtime.jsxs)(_components.h3, {
-      id: "示例",
+      id: "example",
       children: [(0,jsx_runtime.jsx)(_components.a, {
         className: "header-anchor",
         "aria-hidden": "true",
-        href: "#示例",
+        href: "#example",
         children: "#"
-      }), "示例"]
+      }), "Example"]
     }), "\n", (0,jsx_runtime.jsxs)(_components.p, {
-      children: ["默认情况下，不会开启 ", (0,jsx_runtime.jsx)(_components.code, {
+      children: ["By default, ", (0,jsx_runtime.jsx)(_components.code, {
         children: "SRI"
-      }), "，当开启之后它的默认配置如下："]
+      }), " is not turned on, and when it is, its default configuration is as follows:"]
     }), "\n", (0,jsx_runtime.jsxs)(_components.div, {
       className: "language-js",
       children: [(0,jsx_runtime.jsx)(_components.div, {
@@ -527,7 +533,7 @@ function _createMdxContent(props) {
         })]
       })]
     }), "\n", (0,jsx_runtime.jsx)(_components.p, {
-      children: "你可以按照你自己的需求自定义配置项:"
+      children: "You can customize the configuration items according to your own needs:"
     }), "\n", (0,jsx_runtime.jsxs)(_components.div, {
       className: "language-js",
       children: [(0,jsx_runtime.jsx)(_components.div, {
@@ -806,7 +812,7 @@ function MDXContent(props = {}) {
 }
 /* harmony default export */ const sri = (MDXContent);
 
-;// CONCATENATED MODULE: ../../packages/toolkit/main-doc/zh/configure/app/security/sri.mdx
+;// CONCATENATED MODULE: ../../packages/toolkit/main-doc/en/configure/app/security/sri.mdx
 /*@jsxRuntime automatic @jsxImportSource react*/
 
 const sri_frontmatter = {
@@ -815,7 +821,7 @@ const sri_frontmatter = {
 
 const sri_toc = [];
 const title = `security.sri`;
-const sri_content = "\"---\\nsidebar_label: sri\\n---\\n\\n# security.sri\\n\\n:::tip\\n该配置由 Modern.js Builder 提供，更多信息可参考 [security.sri](https://modernjs.dev/builder/api/config-security.html#security-sri)。\\n:::\\n\\nimport Main from '@modern-js/builder-doc/docs/zh/config/security/sri.md'\\n\\n<Main />\\n\"";
+const sri_content = "\"---\\nsidebar_label: sri\\n---\\n\\n# security.sri\\n\\n:::tip\\nThis config is provided by Modern.js Builder, more detail can see [security.sri](https://modernjs.dev/builder/en/api/config-security.html#security-sri)。\\n:::\\n\\nimport Main from '@modern-js/builder-doc/docs/en/config/security/sri.md'\\n\\n<Main />\\n\"";
 function sri_createMdxContent(props) {
   const _components = Object.assign({
     h1: "h1",
@@ -840,8 +846,8 @@ function sri_createMdxContent(props) {
       }), (0,jsx_runtime.jsx)(_components.div, {
         className: "modern-directive-content",
         children: (0,jsx_runtime.jsxs)(_components.p, {
-          children: ["\n该配置由 Modern.js Builder 提供，更多信息可参考 ", (0,jsx_runtime.jsx)(_components.a, {
-            href: "https://modernjs.dev/builder/api/config-security.html#security-sri-2",
+          children: ["\nThis config is provided by Modern.js Builder, more detail can see ", (0,jsx_runtime.jsx)(_components.a, {
+            href: "https://modernjs.dev/builder/en/api/config-security.html#security-sri-3",
             target: "_blank",
             rel: "nofollow",
             children: "security.sri"

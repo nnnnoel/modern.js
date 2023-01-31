@@ -23,7 +23,7 @@ var jsx_runtime = __webpack_require__(97458);
 
 const frontmatter = (/* unused pure expression or super */ null && (undefined));
 const toc = (/* unused pure expression or super */ null && ([]));
-const content = "\"- **类型**\\n\\n```ts\\ntype BuildCacheConfig =\\n  | {\\n      /**\\n       * webpack 文件缓存系统的缓存目录\\n       */\\n      cacheDirectory?: string;\\n    }\\n  | boolean;\\n```\\n\\n- **默认值**:\\n\\n```js\\nconst defaultBuildCacheConfig = {\\n  cacheDirectory: './node_modules/.cache/webpack',\\n};\\n```\\n\\n控制 Builder 在构建过程中的缓存行为。\\n\\nBuilder 默认会开启构建缓存来提升二次构建的速度，并默认把生成的缓存文件写到 `./node_modules/.cache/webpack` 目录下。\\n\\n你可以通过 `buildCache` 配置缓存路径，比如：\\n\\n```js\\nexport default {\\n  performance: {\\n    buildCache: {\\n      cacheDirectory: './node_modules/.custom_cache/webpack',\\n    },\\n  },\\n};\\n```\\n\\n如果不希望缓存，你也可以将 `buildCache` 置为 `false` 将其禁用掉：\\n\\n```js\\nexport default {\\n  performance: {\\n    buildCache: false,\\n  },\\n};\\n```\\n\"";
+const content = "\"- **类型：**\\n\\n```ts\\ntype BuildCacheConfig =\\n  | {\\n      /**\\n       * webpack 文件缓存系统的缓存目录\\n       */\\n      cacheDirectory?: string;\\n    }\\n  | boolean;\\n```\\n\\n- **默认值：**\\n\\n```js\\nconst defaultBuildCacheConfig = {\\n  cacheDirectory: './node_modules/.cache/webpack',\\n};\\n```\\n\\n控制 Builder 在构建过程中的缓存行为。\\n\\nBuilder 默认会开启构建缓存来提升二次构建的速度，并默认把生成的缓存文件写到 `./node_modules/.cache/webpack` 目录下。\\n\\n你可以通过 `buildCache` 配置缓存路径，比如：\\n\\n```js\\nexport default {\\n  performance: {\\n    buildCache: {\\n      cacheDirectory: './node_modules/.custom_cache/webpack',\\n    },\\n  },\\n};\\n```\\n\\n如果不希望缓存，你也可以将 `buildCache` 置为 `false` 将其禁用掉：\\n\\n```js\\nexport default {\\n  performance: {\\n    buildCache: false,\\n  },\\n};\\n```\\n\"";
 function _createMdxContent(props) {
   const _components = Object.assign({
     ul: "ul",
@@ -40,7 +40,7 @@ function _createMdxContent(props) {
     children: [(0,jsx_runtime.jsxs)(_components.ul, {
       children: ["\n", (0,jsx_runtime.jsx)(_components.li, {
         children: (0,jsx_runtime.jsx)(_components.strong, {
-          children: "类型"
+          children: "类型："
         })
       }), "\n"]
     }), "\n", (0,jsx_runtime.jsxs)(_components.div, {
@@ -213,10 +213,10 @@ function _createMdxContent(props) {
         })]
       })]
     }), "\n", (0,jsx_runtime.jsxs)(_components.ul, {
-      children: ["\n", (0,jsx_runtime.jsxs)(_components.li, {
-        children: [(0,jsx_runtime.jsx)(_components.strong, {
-          children: "默认值"
-        }), ":"]
+      children: ["\n", (0,jsx_runtime.jsx)(_components.li, {
+        children: (0,jsx_runtime.jsx)(_components.strong, {
+          children: "默认值："
+        })
       }), "\n"]
     }), "\n", (0,jsx_runtime.jsxs)(_components.div, {
       className: "language-js",

@@ -164,7 +164,7 @@ var jsx_runtime = __webpack_require__(97458);
 function NotFoundLayout(){const{siteData}=(0,hooks/* usePageData */.V)();const defaultLang=siteData.lang;// Consider the existing sites include the defaultLang in some links, such as '/zh/guide/quick-start'
 // We need to redirect them to '/guide/quick-start'
 // In the meanwhile, we will not show the 404 page for the user experience
-if(defaultLang&&location.pathname.includes(`/${defaultLang}/`)&&typeof window!=='undefined'){const redirectUrl=location.pathname.replace(`/${defaultLang}/`,'/');window.location.replace(redirectUrl);}else{// The 404 page content
+if(defaultLang&&location.pathname.includes(`/${defaultLang}/`)&&typeof window!=='undefined'){const redirectUrl=location.pathname.replace(`/${defaultLang}/`,'/');window.location.replace(redirectUrl);return/*#__PURE__*/(0,jsx_runtime.jsx)(jsx_runtime.Fragment,{});}else{// The 404 page content
 return/*#__PURE__*/(0,jsx_runtime.jsxs)("div",{m:"auto t-50",p:"t-16 x-6 b-24 sm:t-24 x-8 b-40",text:"center",flex:"center col",children:[/*#__PURE__*/(0,jsx_runtime.jsx)("p",{text:"6xl",font:"semibold",children:"404"}),/*#__PURE__*/(0,jsx_runtime.jsx)("h1",{p:"t-3",text:"xl",className:"leading-5",font:"bold",children:"PAGE NOT FOUND"}),/*#__PURE__*/(0,jsx_runtime.jsx)("div",{m:"t-6 x-auto b-4.5",w:"16",style:{height:'1px'},bg:"gray-light-1"}),/*#__PURE__*/(0,jsx_runtime.jsx)("div",{p:"t-5",children:/*#__PURE__*/(0,jsx_runtime.jsx)("a",{"inline-block":"~",border:"1px solid brand",className:"rounded-2xl",p:"y-2 x-4",text:"sm brand","font-medium":"~",transition:"border-color duration-300 color duration-300",hover:"border-color-brand-dark color-brand-dark",href:siteData.base,"aria-label":"go to home",children:"Take me home"})})]});}}
 // EXTERNAL MODULE: ../../node_modules/.pnpm/@babel+runtime@7.18.6/node_modules/@babel/runtime/helpers/esm/objectSpread2.js + 1 modules
 var objectSpread2 = __webpack_require__(40600);
@@ -182,6 +182,8 @@ var react = __webpack_require__(52983);
 var index_module = __webpack_require__(63744);
 // EXTERNAL MODULE: ./src/index.ts + 58 modules
 var src = __webpack_require__(12067);
+// EXTERNAL MODULE: ../../packages/cli/doc-core/node_modules/virtual-global-components.js
+var virtual_global_components = __webpack_require__(20714);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/react-router@6.6.0_react@18.2.0/node_modules/react-router/dist/index.js
 var dist = __webpack_require__(23517);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/lodash-es@4.17.21/node_modules/lodash-es/throttle.js + 5 modules
@@ -303,7 +305,10 @@ const Layout=props=>{var _frontmatter$title;const{top,bottom,beforeDocFooter,bef
 title:articleTitle,frontmatter,siteData,pageType}=(0,hooks/* usePageData */.V)();const localesData=(0,useLocaleSiteData/* useLocaleSiteData */.M)();// Priority: front matter title > h1 title
 let title=(_frontmatter$title=frontmatter===null||frontmatter===void 0?void 0:frontmatter.title)!==null&&_frontmatter$title!==void 0?_frontmatter$title:articleTitle;const mainTitle=siteData.title||localesData.title;if(title){// append main title as a suffix
 title=`${title} - ${mainTitle}`;}else{title=mainTitle;}const description=(frontmatter===null||frontmatter===void 0?void 0:frontmatter.description)||siteData.description||localesData.description;// Use doc layout by default
-const getContentLayout=()=>{switch(pageType){case'home':return/*#__PURE__*/(0,jsx_runtime.jsx)(src/* default.HomeLayout */.ZP.HomeLayout,{});case'doc':return/*#__PURE__*/(0,jsx_runtime.jsx)(DocLayout,(0,objectSpread2/* default */.Z)({},docProps));case'404':return/*#__PURE__*/(0,jsx_runtime.jsx)(src/* default.NotFoundLayout */.ZP.NotFoundLayout,{});case'custom':return/*#__PURE__*/(0,jsx_runtime.jsx)(Content,{});default:return/*#__PURE__*/(0,jsx_runtime.jsx)(DocLayout,(0,objectSpread2/* default */.Z)({},docProps));}};return/*#__PURE__*/(0,jsx_runtime.jsxs)("div",{style:{height:'100%'},children:[/*#__PURE__*/(0,jsx_runtime.jsxs)(index_module/* Helmet */.ql,{children:[title?/*#__PURE__*/(0,jsx_runtime.jsx)("title",{children:title}):null,description?/*#__PURE__*/(0,jsx_runtime.jsx)("meta",{name:"description",content:description}):null]}),top,/*#__PURE__*/(0,jsx_runtime.jsx)(src/* Nav */.JL,{beforeNavTitle:beforeNavTitle,afterNavTitle:afterNavTitle}),/*#__PURE__*/(0,jsx_runtime.jsx)("section",{children:getContentLayout()}),bottom]});};
+const getContentLayout=()=>{switch(pageType){case'home':return/*#__PURE__*/(0,jsx_runtime.jsx)(src/* default.HomeLayout */.ZP.HomeLayout,{});case'doc':return/*#__PURE__*/(0,jsx_runtime.jsx)(DocLayout,(0,objectSpread2/* default */.Z)({},docProps));case'404':return/*#__PURE__*/(0,jsx_runtime.jsx)(src/* default.NotFoundLayout */.ZP.NotFoundLayout,{});case'custom':return/*#__PURE__*/(0,jsx_runtime.jsx)(Content,{});default:return/*#__PURE__*/(0,jsx_runtime.jsx)(DocLayout,(0,objectSpread2/* default */.Z)({},docProps));}};return/*#__PURE__*/(0,jsx_runtime.jsxs)("div",{style:{height:'100%'},children:[/*#__PURE__*/(0,jsx_runtime.jsxs)(index_module/* Helmet */.ql,{children:[title?/*#__PURE__*/(0,jsx_runtime.jsx)("title",{children:title}):null,description?/*#__PURE__*/(0,jsx_runtime.jsx)("meta",{name:"description",content:description}):null]}),top,/*#__PURE__*/(0,jsx_runtime.jsx)(src/* Nav */.JL,{beforeNavTitle:beforeNavTitle,afterNavTitle:afterNavTitle}),/*#__PURE__*/(0,jsx_runtime.jsx)("section",{children:getContentLayout()}),bottom,// Global UI
+virtual_global_components/* default.map */.Z.map((Component,index)=>/*#__PURE__*/ // The component order is stable
+// eslint-disable-next-line react/no-array-index-key
+(0,jsx_runtime.jsx)(Component,{},index))]});};
 ;// CONCATENATED MODULE: ../../packages/cli/doc-core/src/theme-default/components/Button/index.module.scss
 // extracted by mini-css-extract-plugin
 /* harmony default export */ const Button_index_module = ({"button":"B0JQV","medium":"WNEsY","big":"U1msm","brand":"zXehA","alt":"ZSwJp"});
@@ -1281,7 +1286,7 @@ const Tabs_excluded=["children"];function isTabItem(item){if(item&&typeof item==
 },
 /******/ __webpack_require__ => { // webpackRuntimeModules
 /******/ var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-/******/ __webpack_require__.O(0, [92986,87991,58193,20795], () => (__webpack_exec__(76645), __webpack_exec__(74224)));
+/******/ __webpack_require__.O(0, [92986,87991,58193,86728], () => (__webpack_exec__(76645), __webpack_exec__(74224)));
 /******/ var __webpack_exports__ = __webpack_require__.O();
 /******/ }
 ]);
