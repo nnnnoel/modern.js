@@ -65,7 +65,7 @@ const toc = [{
   "depth": 2
 }];
 const title = `Server-side rendering`;
-const content = "\"---\\ntitle: Server-side rendering\\nsidebar_position: 3\\n---\\n# Server-side rendering\\n\\nIn Modern.js, SSR also works out of the box. Developers do not need to write complex server level logic for SSR, nor do they need to care about the operation and maintenance of SSR, or create services. Modern.js have a comprehensive SSR degradation strategy to ensure that pages can run safely.\\n\\nEnabling SSR is very easy, just set ['server.ssr'](/configure/app/server/ssr) to `true`:\\n\\n```json\\n{\\n  \\\"server\\\": {\\n    \\\"ssr\\\": true\\n  }\\n}\\n```\\n\\n## SSR Data Fetch\\n\\nModern.js provides Data Loader, which is convenient for developers to fetch data under SSR and CSR. Each routing module, such as `layout.tsx` and `page.tsx`, can define its own Data Loader:\\n\\n```ts title=\\\"src/routes/page.tsx\\\"\\nexport const loader = () => {\\n  return {\\n    message: 'Hello World',\\n  };\\n};\\n```\\n\\nin the component, the data returned by the `loader` function can be get data through the Hooks API:\\n\\n```tsx\\nexport default () => {\\n  const data = useLoaderData();\\n  return <div>{data.message}</div>;\\n};\\n```\\n\\nModern.js break the traditional SSR development model and provide users with a user-friendly SSR development experience.\\n\\nAnd it provides elegant degradation processing. Once the SSR request fails, it will automatically downgrade and restart the request on the browser side.\\n\\nHowever, developers still need to pay attention to the fallback of data, such as `null` values or data returns that do not as expect. Avoid React rendering errors or messy rendering results when SSR.\\n\\n:::info\\nWhen using Data Loader, data fetching happens before rendering, Modern.js still supports fetching data when the component is rendered. See [Data Fetch](/guides/basic-features/data-fetch)。\\n\\n:::\\n\\n## Keep Rendering Consistent\\n\\nIn some businesses, it is usually necessary to display different UI displays according to the current operating container environment characteristics, such as [UA](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/User-Agent) information.\\n\\nIf the processing is not careful enough, the rendering results may do not meet the expectations at this time.\\n\\nHere is an example to show the problem when SSR and CSR rendering are inconsistent, add the following code to the component:\\n\\n```tsx\\n{\\n  typeof window !== 'undefined' ? <div>browser content</div> : null;\\n}\\n```\\n\\nAfter starting the app, visit the page and will find that the browser console throws a warning message:\\n\\n```sh\\nWarning: Expected server HTML to contain a matching <div> in <div>.\\n```\\n\\nThis is caused by the inconsistency between the rendering result and the SSR rendering result when React executes the hydrate logic on the client side. Although the page performs normally, in complex applications, it is likely to cause problems such as DOM hierarchy confusion and style confusion.\\n\\n:::info\\nFor hydrate logic, please refer to [here](https://reactjs.org/docs/react-dom.html#hydrate).\\n\\n:::\\n\\nApplications need to maintain the consistency of SSR and CSR rendering results. If there are inconsistencies, it means that this part of the content does not need to be rendered in SSR.\\n\\nModern.js provide [`<NoSSR>`](/apis/app/runtime/core/use-runtime-context) for such content that does not need to be rendered in SSR:\\n\\n```ts\\nimport { NoSSR } from '@modern-js/runtime/ssr';\\n```\\n\\nOutside of elements that do not require SSR, wrap with a `NoSSR` component:\\n\\n```tsx\\n<NoSSR>\\n  <div>client content</div>\\n</NoSSR>\\n```\\n\\nAfter modifying the code, refresh page found that the previous Waring disappeared. Open the Network window of the browser developer tool to see that the returned HTML document does not contain the content of the `NoSSR` component package.\\n\\n:::info\\n['useRuntimeContext'](/apis/app/runtime/core/use-runtime-context) can get complete request information, which can be used to ensure that the rendering results of SSR and CSR are consistent.\\n\\n:::\\n\\n## Concerned Memory Leaks\\n\\n:::warning\\nIn the SSR, developers need to pay special attention to the problem of memory leaks. Even small memory leaks can affect services..\\n\\n:::\\n\\nIn SSR, every request triggers the component rendering. So, you need to avoid defining any potentially growing global data, or subscribing to events globally, or creating streams that will not be destroyed.\\n\\nFor example, the following code, when using [redux-observable](https://redux-observable.js.org/), developers used to code like this:\\n\\n```tsx\\nimport { createEpicMiddleware, combineEpics } from 'redux-observable';\\n\\nconst epicMiddleware = createEpicMiddleware();\\nconst rootEpic = combineEpics();\\n\\nexport default function Test() {\\n  epicMiddleware.run(rootEpic);\\n  return <div>Hello Modern.js</div>;\\n}\\n```\\n\\nCreate a Middleware instance `epicMiddleware` outside the component and call epicMiddleware.run inside the component.\\n\\nOn the browser side, this code does not cause any problems. But in SSR, the Middleware instance will never be destroyed. Every time the component is rendered and `rootEpic` is called, new event bindings are added internally, causing the entire object to continue to grow larger, which ultimately affects application performance.\\n\\nSuch problems in CSR are not easy to detect, so when switching from CSR to SSR, if you are not sure whether the application has such hidden dangers, you can press the application.\\n\\n## Crop SSR Data\\n\\nIn order to keep the data requested in the SSR phase, it can be used directly on the browser side, Modern.js inject the data and state that collected during the rendering process into the HTML.\\n\\nAs a result, CSR applications often have a large amount of interface data and the state of the components is not crop. If SSR is used directly, the rendered HTML size may be too large.\\n\\nAt this time, SSR not only cannot bring an improvement in the user experience, but may have the opposite effect.\\n\\nTherefore, when using SSR, **developers need to do reasonable weight loss for the application**:\\n\\n1. Pay attention to the first screen, you can only request the data needed for the first screen in SSR, and render the rest on the browser side.\\n2. Removes the data independent with render from the data returned by the interface.\\n\\n## Serverless Pre-render\\n\\nModern.js provide Serverless Pre-rendering(SPR) to improve SSR performance.\\n\\nSPR uses pre-rendering and caching to provide the responsive performance of static Web for SSR pages. It allows SSR applications to have the responsiveness and stability of static Web pages, while keeping data dynamically updated.\\n\\nUsing SPR in the Modern.js is very simple, just add the `<PreRender>` component, and the page where the component is located will automatically open SPR.\\n\\nThis mock a component that uses the `useLoaderData` API, and the request in the Data Loader takes 2s.\\n\\n```jsx\\nimport { useLoaderData } from '@modern-js/runtime/router';\\n\\nexport const loader = async () => {\\n  await new Promise((resolve, reject) => {\\n    setTimeout(() => {\\n      resolve(null);\\n    }, 2000);\\n  });\\n\\n  return {\\n    message: 'Hello Modern.js',\\n  };\\n};\\n\\nexport default () => {\\n  const data = useLoaderData();\\n  return <div>{data?.message}</div>;\\n};\\n```\\n\\nAfter executing the `dev` command and opening the page, it is obvious that the page needs to wait 2s before returning.\\n\\nThe next is to use the `<PreRender>` component, which can be exported directly from `@modern-js/runtime/ssr `:\\n\\n```ts\\nimport { PreRender } from '@modern-js/runtime/ssr';\\n```\\n\\nUse the `PreRender` component in the routing component and set the parameter `interval` to indicate that the expiration time of the rendering result is 5s:\\n\\n```tsx\\n<PreRender interval={5} />\\n```\\n\\nAfter modification, execute `pnpm run build && pnpm run serve` to start the application and open the page.\\n\\nWhen open page for the first time, it is no different from the previous rendering, and there is also a 2s delay.\\n\\nRefresh page, and the page opens instantly, but at this time, the page data has not changed due to the refresh, because the cache has not expired.\\n\\nWait 5s, refresh the page again, the data of the page is still unchanged. Refresh the page again The data changes, but the page still responds almost instantaneously.\\n\\nThis is because in the previous request, the SPR has asynchronously obtained the new rendering result in the background, and the page requested this time is the version that has been cached in the server.\\n\\nIt is conceivable that when `interval` is set to 1, users can have the responsive experience of a static page.\\n\\n:::info\\nFor more detail, see [`<PreRender>`](/apis/app/runtime/ssr/pre-render)。\\n\\n:::\\n\\n## Treeshaking\\n\\nWhen SSR is enabled, Modern.js will use the same entry to build both the SSR Bundle and the CSR Bundle. Therefore, the Web API in the SSR Bundle, or the Node API in the CSR Bundle, can lead to runtime errors.\\n\\nWeb API into a component is usually to do some global listening, or to get browser-related data, such as:\\n\\n```tsx\\ndocument.addEventListener('load', () => {\\n  console.log('document load');\\n});\\nconst App = () => {\\n  return <div>Hello World</div>;\\n};\\nexport default App;\\n```\\n\\nThe Node API is introduced in the component file, usually because of the use of Data Loader, for example:\\n\\n```ts\\nimport fse from 'fs-extra';\\nexport const loader = () => {\\n  const file = fse.readFileSync('./myfile');\\n  return {\\n    ...\\n  };\\n};\\n```\\n\\n### Use Environment Variables\\n\\nFor the first case, we can directly use Modern.js built-in environment variables `MODERN_TARGET` to remove useless code at build time:\\n\\n```ts\\nif (process.env.MODERN_TARGET === 'browser') {\\n  document.addEventListener('load', () => {\\n    console.log('document load');\\n  });\\n}\\n```\\n\\n:::note\\nFor more information, see [environment variables](/guides/basic-features/env-vars).\\n\\n:::\\n\\n### Use File Suffix\\n\\nIn the second case, the Treeshaking method does not guarantee that the code is completely separated. Modern.js also supports the packaging file of SSR Bundle and CSR Bundle products through the file suffixed with `.node.`.\\n\\nFor example, the import of `fs-extra` in the code, when it is directly referenced to the component, will cause the CSR to load an error. You can create `.ts` and `.node.ts` files of the same name as a layer of proxy:\\n\\n```ts title=\\\"compat.ts\\\"\\nexport { readFileSync } from 'fs-extra';\\n```\\n\\n```ts title=\\\"compat.node.ts\\\"\\nexport const readFileSync: any = () => {};\\n```\\n\\nuse `./compat` directly into the file. At this time, files with the `.node.ts` suffix will be used first in the SSR environment, and files with the `.ts` suffix will be used in the CSR environment.\\n\\n```ts title=\\\"App.tsx\\\"\\nimport { readFileSync } from './compat'\\n\\nexport const loader = () => {\\n  const file = readFileSync('./myfile');\\n  return {\\n    ...\\n  };\\n};\\n```\\n\\n### Independent File\\n\\nBoth of the above methods will bring some burden to the developer. Modern.js based on [Nested Routing](/guides/basic-features/routes) developed and designed [Data Fetch](/guides/basic-features/data-fetch) to separate CSR and SSR code。\\n\\n## Remote Request\\n\\nWhen initiating remote requests in SSR, developers sometimes use request tools. Some interfaces need to pass user cookies, which developers can get through the ['useRuntimeContext'](/guides/basic-features/data-fetch#route-loader) API to achieve.\\n\\nIt should be noted, the request header of the HTML request is obtained, which may not be applicable to remote requests, so **must not** pass through all request headers.\\n\\nIn addition, some backend interfaces, or general gateways, will verify according to the information in the request header, and full pass-through is prone to various problems that are difficult to debug. It is recommended that **pass-through on demand**.\\n\\nBe sure to filter the `host` field if you really need to pass through all request headers.\\n\\n## Stream SSR\\n\\nModern.js supports streaming rendering in React 18, the default rendering mode can be modified with the following configuration:\\n\\n```json\\n{\\n  \\\"server\\\": {\\n    \\\"ssr\\\": {\\n      \\\"mode\\\": \\\"stream\\\"\\n    }\\n  }\\n}\\n```\\n\\n:::note\\nAt present Modern.js built-in data fetch does not support streaming rendering. If app need it, developers can build it according to the demo of React Stream SSR.\\n\\n:::\\n\"";
+const content = "\"---\\ntitle: Server-side rendering\\nsidebar_position: 3\\n---\\n# Server-side rendering\\n\\nIn Modern.js, SSR also works out of the box. Developers do not need to write complex server level logic for SSR, nor do they need to care about the operation and maintenance of SSR, or create services. Modern.js have a comprehensive SSR degradation strategy to ensure that pages can run safely.\\n\\nEnabling SSR is very easy, just set ['server.ssr'](/configure/app/server/ssr) to `true`:\\n\\n```json\\n{\\n  \\\"server\\\": {\\n    \\\"ssr\\\": true\\n  }\\n}\\n```\\n\\n## SSR Data Fetch\\n\\nModern.js provides Data Loader, which is convenient for developers to fetch data under SSR and CSR. Each routing module, such as `layout.tsx` and `page.tsx`, can define its own Data Loader:\\n\\n```ts title=\\\"src/routes/page.tsx\\\"\\nexport const loader = () => {\\n  return {\\n    message: 'Hello World',\\n  };\\n};\\n```\\n\\nin the component, the data returned by the `loader` function can be get data through the Hooks API:\\n\\n```tsx\\nexport default () => {\\n  const data = useLoaderData();\\n  return <div>{data.message}</div>;\\n};\\n```\\n\\nModern.js break the traditional SSR development model and provide users with a user-friendly SSR development experience.\\n\\nAnd it provides elegant degradation processing. Once the SSR request fails, it will automatically downgrade and restart the request on the browser side.\\n\\nHowever, developers still need to pay attention to the fallback of data, such as `null` values or data returns that do not as expect. Avoid React rendering errors or messy rendering results when SSR.\\n\\n:::info\\nWhen using Data Loader, data fetching happens before rendering, Modern.js still supports fetching data when the component is rendered. See [Data Fetch](/guides/basic-features/data-fetch)。\\n\\n:::\\n\\n## Keep Rendering Consistent\\n\\nIn some businesses, it is usually necessary to display different UI displays according to the current operating container environment characteristics, such as [UA](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/User-Agent) information.\\n\\nIf the processing is not careful enough, the rendering results may do not meet the expectations at this time.\\n\\nHere is an example to show the problem when SSR and CSR rendering are inconsistent, add the following code to the component:\\n\\n```tsx\\n{\\n  typeof window !== 'undefined' ? <div>browser content</div> : null;\\n}\\n```\\n\\nAfter starting the app, visit the page and will find that the browser console throws a warning message:\\n\\n```sh\\nWarning: Expected server HTML to contain a matching <div> in <div>.\\n```\\n\\nThis is caused by the inconsistency between the rendering result and the SSR rendering result when React executes the hydrate logic on the client side. Although the page performs normally, in complex applications, it is likely to cause problems such as DOM hierarchy confusion and style confusion.\\n\\n:::info\\nFor hydrate logic, please refer to [here](https://reactjs.org/docs/react-dom.html#hydrate).\\n\\n:::\\n\\nApplications need to maintain the consistency of SSR and CSR rendering results. If there are inconsistencies, it means that this part of the content does not need to be rendered in SSR.\\n\\nModern.js provide [`<NoSSR>`](/apis/app/runtime/core/use-runtime-context) for such content that does not need to be rendered in SSR:\\n\\n```ts\\nimport { NoSSR } from '@modern-js/runtime/ssr';\\n```\\n\\nOutside of elements that do not require SSR, wrap with a `NoSSR` component:\\n\\n```tsx\\n<NoSSR>\\n  <div>client content</div>\\n</NoSSR>\\n```\\n\\nAfter modifying the code, refresh page found that the previous Waring disappeared. Open the Network window of the browser developer tool to see that the returned HTML document does not contain the content of the `NoSSR` component package.\\n\\n:::info\\n['useRuntimeContext'](/apis/app/runtime/core/use-runtime-context) can get complete request information, which can be used to ensure that the rendering results of SSR and CSR are consistent.\\n\\n:::\\n\\n## Concerned Memory Leaks\\n\\n:::warning\\nIn the SSR, developers need to pay special attention to the problem of memory leaks. Even small memory leaks can affect services..\\n\\n:::\\n\\nIn SSR, every request triggers the component rendering. So, you need to avoid defining any potentially growing global data, or subscribing to events globally, or creating streams that will not be destroyed.\\n\\nFor example, the following code, when using [redux-observable](https://redux-observable.js.org/), developers used to code like this:\\n\\n```tsx\\nimport { createEpicMiddleware, combineEpics } from 'redux-observable';\\n\\nconst epicMiddleware = createEpicMiddleware();\\nconst rootEpic = combineEpics();\\n\\nexport default function Test() {\\n  epicMiddleware.run(rootEpic);\\n  return <div>Hello Modern.js</div>;\\n}\\n```\\n\\nCreate a Middleware instance `epicMiddleware` outside the component and call epicMiddleware.run inside the component.\\n\\nOn the browser side, this code does not cause any problems. But in SSR, the Middleware instance will never be destroyed. Every time the component is rendered and `rootEpic` is called, new event bindings are added internally, causing the entire object to continue to grow larger, which ultimately affects application performance.\\n\\nSuch problems in CSR are not easy to detect, so when switching from CSR to SSR, if you are not sure whether the application has such hidden dangers, you can press the application.\\n\\n## Crop SSR Data\\n\\nIn order to keep the data requested in the SSR phase, it can be used directly on the browser side, Modern.js inject the data and state that collected during the rendering process into the HTML.\\n\\nAs a result, CSR applications often have a large amount of interface data and the state of the components is not crop. If SSR is used directly, the rendered HTML size may be too large.\\n\\nAt this time, SSR not only cannot bring an improvement in the user experience, but may have the opposite effect.\\n\\nTherefore, when using SSR, **developers need to do reasonable weight loss for the application**:\\n\\n1. Pay attention to the first screen, you can only request the data needed for the first screen in SSR, and render the rest on the browser side.\\n2. Removes the data independent with render from the data returned by the interface.\\n\\n## Serverless Pre-render\\n\\nModern.js provide Serverless Pre-rendering(SPR) to improve SSR performance.\\n\\nSPR uses pre-rendering and caching to provide the responsive performance of static Web for SSR pages. It allows SSR applications to have the responsiveness and stability of static Web pages, while keeping data dynamically updated.\\n\\nUsing SPR in the Modern.js is very simple, just add the `<PreRender>` component, and the page where the component is located will automatically open SPR.\\n\\nThis mock a component that uses the `useLoaderData` API, and the request in the Data Loader takes 2s.\\n\\n```jsx\\nimport { useLoaderData } from '@modern-js/runtime/router';\\n\\nexport const loader = async () => {\\n  await new Promise((resolve, reject) => {\\n    setTimeout(() => {\\n      resolve(null);\\n    }, 2000);\\n  });\\n\\n  return {\\n    message: 'Hello Modern.js',\\n  };\\n};\\n\\nexport default () => {\\n  const data = useLoaderData();\\n  return <div>{data?.message}</div>;\\n};\\n```\\n\\nAfter executing the `dev` command and opening the page, it is obvious that the page needs to wait 2s before returning.\\n\\nThe next is to use the `<PreRender>` component, which can be exported directly from `@modern-js/runtime/ssr `:\\n\\n```ts\\nimport { PreRender } from '@modern-js/runtime/ssr';\\n```\\n\\nUse the `PreRender` component in the routing component and set the parameter `interval` to indicate that the expiration time of the rendering result is 5s:\\n\\n```tsx\\n<PreRender interval={5} />\\n```\\n\\nAfter modification, execute `pnpm run build && pnpm run serve` to start the application and open the page.\\n\\nWhen open page for the first time, it is no different from the previous rendering, and there is also a 2s delay.\\n\\nRefresh page, and the page opens instantly, but at this time, the page data has not changed due to the refresh, because the cache has not expired.\\n\\nWait 5s, refresh the page again, the data of the page is still unchanged. Refresh the page again The data changes, but the page still responds almost instantaneously.\\n\\nThis is because in the previous request, the SPR has asynchronously obtained the new rendering result in the background, and the page requested this time is the version that has been cached in the server.\\n\\nIt is conceivable that when `interval` is set to 1, users can have the responsive experience of a static page.\\n\\n:::info\\nFor more detail, see [`<PreRender>`](/apis/app/runtime/ssr/pre-render)。\\n\\n:::\\n\\n## Treeshaking\\n\\nWhen SSR is enabled, Modern.js will use the same entry to build both the SSR Bundle and the CSR Bundle. Therefore, the Web API in the SSR Bundle, or the Node API in the CSR Bundle, can lead to runtime errors.\\n\\nWeb API into a component is usually to do some global listening, or to get browser-related data, such as:\\n\\n```tsx\\ndocument.addEventListener('load', () => {\\n  console.log('document load');\\n});\\nconst App = () => {\\n  return <div>Hello World</div>;\\n};\\nexport default App;\\n```\\n\\nThe Node API is introduced in the component file, usually because of the use of Data Loader, for example:\\n\\n```ts\\nimport fse from 'fs-extra';\\nexport const loader = () => {\\n  const file = fse.readFileSync('./myfile');\\n  return {\\n    ...\\n  };\\n};\\n```\\n\\n### Use Environment Variables\\n\\nFor the first case, we can directly use Modern.js built-in environment variables `MODERN_TARGET` to remove useless code at build time:\\n\\n```ts\\nif (process.env.MODERN_TARGET === 'browser') {\\n  document.addEventListener('load', () => {\\n    console.log('document load');\\n  });\\n}\\n```\\n\\n:::note\\nFor more information, see [environment variables](/guides/basic-features/env-vars).\\n\\n:::\\n\\n### Use File Suffix\\n\\nIn the second case, the Treeshaking method does not guarantee that the code is completely separated. Modern.js also supports the packaging file of SSR Bundle and CSR Bundle products through the file suffixed with `.node.`.\\n\\nFor example, the import of `fs-extra` in the code, when it is directly referenced to the component, will cause the CSR to load an error. You can create `.ts` and `.node.ts` files of the same name as a layer of proxy:\\n\\n```ts title=\\\"compat.ts\\\"\\nexport const readFileSync: any = () => {};\\n```\\n\\n```ts title=\\\"compat.node.ts\\\"\\nexport { readFileSync } from 'fs-extra';\\n```\\n\\nuse `./compat` directly into the file. At this time, files with the `.node.ts` suffix will be used first in the SSR environment, and files with the `.ts` suffix will be used in the CSR environment.\\n\\n```ts title=\\\"App.tsx\\\"\\nimport { readFileSync } from './compat'\\n\\nexport const loader = () => {\\n  const file = readFileSync('./myfile');\\n  return {\\n    ...\\n  };\\n};\\n```\\n\\n### Independent File\\n\\nBoth of the above methods will bring some burden to the developer. Modern.js based on [Nested Routing](/guides/basic-features/routes) developed and designed [Data Fetch](/guides/basic-features/data-fetch) to separate CSR and SSR code。\\n\\n## Remote Request\\n\\nWhen initiating remote requests in SSR, developers sometimes use request tools. Some interfaces need to pass user cookies, which developers can get through the ['useRuntimeContext'](/guides/basic-features/data-fetch#route-loader) API to achieve.\\n\\nIt should be noted, the request header of the HTML request is obtained, which may not be applicable to remote requests, so **must not** pass through all request headers.\\n\\nIn addition, some backend interfaces, or general gateways, will verify according to the information in the request header, and full pass-through is prone to various problems that are difficult to debug. It is recommended that **pass-through on demand**.\\n\\nBe sure to filter the `host` field if you really need to pass through all request headers.\\n\\n## Stream SSR\\n\\nModern.js supports streaming rendering in React 18, the default rendering mode can be modified with the following configuration:\\n\\n```json\\n{\\n  \\\"server\\\": {\\n    \\\"ssr\\\": {\\n      \\\"mode\\\": \\\"stream\\\"\\n    }\\n  }\\n}\\n```\\n\\n:::note\\nAt present Modern.js built-in data fetch does not support streaming rendering. If app need it, developers can build it according to the demo of React Stream SSR.\\n\\n:::\\n\"";
 function _createMdxContent(props) {
   const _components = Object.assign({
     h1: "h1",
@@ -3315,100 +3315,6 @@ function _createMdxContent(props) {
                 children: " "
               }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
-                  color: "#ECEFF4"
-                },
-                children: "{"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9"
-                },
-                children: "readFileSync"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "}"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#81A1C1"
-                },
-                children: "from"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "'"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#A3BE8C"
-                },
-                children: "fs-extra"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "'"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#81A1C1"
-                },
-                children: ";"
-              })]
-            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-              className: "line"
-            })]
-          })
-        })]
-      })]
-    }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.div, {
-      className: "language-ts",
-      children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.div, {
-        className: "modern-code-title",
-        children: "compat.node.ts"
-      }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.div, {
-        className: "modern-code-content",
-        children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.button, {
-          className: "copy"
-        }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.pre, {
-          className: "shiki",
-          style: {
-            backgroundColor: "#2e3440ff"
-          },
-          children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.code, {
-            children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
-              className: "line",
-              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#81A1C1"
-                },
-                children: "export"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
                   color: "#81A1C1"
                 },
                 children: "const"
@@ -3477,6 +3383,100 @@ function _createMdxContent(props) {
                   color: "#ECEFF4"
                 },
                 children: "{}"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#81A1C1"
+                },
+                children: ";"
+              })]
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+              className: "line"
+            })]
+          })
+        })]
+      })]
+    }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.div, {
+      className: "language-ts",
+      children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.div, {
+        className: "modern-code-title",
+        children: "compat.node.ts"
+      }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.div, {
+        className: "modern-code-content",
+        children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.button, {
+          className: "copy"
+        }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.pre, {
+          className: "shiki",
+          style: {
+            backgroundColor: "#2e3440ff"
+          },
+          children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.code, {
+            children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#81A1C1"
+                },
+                children: "export"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: " "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: "{"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: " "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9"
+                },
+                children: "readFileSync"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: " "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: "}"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: " "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#81A1C1"
+                },
+                children: "from"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: " "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: "'"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#A3BE8C"
+                },
+                children: "fs-extra"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: "'"
               }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
                   color: "#81A1C1"

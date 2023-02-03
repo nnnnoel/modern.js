@@ -23,12 +23,12 @@ const toc = [{
   "text": "创建项目",
   "depth": 2
 }, {
-  "id": "扩展类型",
-  "text": "扩展类型",
+  "id": "扩展工程方案",
+  "text": "扩展工程方案",
   "depth": 3
 }, {
-  "id": "自定义类型",
-  "text": "自定义类型",
+  "id": "创建工程方案场景",
+  "text": "创建工程方案场景",
   "depth": 3
 }, {
   "id": "开发插件逻辑",
@@ -48,7 +48,7 @@ const toc = [{
   "depth": 3
 }];
 const title = `如何开发生成器插件`;
-const content = "\"---\\nsidebar_position: 3\\n---\\n\\n# 如何开发生成器插件\\n\\n## 创建项目\\n\\nModern.js 提供了创建生成器插件项目的生成器插件用于创建项目，可直接执行以下命令创建:\\n\\n```bash\\nnpx @modern-js/create plugin --plugin @modern-js/generator-plugin-plugin\\n```\\n\\n插件类型不同，会提问不同的问题，可根据需求选择插件类型\\n\\n### 扩展类型\\n\\n```\\n? 请选择你想创建的工程类型 模块\\n? 请选择项目场景 生成器插件\\n? 插件包名 plugin\\n? 请选择开发语言 TS\\n? 请选择包管理工具 pnpm\\n? 插件类型 扩展\\n? 插件基础类型 应用\\n```\\n\\n### 自定义类型\\n\\n```\\n? 请选择你想创建的工程类型 模块\\n? 请选择项目场景 生成器插件\\n? 插件包名 plugin\\n? 请选择开发语言 TS\\n? 请选择包管理工具 pnpm\\n? 插件类型 自定义\\n? 插件关键字 mobile-app\\n? 插件展示名称 移动应用\\n? 插件基础类型 应用\\n```\\n\\n创建项目命令执行完成后，会对应的生成一个开发生成器插件的项目，`package.json` 中也会根据你的选择对应的生成 `meta` 信息。\\n\\n:::info\\n生成器插件开发可参考 `@modern-js/generator-plugin-plugin` [源码地址](https://github.com/modern-js-dev/modern.js/tree/main/packages/generator/plugins/generator-plugin)\\n\\n:::\\n\\n## 开发插件逻辑\\n\\n在 `src/index.ts` 中完成插件逻辑开发。\\n\\n插件默认导出一个函数，函数参数为 `context`，`context` 上提供一些方法可直接对当前项目进行操作。\\n\\n简单介绍一下提供的方法，完整的 API 列表可查看[生成器插件 API](/guides/topic-detail/generator/plugin/api/introduce)。\\n\\n### 自定义输入\\n\\n- addInputBefore\\n\\n在默认的输入前添加输入，比如在`选择包管理工具`问题前添加问题，具体 Modern.js 每个问题的配置可查看[工程方案配置](/guides/topic-detail/generator/config/common)。\\n\\n```ts\\ncontext.addInputBefore('input2', {\\n  type: 'object',\\n  properties: {\\n    'input1.2': {\\n      type: 'string',\\n      title: 'input1.2',\\n    },\\n  },\\n});\\n```\\n\\n- setInput\\n\\n设置已经存在问题的属性\\n\\n```ts\\ncontext.setInput('test', 'type', 'number');\\ncontext.setInput('test', 'enum', [{ value: 'option1', label: '选项一' }]);\\n```\\n\\n### onForged\\n\\n工程方案类型文件相关操作执行完成后钩子，多个扩展产检将按照 `plugin` 参数顺序依次执行其 `onForged` 函数。\\n\\n`onForged` 参数是一个回调函数，函数参数为 `api` 和 `input`。\\n\\n`api` 上会提供一些文件操作相关的方法，可在该钩子中对当前的模板文件进行操作。\\n\\n`input` 为当前用户输入，可用于获取用户当前的输入信息及配置信息。\\n\\n当需要新的模板文件时，可直接在 `templates` 目录添加，在 `onForged` 函数中可直接对 `templates` 目录文件进行操作，比如下方的 `addFile` 中 `templateFile` 参数就为 `templates` 目录下的文件。这里不需要显示的声明 `templates`，直接写相对于 `templates` 的相对路径即可。\\n\\n`onForged` 中支持的 API 函数也可参考 [生成器插件 API](/guides/topic-detail/generator/plugin/api/hook/onForged)。\\n\\n```ts\\ncontext.onForged(async (api: ForgedAPI, input: Record<string, unknown>) => {\\n  const { language } = input;\\n  api.addFile({\\n    type: FileType.Text,\\n    file: `src/index.${language as string}`,\\n    templateFile: `index.${language as string}.handlebars`,\\n    force: true,\\n  });\\n});\\n```\\n\\n### afterForged\\n\\n`onForged` 函数执行完成后钩子，这里主要可进行安装依赖，Git 操作等。\\n\\n如果你的工程方案是基于 Modern.js 提供的三种工程方案进行的，这个钩子函数是可以不需要的。默认的工程方案中会自动包含安装依赖、提交代码逻辑。\\n\\n生成器插件还支持了一种自定义的 `custom` 类型，这种类型只提供了少量的开发层面的最佳实践的代码，比如 `.gitignore`、`.editorConfig` 等文件，这时则需要在 `afterForged` 函数中手动补充安装依赖和 Git 操作逻辑。\\n\\n`afterForged` 参数也是一个回调函数，函数参数为 `api` 和 `input`。\\n\\n`api` 上会提供一些 npm、Git 等方法，可在该钩子中进行安装依赖，Git 操作。\\n\\n`input` 为当前用户输入，可用于获取用户当前的输入信息及配置信息。\\n\\n`afterForged` 中支持的 API 函数也可参考 [生成器插件 API](/guides/topic-detail/generator/plugin/api/hook/afterForged)。\\n\"";
+const content = "\"---\\nsidebar_position: 3\\n---\\n\\n# 如何开发生成器插件\\n\\n## 创建项目\\n\\nModern.js 提供了生成器插件用于创建开发项目，可直接执行以下命令创建:\\n\\n```bash\\nnpx @modern-js/create plugin --plugin @modern-js/generator-plugin-plugin\\n```\\n\\n插件类型不同，会提问不同的问题，可根据需求选择插件类型\\n\\n### 扩展工程方案\\n\\n```\\n? 请选择你想创建的工程类型 模块\\n? 请选择项目场景 生成器插件\\n? 插件包名 plugin\\n? 请选择开发语言 TS\\n? 请选择包管理工具 pnpm\\n? 插件类型 扩展\\n? 插件基础类型 应用\\n```\\n\\n### 创建工程方案场景\\n\\n```\\n? 请选择你想创建的工程类型 模块\\n? 请选择项目场景 生成器插件\\n? 插件包名 plugin\\n? 请选择开发语言 TS\\n? 请选择包管理工具 pnpm\\n? 插件类型 自定义\\n? 插件关键字 mobile-app\\n? 插件展示名称 移动应用\\n? 插件基础类型 应用\\n```\\n\\n创建项目命令执行完成后，会对应的生成一个开发生成器插件的项目，`package.json` 中也会根据你的选择对应的生成 `meta` 信息。\\n\\n:::info\\n生成器插件开发可参考 `@modern-js/generator-plugin-plugin` [源码地址](https://github.com/modern-js-dev/modern.js/tree/main/packages/generator/plugins/generator-plugin)\\n\\n:::\\n\\n## 开发插件逻辑\\n\\n在 `src/index.ts` 中完成插件逻辑开发。\\n\\n插件默认导出一个函数，函数参数为 `context`，`context` 上提供一些方法可直接对当前项目进行操作。\\n\\n简单介绍一下提供的方法，完整的 API 列表可查看[生成器插件 API](/guides/topic-detail/generator/plugin/api/introduce)。\\n\\n### 自定义输入\\n\\n- addInputBefore\\n\\n在默认的输入前添加输入，比如在`选择包管理工具`问题前添加问题，具体 Modern.js 每个问题的配置可查看[工程方案配置](/guides/topic-detail/generator/config/common)。\\n\\n```ts\\ncontext.addInputBefore('input2', {\\n  type: 'object',\\n  properties: {\\n    'input1.2': {\\n      type: 'string',\\n      title: 'input1.2',\\n    },\\n  },\\n});\\n```\\n\\n- setInput\\n\\n设置已经存在问题的属性\\n\\n```ts\\ncontext.setInput('test', 'type', 'number');\\ncontext.setInput('test', 'enum', [{ value: 'option1', label: '选项一' }]);\\n```\\n\\n### onForged\\n\\n工程方案类型文件相关操作执行完成后钩子，多个扩展产检将按照 `plugin` 参数顺序依次执行其 `onForged` 函数。\\n\\n`onForged` 参数是一个回调函数，函数参数为 `api` 和 `input`。\\n\\n`api` 上会提供一些文件操作相关的方法，可在该钩子中对当前的模板文件进行操作。\\n\\n`input` 为当前用户输入，可用于获取用户当前的输入信息及配置信息。\\n\\n当需要新的模板文件时，可直接在 `templates` 目录添加，在 `onForged` 函数中可直接对 `templates` 目录文件进行操作，比如下方的 `addFile` 中 `templateFile` 参数就为 `templates` 目录下的文件。这里不需要显示的声明 `templates`，直接写相对于 `templates` 的相对路径即可。\\n\\n`onForged` 中支持的 API 函数也可参考 [生成器插件 API](/guides/topic-detail/generator/plugin/api/hook/onForged)。\\n\\n```ts\\ncontext.onForged(async (api: ForgedAPI, input: Record<string, unknown>) => {\\n  const { language } = input;\\n  api.addFile({\\n    type: FileType.Text,\\n    file: `src/index.${language as string}`,\\n    templateFile: `index.${language as string}.handlebars`,\\n    force: true,\\n  });\\n});\\n```\\n\\n### afterForged\\n\\n`onForged` 函数执行完成后钩子，这里主要可进行安装依赖，Git 操作等。\\n\\n如果你的工程方案是基于 Modern.js 提供的三种工程方案进行的，这个钩子函数是可以不需要的。默认的工程方案中会自动包含安装依赖、提交代码逻辑。\\n\\n生成器插件还支持了一种自定义的 `custom` 类型，这种类型只提供了少量的开发层面的最佳实践的代码，比如 `.gitignore`、`.editorConfig` 等文件，这时则需要在 `afterForged` 函数中手动补充安装依赖和 Git 操作逻辑。\\n\\n`afterForged` 参数也是一个回调函数，函数参数为 `api` 和 `input`。\\n\\n`api` 上会提供一些 npm、Git 等方法，可在该钩子中进行安装依赖，Git 操作。\\n\\n`input` 为当前用户输入，可用于获取用户当前的输入信息及配置信息。\\n\\n`afterForged` 中支持的 API 函数也可参考 [生成器插件 API](/guides/topic-detail/generator/plugin/api/hook/afterForged)。\\n\"";
 function _createMdxContent(props) {
   const _components = Object.assign({
     h1: "h1",
@@ -82,7 +82,7 @@ function _createMdxContent(props) {
         children: "#"
       }), "创建项目"]
     }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.p, {
-      children: "Modern.js 提供了创建生成器插件项目的生成器插件用于创建项目，可直接执行以下命令创建:"
+      children: "Modern.js 提供了生成器插件用于创建开发项目，可直接执行以下命令创建:"
     }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.div, {
       className: "language-bash",
       children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.div, {
@@ -114,13 +114,13 @@ function _createMdxContent(props) {
     }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.p, {
       children: "插件类型不同，会提问不同的问题，可根据需求选择插件类型"
     }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.h3, {
-      id: "扩展类型",
+      id: "扩展工程方案",
       children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.a, {
         className: "header-anchor",
         "aria-hidden": "true",
-        href: "#扩展类型",
+        href: "#扩展工程方案",
         children: "#"
-      }), "扩展类型"]
+      }), "扩展工程方案"]
     }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.div, {
       className: "language-text",
       children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.div, {
@@ -136,13 +136,13 @@ function _createMdxContent(props) {
         })]
       })]
     }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.h3, {
-      id: "自定义类型",
+      id: "创建工程方案场景",
       children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.a, {
         className: "header-anchor",
         "aria-hidden": "true",
-        href: "#自定义类型",
+        href: "#创建工程方案场景",
         children: "#"
-      }), "自定义类型"]
+      }), "创建工程方案场景"]
     }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.div, {
       className: "language-text",
       children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.div, {
