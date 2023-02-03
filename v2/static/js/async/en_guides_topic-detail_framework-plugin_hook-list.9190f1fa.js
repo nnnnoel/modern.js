@@ -144,7 +144,7 @@ const toc = [{
   "text": "client",
   "depth": 3
 }, {
-  "id": "server",
+  "id": "server-1",
   "text": "server",
   "depth": 3
 }];
@@ -7102,7 +7102,7 @@ function _createMdxContent(props) {
         }), " 语句"]
       }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.li, {
         children: ["执行阶段：生成入口文件之前，", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.a, {
-          href: "#prepare",
+          href: "#prepare-1",
           children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
             children: "prepare"
           })
@@ -7661,7 +7661,7 @@ function _createMdxContent(props) {
         })]
       }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.li, {
         children: ["执行阶段：生成入口文件之前，", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.a, {
-          href: "#prepare",
+          href: "#prepare-2",
           children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
             children: "prepare"
           })
@@ -8382,7 +8382,7 @@ function _createMdxContent(props) {
         }), " 函数"]
       }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.li, {
         children: ["执行阶段：生成入口文件之前，", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.a, {
-          href: "#prepare",
+          href: "#prepare-3",
           children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
             children: "prepare"
           })
@@ -8915,7 +8915,7 @@ function _createMdxContent(props) {
         children: "功能：用于修改生成前端页面路由文件中的内容，内容都是需要可序列化的"
       }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.li, {
         children: ["执行阶段：生成前端路由文件之前，", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.a, {
-          href: "#prepare",
+          href: "#prepare-4",
           children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
             children: "prepare"
           })
@@ -9588,7 +9588,7 @@ function _createMdxContent(props) {
         children: "功能：用于修改生成服务器路由中的内容"
       }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.li, {
         children: ["执行阶段：生成 Server 路由文件之前，", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.a, {
-          href: "#prepare",
+          href: "#prepare-5",
           children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
             children: "prepare"
           })
@@ -10260,7 +10260,7 @@ function _createMdxContent(props) {
         })]
       }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.li, {
         children: ["执行阶段：生成入口文件之前，", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.a, {
-          href: "#prepare",
+          href: "#prepare-6",
           children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
             children: "prepare"
           })
@@ -10813,7 +10813,7 @@ function _createMdxContent(props) {
         children: "功能：用于定制生成的 HTML 页面模版"
       }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.li, {
         children: ["执行阶段：", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.a, {
-          href: "#prepare",
+          href: "#prepare-7",
           children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
             children: "prepare"
           })

@@ -59,7 +59,7 @@ const toc = [{
   "text": "Example",
   "depth": 3
 }, {
-  "id": "note",
+  "id": "note-1",
   "text": "Note",
   "depth": 3
 }];

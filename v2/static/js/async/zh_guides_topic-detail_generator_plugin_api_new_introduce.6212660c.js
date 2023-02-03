@@ -53,7 +53,7 @@ function _createMdxContent(props) {
       }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.li, {
         children: ["\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.p, {
           children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.a, {
-            href: "/v2/guides/topic-detail/generator/config/module.html#new-%E5%91%BD%E4%BB%A4",
+            href: "/v2/guides/topic-detail/generator/config/module.html#new-%E5%91%BD%E4%BB%A4-1",
             children: "模块"
           })
         }), "\n"]

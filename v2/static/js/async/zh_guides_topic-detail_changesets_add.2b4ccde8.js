@@ -47,7 +47,7 @@ const toc = [{
   "text": "Monorepo 工程方案",
   "depth": 3
 }, {
-  "id": "在根目录执行以下命令",
+  "id": "在根目录执行以下命令-1",
   "text": "在根目录执行以下命令：",
   "depth": 4
 }, {
@@ -59,7 +59,7 @@ const toc = [{
   "text": "分别选择不同版本类型对应的包，changeset 会询问 major 和 minor 类型，如果存在包未选择这两种类型，将会默认使用 patch 类型：",
   "depth": 4
 }, {
-  "id": "填入-changelog-信息并点击两次回车",
+  "id": "填入-changelog-信息并点击两次回车-1",
   "text": "填入 Changelog 信息，并点击两次回车：",
   "depth": 4
 }, {

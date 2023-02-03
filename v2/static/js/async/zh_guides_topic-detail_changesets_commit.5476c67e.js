@@ -43,15 +43,15 @@ const toc = [{
   "text": "getVersionMessage",
   "depth": 3
 }, {
-  "id": "params",
+  "id": "params-1",
   "text": "Params",
   "depth": 4
 }, {
-  "id": "返回值",
+  "id": "返回值-1",
   "text": "返回值",
   "depth": 4
 }, {
-  "id": "默认实现",
+  "id": "默认实现-1",
   "text": "默认实现",
   "depth": 4
 }, {
@@ -95,7 +95,7 @@ const toc = [{
   "text": "执行 pnpm run new 创建模块子项目。",
   "depth": 4
 }, {
-  "id": "实现自定义内容",
+  "id": "实现自定义内容-1",
   "text": "实现自定义内容。",
   "depth": 4
 }, {
@@ -103,7 +103,7 @@ const toc = [{
   "text": "在 Monorepo 根目录添加子项目模块依赖，例如 custom-commit。",
   "depth": 4
 }, {
-  "id": "配置-changeset-的-commit-配置为包名称",
+  "id": "配置-changeset-的-commit-配置为包名称-1",
   "text": "配置 changeset 的 commit 配置为包名称。",
   "depth": 4
 }];

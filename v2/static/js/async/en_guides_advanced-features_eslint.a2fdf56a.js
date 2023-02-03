@@ -262,14 +262,14 @@ function _createMdxContent(props) {
       })]
     }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.p, {
       children: ["【Modern.js ESLint 规则集】要求 ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.a, {
-        href: "https://eslint.org/docs/user-guide/configuring/rules#disabling-rules",
+        href: "https://eslint.org/docs/user-guide/configuring/rules#disabling-rules-1",
         target: "_blank",
         rel: "nofollow",
         children: "eslint-disable"
       }), " 必须成对使用，必须明确表达要影响的范围，以及在这个范围内明确表达要禁用什么规则，目的是让", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.strong, {
         children: "例外"
       }), "有明确的、最小化的范围，避免 ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.a, {
-        href: "https://eslint.org/docs/user-guide/configuring/rules#disabling-rules",
+        href: "https://eslint.org/docs/user-guide/configuring/rules#disabling-rules-2",
         target: "_blank",
         rel: "nofollow",
         children: "eslint-disable"

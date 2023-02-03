@@ -55,7 +55,7 @@ const toc = [{
   "text": "自动创建 Release Pull Request",
   "depth": 3
 }, {
-  "id": "使用",
+  "id": "使用-1",
   "text": "使用",
   "depth": 3
 }, {
@@ -63,7 +63,7 @@ const toc = [{
   "text": "自动 Release",
   "depth": 3
 }, {
-  "id": "使用",
+  "id": "使用-2",
   "text": "使用",
   "depth": 4
 }];

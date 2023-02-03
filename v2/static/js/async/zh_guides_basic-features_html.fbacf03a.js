@@ -48,7 +48,7 @@ const toc = [{
   "text": "完全自定义 HTML 模板",
   "depth": 3
 }, {
-  "id": "模板参数",
+  "id": "模板参数-1",
   "text": "模板参数",
   "depth": 3
 }, {

@@ -1,7 +1,7 @@
 "use strict";
-(self["webpackChunk_modern_js_main_doc_website"] = self["webpackChunk_modern_js_main_doc_website"] || []).push([[48292],{
+(self["webpackChunk_modern_js_main_doc_website"] = self["webpackChunk_modern_js_main_doc_website"] || []).push([[91285],{
 
-/***/ 651:
+/***/ 75013:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -16,176 +16,215 @@ __webpack_require__.r(__webpack_exports__);
 /*@jsxRuntime automatic @jsxImportSource react*/
 
 const frontmatter = {
-  "sidebar_position": 6
+  "title": "HTML Template",
+  "sidebar_position": 9
 };
 const toc = [{
-  "id": "自定义-changlog-内容",
-  "text": "自定义 Changlog 内容",
+  "id": "jsx-syntax",
+  "text": "JSX syntax",
   "depth": 2
 }, {
-  "id": "getreleaseline",
-  "text": "getReleaseLine",
+  "id": "html-component",
+  "text": "HTML Component",
   "depth": 3
 }, {
-  "id": "params",
-  "text": "Params",
-  "depth": 4
-}, {
-  "id": "返回值",
-  "text": "返回值",
-  "depth": 4
-}, {
-  "id": "默认实现",
-  "text": "默认实现",
-  "depth": 4
-}, {
-  "id": "getdependencyreleaseline",
-  "text": "getDependencyReleaseLine",
+  "id": "template-params",
+  "text": "Template Params",
   "depth": 3
 }, {
-  "id": "params",
-  "text": "Params",
-  "depth": 4
+  "id": "examples",
+  "text": "Examples",
+  "depth": 3
 }, {
-  "id": "返回值",
-  "text": "返回值",
-  "depth": 4
-}, {
-  "id": "默认实现",
-  "text": "默认实现",
-  "depth": 4
-}, {
-  "id": "配置",
-  "text": "配置",
+  "id": "html-synxtax",
+  "text": "Html Synxtax",
   "depth": 2
 }, {
-  "id": "配置相对路径",
-  "text": "配置相对路径",
+  "id": "custom-html-fragments",
+  "text": "Custom HTML Fragments",
   "depth": 3
 }, {
-  "id": "使用模块工程方案",
-  "text": "使用模块工程方案",
+  "id": "fully-custom-html-templates",
+  "text": "Fully Custom HTML Templates",
   "depth": 3
 }, {
-  "id": "使用-npx-modern-jscreate-创建模块工程方案",
-  "text": "使用 npx @modern-js/create 创建模块工程方案。",
-  "depth": 4
-}, {
-  "id": "实现自定义内容",
-  "text": "实现自定义内容。",
-  "depth": 4
-}, {
-  "id": "将模块发布到-npm",
-  "text": "将模块发布到 NPM。",
-  "depth": 4
-}, {
-  "id": "在目标仓库根目录安装对应模块例如-custom-changelog",
-  "text": "在目标仓库根目录安装对应模块，例如 custom-changelog。",
-  "depth": 4
-}, {
-  "id": "配置-changeset-的-changelog-配置为包名称",
-  "text": "配置 changeset 的 changelog 配置为包名称。",
-  "depth": 4
-}, {
-  "id": "使用-monorepo-工程方案",
-  "text": "使用 Monorepo 工程方案",
+  "id": "template-params-1",
+  "text": "Template Params",
   "depth": 3
 }, {
-  "id": "执行-pnpm-run-new-创建模块子项目",
-  "text": "执行 pnpm run new 创建模块子项目。",
-  "depth": 4
-}, {
-  "id": "实现自定义内容",
-  "text": "实现自定义内容。",
-  "depth": 4
-}, {
-  "id": "在-monorepo-根目录添加子项目模块依赖例如-custom-changelog",
-  "text": "在 Monorepo 根目录添加子项目模块依赖，例如 custom-changelog。",
-  "depth": 4
-}, {
-  "id": "配置-changeset-的-changelog-配置为包名称",
-  "text": "配置 changeset 的 changelog 配置为包名称。",
-  "depth": 4
+  "id": "config-by-entry",
+  "text": "Config By Entry",
+  "depth": 3
 }];
-const title = `自定义 Changelog 生成`;
-const content = "\"---\\nsidebar_position: 6\\n---\\n\\n# 自定义 Changelog 生成\\n\\nChangesets 默认会使用 `@changesets/cli/changelog` 生成 Changelog 信息，如果默认的 Changelog 信息不能满足需求，可以自定义 Changelog 的生成。\\n\\n## 自定义 Changlog 内容\\n\\nChangelog 信息主要包含以下两种信息：\\n\\n- changeset 中写入的 Changelog 信息。\\n\\n- 本次版本升级关联包的版本变更信息。\\n\\n自定义逻辑主要实现两个函数，`getReleaseLine` 和 `getDependencyReleaseLine`，分别用来定义上述这两种信息。\\n\\n### getReleaseLine\\n\\n#### Params\\n\\n- changeset\\n\\n```ts\\nexport type VersionType = 'major' | 'minor' | 'patch' | 'none';\\n\\nexport type Release = { name: string; type: VersionType };\\n\\nexport type Changeset = {\\n  id: string; // changeset 的文件名称\\n  commit?: string; // changeset 提交时的 commit id 信息\\n  summary: string; // changeset 内容信息\\n  releases: Array<Release>; // 当前计算出的 changeset 升级包名称及类型信息\\n};\\n```\\n\\n- type\\n\\n当前包对应的升级版本类型，类型为上述 `VersionType`。\\n\\n#### 返回值\\n\\nChangelog 内容。\\n\\n#### 默认实现\\n\\n`@changesets/cli/changelog` 默认处理逻辑为将 `summary` 信息按照换行符 `\\\\n` 分割，第一样前面增加 `-` 作为列表开头，其他内容作为第一行内容的补充整理在列表下方。\\n\\n```ts\\nasync function getReleaseLine(changeset, type) {\\n  const [firstLine, ...futureLines] = changeset.summary\\n    .split('\\\\n')\\n    .map(l => l.trimRight());\\n\\n  let returnVal = `- ${\\n    changeset.commit ? `${changeset.commit}: ` : ''\\n  }${firstLine}`;\\n\\n  if (futureLines.length > 0) {\\n    returnVal += `\\\\n${futureLines.map(l => `  ${l}`).join('\\\\n')}`;\\n  }\\n\\n  return returnVal;\\n}\\n```\\n\\n### getDependencyReleaseLine\\n\\n#### Params\\n\\n- changesets\\n\\n当前关联的所有 changeset 信息，类型为 `getReleaseLine` changeset 类型数组。\\n\\n- dependenciesUpdated\\n\\n```ts\\ntype ModCompWithPackage = {\\n  name: string; // 依赖模块名称\\n  type: VersionType; // 依赖模块的升级类型\\n  oldVersion: string; // 依赖模块当前版本号\\n  newVersion: string; // 依赖模块新版本号\\n  changesets: string[]; // 关联的 changeset id 列表\\n  packageJson: PackageJSON; // 依赖模块完整的 package.json 内容\\n  dir: string; // 依赖模块的路径(绝对路径)\\n};\\n\\ntype DependenciesUpdated = ModCompWithPackage[];\\n```\\n\\n#### 返回值\\n\\nChangelog 内容。\\n\\n#### 默认实现\\n\\n`@changesets/cli/changelog` 默认会使用 changesets 信息展示对应的 `Updated dependencies + commit id`，以列表形式展示。然后根据 `dependenciesUpdated` 信息展示对应的依赖包包名和新版本号，作为列表的子列表项。\\n\\n```ts\\nasync function getDependencyReleaseLine(changesets, dependenciesUpdated) {\\n  console.log('getDependencyReleaseLine', changesets, dependenciesUpdated);\\n  if (dependenciesUpdated.length === 0) return '';\\n\\n  const changesetLinks = changesets.map(\\n    changeset =>\\n      `- Updated dependencies${\\n        changeset.commit ? ` [${changeset.commit}]` : ''\\n      }`,\\n  );\\n\\n  const updatedDepenenciesList = dependenciesUpdated.map(\\n    dependency => `  - ${dependency.name}@${dependency.newVersion}`,\\n  );\\n\\n  return [...changesetLinks, ...updatedDepenenciesList].join('\\\\n');\\n}\\n```\\n\\n展示效果为：\\n\\n```markdown\\n- Updated dependencies [f0438ab]\\n- Updated dependencies [f0438ab]\\n  - module-3@2.0.0\\n  - module-1@0.2.0\\n```\\n\\n## 配置\\n\\nChangesets 配置文件中 `changelog` 字段，该字段用于标记 Changelog 信息的获取途径。\\n\\n该配置可以为字符串，直接声明获取 Changelog 信息模块的模块名称或者路径。\\n\\n该配置还支持配置数组，数组中第一个元素为获取 Changelog 信息模块的模块名称或者路径，第二个元素为传入对应函数的参数值，会作为 `getReleaseLine` 和 `getDependencyReleaseLine` 函数的第三个参数传入。\\n\\n### 配置相对路径\\n\\nchangelog 配置如果为相对路径为 `.changesets` 目录下的相对路径。\\n\\n例如创建 `.changeset/my-changelog-config.js` 文件，定义如下内容：\\n\\n```ts title=\\\".changeset/my-changelog-config.js\\\"\\nasync function getReleaseLine(changeset, type) {}\\n\\nasync function getDependencyReleaseLine(changesets, dependenciesUpdated) {}\\n\\nmodule.exports = {\\n  getReleaseLine,\\n  getDependencyReleaseLine,\\n};\\n```\\n\\n`changlog` 配置为 `./my-changelog-config.js` 即可:\\n\\n```json title=\\\".changesets/config.json\\\"\\n{\\n  \\\"changelog\\\": \\\"./my-changelog-config.js\\\",\\n   ...\\n}\\n```\\n\\n### 使用模块工程方案\\n\\n自定义 Changelog 还可以使用模块工程方案进行管理，提供通用方案。\\n\\n#### 使用 `npx @modern-js/create` 创建模块工程方案。\\n\\n```md\\n? 请选择你想创建的工程类型 模块\\n? 请填写项目名称 custom-changelog\\n? 请选择开发语言 TS\\n? 请选择包管理工具 pnpm\\n```\\n\\n#### 实现自定义内容。\\n\\n```ts title=\\\"src/index.ts\\\"\\nexport async function getReleaseLine() {}\\n\\nexport async function getDependencyReleaseLine() {}\\n```\\n\\n#### 将模块发布到 NPM。\\n\\n#### 在目标仓库根目录安装对应模块，例如 `custom-changelog`。\\n\\n#### 配置 changeset 的 changelog 配置为包名称。\\n\\n```json title=\\\".changesets/config.json\\\"\\n{\\n  \\\"changelog\\\": \\\"custom-changelog\\\",\\n   ...\\n}\\n```\\n\\n### 使用 Monorepo 工程方案\\n\\n如果你当前仓库为 Monorepo 工程方案，可以直接使用模块子项目进行管理。\\n\\n#### 执行 `pnpm run new` 创建模块子项目。\\n\\n```md\\n? 请选择你想创建的工程类型 模块\\n? 请填写子项目名称 custom-changelog\\n? 请填写子项目目录名称 custom-changelog\\n? 请选择开发语言 TS\\n```\\n\\n#### 实现自定义内容。\\n\\n```ts title=\\\"src/index.ts\\\"\\nexport async function getReleaseLine() {}\\n\\nexport async function getDependencyReleaseLine() {}\\n```\\n\\n#### 在 Monorepo 根目录添加子项目模块依赖，例如 `custom-changelog`。\\n\\n```json title=\\\"package.json\\\"\\n{\\n  \\\"devDependencies\\\": {\\n    \\\"custom-changelog\\\": \\\"workspace: *\\\",\\n    ...\\n  }\\n}\\n```\\n\\n#### 配置 changeset 的 changelog 配置为包名称。\\n\\n```json title=\\\".changesets/config.json\\\"\\n{\\n  \\\"changelog\\\": \\\"custom-changelog\\\",\\n   ...\\n}\\n```\\n\\n该模块发布到 NPM 后，依然可以和模块类型一样供其他仓库使用。\\n\"";
+const title = `HTML Template`;
+const content = "\"---\\ntitle: HTML Template\\nsidebar_position: 9\\n---\\n# HTML Template\\n\\nModern.js provides **JSX syntax** and **HTML(Ejs) syntax** for customizing HTML template.\\n\\n## JSX syntax\\n\\nModern.js convention, in the `src/`, or in the entry directory, you can create `Document.[jt]sx` and export a component by default. The rendering result of this component can be used as an HTML template for the entry.\\n\\nFor example the following directory structure:\\n\\n```bash\\n.\\n├── src\\n│   ├── Document.tsx\\n│   ├── entry-a\\n│   │   ├── Document.tsx\\n│   │   └── routes\\n│   ├── entry-b\\n│   │   └── routes\\n│   └── modern-app-env.d.ts\\n```\\n\\n`entry-a` will take precedence over the `Docoument.[jt]sx` file under the current entry. If the current entry does not have a `Document.[jt]sx` file, such as `entry-b`, it will look for the `Document.[jt]sx` file in the root directory.\\n\\nIf not, it will go to the the logic of traditional templates.\\n\\n### HTML Component\\n\\nModern.js provides a list of components for rendering pages to help developers generate templates, which can be exported from `@modern-js/runtime/document`:\\n\\n```tsx\\nimport { Html, Body, Root, Head, Scripts } from '@modern-js/runtime/document';\\n```\\n\\nThese components are rendered:\\n\\n- `Html`：Provide the ability of native HTML Elements, and render necessary components that the developer did not add by default. `<Head>` and `<Body>` must exist, and other components can be assembled by selecting appropriate components on demand.\\n\\n- `Body`：Provide the ability of native Body Element, which needs to contain the `<Root>` component internally, and also supports other elements as child elements at the same time, such as adding footers.\\n\\n- `Root`：React root element `<div id='root'></div>`。the default element id is `id = 'root'`, can set `props.rootId` to change the id。Child components can be added, and will also be rendered into HTML templates, which will be overwritten when React rendering is complete, generally used to implement global Loading.\\n\\n- `Head`：Provides native Head Element capabilities and automatically populates `<meta>`, as well as the `<Scripts>` component.\\n\\n- `Scripts`：The script content generated by the webpack, which can be used to adjust the position of the bundle result, is placed in the `<Head>` component by default.\\n\\n### Template Params\\n\\nBecause it is in the form of JSX, in `Document.[jt]sx`, you can use various variables in the component to assign values to various custom components more freely.\\n\\nAt the same time, Modern.js provides `DocumentContext` to provide some configuration and environment parameters, The main parameters as follow:\\n\\n- `processEnv`：Provide build-time env vars.\\n- `config`：The configuration of the project, only `output` are exposed.\\n- `entryName`：current entry name.\\n- `templateParams`：HTML template params(in order to be compatible with traditional templates, it is not recommended to use).\\n\\n### Examples\\n\\n```tsx\\nimport React, { useContext } from 'react';\\nimport {\\n  Html,\\n  Root,\\n  Head,\\n  Body,\\n  Scripts,\\n  DocumentContext,\\n} from '@modern-js/runtime/document';\\n\\nexport default function Document(): React.ReactElement {\\n  // the params provide by DocumentContext\\n  const {\\n    config: { output: htmlConfig },\\n    entryName,\\n    templateParams,\\n  } = useContext(DocumentContext);\\n\\n  return (\\n    <Html>\\n      <Head>\\n        <link href=\\\"https://modernjs.dev\\\">Modern.js</link>\\n      </Head>\\n      <Body>\\n        <Root rootId=\\\"root\\\">\\n          <h1 style={{ color: 'red' }}>Some Params：</h1>\\n          <h2> entryName：{entryName}</h2>\\n          <h2> title：{htmlConfig.title}</h2>\\n          <h2> rootId: {templateParams.mountId}</h2>\\n        </Root>\\n        <h1>bottom</h1>\\n      </Body>\\n    </Html>\\n  );\\n}\\n```\\n\\nThe above JSX component will generate the following HTML template:\\n\\n```html\\n<!DOCTYPE html>\\n<html>\\n  <head>\\n    <meta charset=\\\"utf-8\\\" />\\n    <meta\\n      name=\\\"viewport\\\"\\n      content=\\\"width=device-width, initial-scale=1.0, shrink-to-fit=no, viewport-fit=cover, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no\\\"\\n    />\\n    <meta http-equiv=\\\"x-ua-compatible\\\" content=\\\"ie=edge\\\" />\\n    <meta name=\\\"renderer\\\" content=\\\"webkit\\\" />\\n    <meta name=\\\"layoutmode\\\" content=\\\"standard\\\" />\\n    <meta name=\\\"imagemode\\\" content=\\\"force\\\" />\\n    <meta name=\\\"wap-font-scale\\\" content=\\\"no\\\" />\\n    <meta name=\\\"format-detection\\\" content=\\\"telephone=no\\\" />\\n    <script>\\n      ...\\n    </script>\\n    <script defer src=\\\"/static/js/lib-react.js\\\"></script>\\n    <script defer src=\\\"/static/js/lib-polyfill.js\\\"></script>\\n    <script defer src=\\\"/static/js/lib-router.js\\\"></script>\\n    <script\\n      defer\\n      src=\\\"/static/js/vendors-node_modules_pnpm_loadable_component_5_15_2_react_18_2_0_node_modules_loadable_compon-3fb0cf.js\\\"\\n    ></script>\\n    <script\\n      defer\\n      src=\\\"/static/js/packages_runtime_plugin-router-legacy_dist_js_treeshaking_runtime_index_js-packages_runtime_p-28f4c9.js\\\"\\n    ></script>\\n    <script defer src=\\\"/static/js/sub.js\\\"></script>\\n    <link href=\\\"https://www.baidu.com\\\" />\\n  </head>\\n\\n  <body>\\n    <div id=\\\"root\\\">\\n      {/* <?- html ?> */}\\n      <h1 style=\\\"color:red\\\">Some Params：</h1>\\n      <h2>entryName：sub</h2>\\n      <h2>title：</h2>\\n      <h2>rootId: root</h2>\\n    </div>\\n    <h1>bottom</h1>\\n    {/* <?- chunksMap.js ?> */}\\n    {/* <?- SSRDataScript ?> */}\\n  </body>\\n</html>\\n```\\n\\n## Html Synxtax\\n\\nModern.js also supports HTML syntax. By default, an HTML template is built into the Modern.js application project to generate HTML code.\\n\\nBased on HTML syntax templates, Modern.js provides **Custom HTML Fragments** and **Fully Custom HTML Templates** two ways to customize templates.\\n\\n### Custom HTML Fragments\\n\\nIn the application root directory, create the `config/html/` directory, which supports the creation of four kinds of HTML fragments.\\n\\n- `top.html`\\n- `head.html`\\n- `body.html`\\n- `bottom.html`\\n\\n**These fragments will be injected into the default HTML template.**\\n\\n```html\\n<!DOCTYPE html>\\n<html>\\n  <head>\\n    <%= meta %>\\n    <title><%= title %></title>\\n    <%= topTemplate %>\\n\\n    <script>\\n      window.__assetPrefix__ = '<%= assetPrefix %>';\\n    </script>\\n    <%= headTemplate %>\\n    {/* webpack inject css  */}\\n  </head>\\n  <body>\\n    <noscript>\\n      We're sorry but react app doesn't work properly without JavaScript\\n      enabled. Please enable it to continue.\\n    </noscript>\\n    <div id=\\\"<%= mountId %>\\\"></div>\\n    <%= bodyTemplate %>\\n    {/* webpack inject js  */}\\n    {/* <?- bottomTemplate ?> */}\\n  </body>\\n</html>\\n```\\n\\nHTML Fragments support the use [Lodash template](https://lodash.com/docs/4.17.15#template)。\\n\\nFor example, insert a script in `body.html`:\\n\\n```html title=\\\"config/html/body.html\\\"\\n<script src=\\\"//example.com/assets/a.js\\\"></script>\\n```\\n\\n:::info\\nThe implementation of the custom HTML fragment is to merge the fragment with the built-in template of the frame. Since `<title>` already exists in the default template of the frame, the `<title>` in the custom HTML template cannot take effect. Please pass [html.title](/configure/app/html/title) to modify the page title.\\n\\n:::\\n\\n### Fully Custom HTML Templates\\n\\nIn some cases, HTML snippets do not meet the customization requirements, Modern.js provide a fully customized way.\\n\\n:::caution\\nIt is not recommended to override the default HTML template directly, and some features may be lost. Even if it needs to be replaced, it is recommended to build on the built-in template and modify it as needed.\\n\\n:::\\n\\nIn the `config/html/` directory, create a index.html file that will override the default HTML template.\\n\\n:::info\\nThe internal default HTML template can be viewed in `node_modules/.modern-js/${entryName}/index.html`.\\n\\n:::\\n\\n### Template Params\\n\\nThe parameters used in the template can be defined by the [html.templateParameters](/configure/app/html/template-parameters).\\n\\n### Config By Entry\\n\\nThe fragment in the `config/html/` directory are valid for all entries in the application. If you want to customize the HTML by entry, you can create a new directory named with the **entry name** in the `config/html/` directory, and then customize the HTML snippets in this directory.\\n\\nFor example, the following HTML fragment is only valid for `entry1`:\\n\\n```bash\\n.\\n├── config/\\n│   └── html/\\n│       └── entry1\\n│           ├── head.html\\n│           └── body.html\\n└── src/\\n    ├── entry1/\\n    │   └── routes\\n    └── entry2/\\n        └── routes\\n```\\n\"";
 function _createMdxContent(props) {
   const _components = Object.assign({
     h1: "h1",
     a: "a",
     p: "p",
-    code: "code",
+    strong: "strong",
     h2: "h2",
-    ul: "ul",
-    li: "li",
-    h3: "h3",
-    h4: "h4",
+    code: "code",
     div: "div",
     button: "button",
     pre: "pre",
-    span: "span"
+    span: "span",
+    h3: "h3",
+    ul: "ul",
+    li: "li"
   }, props.components);
   return (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
     children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.h1, {
-      id: "自定义-changelog-生成",
+      id: "html-template",
       children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.a, {
         className: "header-anchor",
         "aria-hidden": "true",
-        href: "#自定义-changelog-生成",
+        href: "#html-template",
         children: "#"
-      }), "自定义 Changelog 生成"]
+      }), "HTML Template"]
     }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.p, {
-      children: ["Changesets 默认会使用 ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
-        children: "@changesets/cli/changelog"
-      }), " 生成 Changelog 信息，如果默认的 Changelog 信息不能满足需求，可以自定义 Changelog 的生成。"]
+      children: ["Modern.js provides ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.strong, {
+        children: "JSX syntax"
+      }), " and ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.strong, {
+        children: "HTML(Ejs) syntax"
+      }), " for customizing HTML template."]
     }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.h2, {
-      id: "自定义-changlog-内容",
+      id: "jsx-syntax",
       children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.a, {
         className: "header-anchor",
         "aria-hidden": "true",
-        href: "#自定义-changlog-内容",
+        href: "#jsx-syntax",
         children: "#"
-      }), "自定义 Changlog 内容"]
-    }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.p, {
-      children: "Changelog 信息主要包含以下两种信息："
-    }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.ul, {
-      children: ["\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.li, {
-        children: ["\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.p, {
-          children: "changeset 中写入的 Changelog 信息。"
-        }), "\n"]
-      }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.li, {
-        children: ["\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.p, {
-          children: "本次版本升级关联包的版本变更信息。"
-        }), "\n"]
-      }), "\n"]
+      }), "JSX syntax"]
     }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.p, {
-      children: ["自定义逻辑主要实现两个函数，", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
-        children: "getReleaseLine"
-      }), " 和 ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
-        children: "getDependencyReleaseLine"
-      }), "，分别用来定义上述这两种信息。"]
-    }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.h3, {
-      id: "getreleaseline",
-      children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.a, {
-        className: "header-anchor",
-        "aria-hidden": "true",
-        href: "#getreleaseline",
-        children: "#"
-      }), "getReleaseLine"]
-    }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.h4, {
-      id: "params",
-      children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.a, {
-        className: "header-anchor",
-        "aria-hidden": "true",
-        href: "#params",
-        children: "#"
-      }), "Params"]
-    }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.ul, {
-      children: ["\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.li, {
-        children: "changeset"
-      }), "\n"]
+      children: ["Modern.js convention, in the ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
+        children: "src/"
+      }), ", or in the entry directory, you can create ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
+        children: "Document.[jt]sx"
+      }), " and export a component by default. The rendering result of this component can be used as an HTML template for the entry."]
+    }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.p, {
+      children: "For example the following directory structure:"
     }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.div, {
-      className: "language-ts",
+      className: "language-bash",
+      children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.div, {
+        className: ""
+      }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.div, {
+        className: "modern-code-content",
+        children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.button, {
+          className: "copy"
+        }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.pre, {
+          className: "shiki",
+          style: {
+            backgroundColor: "#2e3440ff"
+          },
+          children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.code, {
+            children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+              className: "line",
+              children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#88C0D0"
+                },
+                children: "."
+              })
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+              className: "line",
+              children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: "├── src"
+              })
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+              className: "line",
+              children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: "│   ├── Document.tsx"
+              })
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+              className: "line",
+              children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: "│   ├── entry-a"
+              })
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+              className: "line",
+              children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: "│   │   ├── Document.tsx"
+              })
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+              className: "line",
+              children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: "│   │   └── routes"
+              })
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+              className: "line",
+              children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: "│   ├── entry-b"
+              })
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+              className: "line",
+              children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: "│   │   └── routes"
+              })
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+              className: "line",
+              children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: "│   └── modern-app-env.d.ts"
+              })
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+              className: "line"
+            })]
+          })
+        })]
+      })]
+    }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.p, {
+      children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
+        children: "entry-a"
+      }), " will take precedence over the ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
+        children: "Docoument.[jt]sx"
+      }), " file under the current entry. If the current entry does not have a ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
+        children: "Document.[jt]sx"
+      }), " file, such as ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
+        children: "entry-b"
+      }), ", it will look for the ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
+        children: "Document.[jt]sx"
+      }), " file in the root directory."]
+    }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.p, {
+      children: "If not, it will go to the the logic of traditional templates."
+    }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.h3, {
+      id: "html-component",
+      children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.a, {
+        className: "header-anchor",
+        "aria-hidden": "true",
+        href: "#html-component",
+        children: "#"
+      }), "HTML Component"]
+    }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.p, {
+      children: ["Modern.js provides a list of components for rendering pages to help developers generate templates, which can be exported from ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
+        children: "@modern-js/runtime/document"
+      }), ":"]
+    }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.div, {
+      className: "language-tsx",
       children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.div, {
         className: ""
       }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.div, {
@@ -204,192 +243,7 @@ function _createMdxContent(props) {
                 style: {
                   color: "#81A1C1"
                 },
-                children: "export"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#81A1C1"
-                },
-                children: "type"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#8FBCBB"
-                },
-                children: "VersionType"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#81A1C1"
-                },
-                children: "="
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "'"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#A3BE8C"
-                },
-                children: "major"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "'"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#81A1C1"
-                },
-                children: "|"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "'"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#A3BE8C"
-                },
-                children: "minor"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "'"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#81A1C1"
-                },
-                children: "|"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "'"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#A3BE8C"
-                },
-                children: "patch"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "'"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#81A1C1"
-                },
-                children: "|"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "'"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#A3BE8C"
-                },
-                children: "none"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "'"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#81A1C1"
-                },
-                children: ";"
-              })]
-            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-              className: "line"
-            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
-              className: "line",
-              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#81A1C1"
-                },
-                children: "export"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#81A1C1"
-                },
-                children: "type"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#8FBCBB"
-                },
-                children: "Release"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#81A1C1"
-                },
-                children: "="
+                children: "import"
               }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
                   color: "#D8DEE9FF"
@@ -404,12 +258,17 @@ function _createMdxContent(props) {
                 style: {
                   color: "#D8DEE9FF"
                 },
-                children: " name"
+                children: " "
               }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
-                  color: "#81A1C1"
+                  color: "#D8DEE9"
                 },
-                children: ":"
+                children: "Html"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: ","
               }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
                   color: "#D8DEE9FF"
@@ -417,24 +276,14 @@ function _createMdxContent(props) {
                 children: " "
               }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
-                  color: "#8FBCBB"
+                  color: "#D8DEE9"
                 },
-                children: "string"
+                children: "Body"
               }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
-                  color: "#81A1C1"
+                  color: "#ECEFF4"
                 },
-                children: ";"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: " type"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#81A1C1"
-                },
-                children: ":"
+                children: ","
               }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
                   color: "#D8DEE9FF"
@@ -442,9 +291,39 @@ function _createMdxContent(props) {
                 children: " "
               }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
-                  color: "#8FBCBB"
+                  color: "#D8DEE9"
                 },
-                children: "VersionType"
+                children: "Root"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: ","
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: " "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9"
+                },
+                children: "Head"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: ","
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: " "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9"
+                },
+                children: "Scripts"
               }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
                   color: "#D8DEE9FF"
@@ -457,6 +336,409 @@ function _createMdxContent(props) {
                 children: "}"
               }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
+                  color: "#D8DEE9FF"
+                },
+                children: " "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#81A1C1"
+                },
+                children: "from"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: " "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: "'"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#A3BE8C"
+                },
+                children: "@modern-js/runtime/document"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: "'"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#81A1C1"
+                },
+                children: ";"
+              })]
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+              className: "line"
+            })]
+          })
+        })]
+      })]
+    }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.p, {
+      children: "These components are rendered:"
+    }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.ul, {
+      children: ["\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.li, {
+        children: ["\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.p, {
+          children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
+            children: "Html"
+          }), "：Provide the ability of native HTML Elements, and render necessary components that the developer did not add by default. ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
+            children: "<Head>"
+          }), " and ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
+            children: "<Body>"
+          }), " must exist, and other components can be assembled by selecting appropriate components on demand."]
+        }), "\n"]
+      }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.li, {
+        children: ["\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.p, {
+          children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
+            children: "Body"
+          }), "：Provide the ability of native Body Element, which needs to contain the ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
+            children: "<Root>"
+          }), " component internally, and also supports other elements as child elements at the same time, such as adding footers."]
+        }), "\n"]
+      }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.li, {
+        children: ["\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.p, {
+          children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
+            children: "Root"
+          }), "：React root element ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
+            children: "<div id='root'></div>"
+          }), "。the default element id is ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
+            children: "id = 'root'"
+          }), ", can set ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
+            children: "props.rootId"
+          }), " to change the id。Child components can be added, and will also be rendered into HTML templates, which will be overwritten when React rendering is complete, generally used to implement global Loading."]
+        }), "\n"]
+      }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.li, {
+        children: ["\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.p, {
+          children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
+            children: "Head"
+          }), "：Provides native Head Element capabilities and automatically populates ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
+            children: "<meta>"
+          }), ", as well as the ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
+            children: "<Scripts>"
+          }), " component."]
+        }), "\n"]
+      }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.li, {
+        children: ["\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.p, {
+          children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
+            children: "Scripts"
+          }), "：The script content generated by the webpack, which can be used to adjust the position of the bundle result, is placed in the ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
+            children: "<Head>"
+          }), " component by default."]
+        }), "\n"]
+      }), "\n"]
+    }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.h3, {
+      id: "template-params",
+      children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.a, {
+        className: "header-anchor",
+        "aria-hidden": "true",
+        href: "#template-params",
+        children: "#"
+      }), "Template Params"]
+    }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.p, {
+      children: ["Because it is in the form of JSX, in ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
+        children: "Document.[jt]sx"
+      }), ", you can use various variables in the component to assign values to various custom components more freely."]
+    }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.p, {
+      children: ["At the same time, Modern.js provides ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
+        children: "DocumentContext"
+      }), " to provide some configuration and environment parameters, The main parameters as follow:"]
+    }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.ul, {
+      children: ["\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.li, {
+        children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
+          children: "processEnv"
+        }), "：Provide build-time env vars."]
+      }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.li, {
+        children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
+          children: "config"
+        }), "：The configuration of the project, only ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
+          children: "output"
+        }), " are exposed."]
+      }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.li, {
+        children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
+          children: "entryName"
+        }), "：current entry name."]
+      }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.li, {
+        children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
+          children: "templateParams"
+        }), "：HTML template params(in order to be compatible with traditional templates, it is not recommended to use)."]
+      }), "\n"]
+    }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.h3, {
+      id: "examples",
+      children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.a, {
+        className: "header-anchor",
+        "aria-hidden": "true",
+        href: "#examples",
+        children: "#"
+      }), "Examples"]
+    }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.div, {
+      className: "language-tsx",
+      children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.div, {
+        className: ""
+      }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.div, {
+        className: "modern-code-content",
+        children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.button, {
+          className: "copy"
+        }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.pre, {
+          className: "shiki",
+          style: {
+            backgroundColor: "#2e3440ff"
+          },
+          children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.code, {
+            children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#81A1C1"
+                },
+                children: "import"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: " "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9"
+                },
+                children: "React"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: ","
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: " "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: "{"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: " "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9"
+                },
+                children: "useContext"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: " "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: "}"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: " "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#81A1C1"
+                },
+                children: "from"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: " "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: "'"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#A3BE8C"
+                },
+                children: "react"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: "'"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#81A1C1"
+                },
+                children: ";"
+              })]
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#81A1C1"
+                },
+                children: "import"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: " "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: "{"
+              })]
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: "  "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9"
+                },
+                children: "Html"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: ","
+              })]
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: "  "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9"
+                },
+                children: "Root"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: ","
+              })]
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: "  "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9"
+                },
+                children: "Head"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: ","
+              })]
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: "  "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9"
+                },
+                children: "Body"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: ","
+              })]
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: "  "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9"
+                },
+                children: "Scripts"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: ","
+              })]
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: "  "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9"
+                },
+                children: "DocumentContext"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: ","
+              })]
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: "}"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: " "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#81A1C1"
+                },
+                children: "from"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: " "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: "'"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#A3BE8C"
+                },
+                children: "@modern-js/runtime/document"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: "'"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
                   color: "#81A1C1"
                 },
                 children: ";"
@@ -479,17 +761,7 @@ function _createMdxContent(props) {
                 style: {
                   color: "#81A1C1"
                 },
-                children: "type"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#8FBCBB"
-                },
-                children: "Changeset"
+                children: "default"
               }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
                   color: "#D8DEE9FF"
@@ -499,7 +771,83 @@ function _createMdxContent(props) {
                 style: {
                   color: "#81A1C1"
                 },
-                children: "="
+                children: "function"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: " "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#88C0D0"
+                },
+                children: "Document"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: "()"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#81A1C1"
+                },
+                children: ":"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: " "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#8FBCBB"
+                },
+                children: "React"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: "."
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#8FBCBB"
+                },
+                children: "ReactElement"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: " "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: "{"
+              })]
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: "  "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#616E88"
+                },
+                children: "// the params provide by DocumentContext"
+              })]
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: "  "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#81A1C1"
+                },
+                children: "const"
               }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
                   color: "#D8DEE9FF"
@@ -517,253 +865,220 @@ function _createMdxContent(props) {
                 style: {
                   color: "#D8DEE9FF"
                 },
-                children: "  id"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#81A1C1"
-                },
-                children: ":"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#8FBCBB"
-                },
-                children: "string"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#81A1C1"
-                },
-                children: ";"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#616E88"
-                },
-                children: "// changeset 的文件名称"
-              })]
-            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
-              className: "line",
-              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: "  commit"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#81A1C1"
-                },
-                children: "?:"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#8FBCBB"
-                },
-                children: "string"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#81A1C1"
-                },
-                children: ";"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#616E88"
-                },
-                children: "// changeset 提交时的 commit id 信息"
-              })]
-            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
-              className: "line",
-              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: "  summary"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#81A1C1"
-                },
-                children: ":"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#8FBCBB"
-                },
-                children: "string"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#81A1C1"
-                },
-                children: ";"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#616E88"
-                },
-                children: "// changeset 内容信息"
-              })]
-            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
-              className: "line",
-              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: "  releases"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#81A1C1"
-                },
-                children: ":"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#8FBCBB"
-                },
-                children: "Array"
+                children: "    config"
               }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
                   color: "#ECEFF4"
+                },
+                children: ":"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: " "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: "{"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: " output"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: ":"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: " "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9"
+                },
+                children: "htmlConfig"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: " "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: "},"
+              })]
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: "    "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9"
+                },
+                children: "entryName"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: ","
+              })]
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: "    "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9"
+                },
+                children: "templateParams"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: ","
+              })]
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: "  "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: "}"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: " "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#81A1C1"
+                },
+                children: "="
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: " "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#88C0D0"
+                },
+                children: "useContext"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: "("
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9"
+                },
+                children: "DocumentContext"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: ")"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#81A1C1"
+                },
+                children: ";"
+              })]
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+              className: "line"
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: "  "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#81A1C1"
+                },
+                children: "return"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: " ("
+              })]
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: "    "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#81A1C1"
                 },
                 children: "<"
               }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
                   color: "#8FBCBB"
                 },
-                children: "Release"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: ">"
+                children: "Html"
               }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
                   color: "#81A1C1"
                 },
-                children: ";"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#616E88"
-                },
-                children: "// 当前计算出的 changeset 升级包名称及类型信息"
+                children: ">"
               })]
             }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
               className: "line",
               children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
-                  color: "#ECEFF4"
+                  color: "#D8DEE9FF"
                 },
-                children: "}"
+                children: "      "
               }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
                   color: "#81A1C1"
                 },
-                children: ";"
+                children: "<"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#8FBCBB"
+                },
+                children: "Head"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#81A1C1"
+                },
+                children: ">"
               })]
-            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-              className: "line"
-            })]
-          })
-        })]
-      })]
-    }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.ul, {
-      children: ["\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.li, {
-        children: "type"
-      }), "\n"]
-    }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.p, {
-      children: ["当前包对应的升级版本类型，类型为上述 ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
-        children: "VersionType"
-      }), "。"]
-    }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.h4, {
-      id: "返回值",
-      children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.a, {
-        className: "header-anchor",
-        "aria-hidden": "true",
-        href: "#返回值",
-        children: "#"
-      }), "返回值"]
-    }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.p, {
-      children: "Changelog 内容。"
-    }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.h4, {
-      id: "默认实现",
-      children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.a, {
-        className: "header-anchor",
-        "aria-hidden": "true",
-        href: "#默认实现",
-        children: "#"
-      }), "默认实现"]
-    }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.p, {
-      children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
-        children: "@changesets/cli/changelog"
-      }), " 默认处理逻辑为将 ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
-        children: "summary"
-      }), " 信息按照换行符 ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
-        children: "\\n"
-      }), " 分割，第一样前面增加 ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
-        children: "-"
-      }), " 作为列表开头，其他内容作为第一行内容的补充整理在列表下方。"]
-    }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.div, {
-      className: "language-ts",
-      children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.div, {
-        className: ""
-      }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.div, {
-        className: "modern-code-content",
-        children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.button, {
-          className: "copy"
-        }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.pre, {
-          className: "shiki",
-          style: {
-            backgroundColor: "#2e3440ff"
-          },
-          children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.code, {
-            children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
               className: "line",
               children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
-                  color: "#81A1C1"
-                },
-                children: "async"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
                   color: "#D8DEE9FF"
                 },
-                children: " "
+                children: "        "
               }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
                   color: "#81A1C1"
                 },
-                children: "function"
+                children: "<link"
               }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
                   color: "#D8DEE9FF"
@@ -771,24 +1086,108 @@ function _createMdxContent(props) {
                 children: " "
               }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
-                  color: "#88C0D0"
+                  color: "#8FBCBB"
                 },
-                children: "getReleaseLine"
+                children: "href"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#81A1C1"
+                },
+                children: "="
               }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
                   color: "#ECEFF4"
                 },
-                children: "("
+                children: "\""
               }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
-                  color: "#D8DEE9"
+                  color: "#A3BE8C"
                 },
-                children: "changeset"
+                children: "https://modernjs.dev"
               }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
                   color: "#ECEFF4"
                 },
-                children: ","
+                children: "\""
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#81A1C1"
+                },
+                children: ">"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: "Modern.js"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#81A1C1"
+                },
+                children: "</link>"
+              })]
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: "      "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#81A1C1"
+                },
+                children: "</"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#8FBCBB"
+                },
+                children: "Head"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#81A1C1"
+                },
+                children: ">"
+              })]
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: "      "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#81A1C1"
+                },
+                children: "<"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#8FBCBB"
+                },
+                children: "Body"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#81A1C1"
+                },
+                children: ">"
+              })]
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: "        "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#81A1C1"
+                },
+                children: "<"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#8FBCBB"
+                },
+                children: "Root"
               }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
                   color: "#D8DEE9FF"
@@ -796,87 +1195,67 @@ function _createMdxContent(props) {
                 children: " "
               }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
-                  color: "#D8DEE9"
+                  color: "#8FBCBB"
                 },
-                children: "type"
+                children: "rootId"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#81A1C1"
+                },
+                children: "="
               }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
                   color: "#ECEFF4"
                 },
-                children: ")"
+                children: "\""
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#A3BE8C"
+                },
+                children: "root"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: "\""
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#81A1C1"
+                },
+                children: ">"
+              })]
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: "          "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#81A1C1"
+                },
+                children: "<h1"
               }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
                   color: "#D8DEE9FF"
                 },
                 children: " "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#8FBCBB"
+                },
+                children: "style"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#81A1C1"
+                },
+                children: "={"
               }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
                   color: "#ECEFF4"
                 },
                 children: "{"
-              })]
-            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
-              className: "line",
-              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: "  "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#81A1C1"
-                },
-                children: "const"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "["
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9"
-                },
-                children: "firstLine"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: ","
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#81A1C1"
-                },
-                children: "..."
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9"
-                },
-                children: "futureLines"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "]"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#81A1C1"
-                },
-                children: "="
               }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
                   color: "#D8DEE9FF"
@@ -886,329 +1265,118 @@ function _createMdxContent(props) {
                 style: {
                   color: "#D8DEE9"
                 },
-                children: "changeset"
+                children: "color"
               }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
                   color: "#ECEFF4"
-                },
-                children: "."
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9"
-                },
-                children: "summary"
-              })]
-            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
-              className: "line",
-              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: "    "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "."
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#88C0D0"
-                },
-                children: "split"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: "("
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "'"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#EBCB8B"
-                },
-                children: "\\n"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "'"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: ")"
-              })]
-            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
-              className: "line",
-              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: "    "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "."
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#88C0D0"
-                },
-                children: "map"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: "("
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9"
-                },
-                children: "l"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#81A1C1"
-                },
-                children: "=>"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9"
-                },
-                children: "l"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "."
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#88C0D0"
-                },
-                children: "trimRight"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: "())"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#81A1C1"
-                },
-                children: ";"
-              })]
-            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-              className: "line"
-            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
-              className: "line",
-              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: "  "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#81A1C1"
-                },
-                children: "let"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9"
-                },
-                children: "returnVal"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#81A1C1"
-                },
-                children: "="
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "`"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#A3BE8C"
-                },
-                children: "- "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "${"
-              })]
-            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
-              className: "line",
-              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#A3BE8C"
-                },
-                children: "    "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9"
-                },
-                children: "changeset"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "."
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9"
-                },
-                children: "commit"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#A3BE8C"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#81A1C1"
-                },
-                children: "?"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#A3BE8C"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "`${"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9"
-                },
-                children: "changeset"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "."
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9"
-                },
-                children: "commit"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "}"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#A3BE8C"
-                },
-                children: ": "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "`"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#A3BE8C"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#81A1C1"
                 },
                 children: ":"
               }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
-                  color: "#A3BE8C"
+                  color: "#D8DEE9FF"
                 },
                 children: " "
               }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
                   color: "#ECEFF4"
                 },
-                children: "''"
-              })]
-            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
-              className: "line",
-              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                children: "'"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
                   color: "#A3BE8C"
                 },
-                children: "  "
+                children: "red"
               }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
                   color: "#ECEFF4"
                 },
-                children: "}${"
+                children: "'"
               }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
-                  color: "#D8DEE9"
+                  color: "#D8DEE9FF"
                 },
-                children: "firstLine"
+                children: " "
               }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
                   color: "#ECEFF4"
                 },
-                children: "}`"
+                children: "}"
               }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
                   color: "#81A1C1"
                 },
-                children: ";"
+                children: "}>"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: "Some Params："
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#81A1C1"
+                },
+                children: "</h1>"
               })]
-            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-              className: "line"
             }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
               className: "line",
               children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
                   color: "#D8DEE9FF"
                 },
-                children: "  "
+                children: "          "
               }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
                   color: "#81A1C1"
                 },
-                children: "if"
+                children: "<h2>"
               }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
                   color: "#D8DEE9FF"
                 },
-                children: " ("
+                children: " entryName："
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#81A1C1"
+                },
+                children: "{"
               }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
                   color: "#D8DEE9"
                 },
-                children: "futureLines"
+                children: "entryName"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#81A1C1"
+                },
+                children: "}</h2>"
+              })]
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: "          "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#81A1C1"
+                },
+                children: "<h2>"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: " title："
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#81A1C1"
+                },
+                children: "{"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9"
+                },
+                children: "htmlConfig"
               }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
                   color: "#ECEFF4"
@@ -1218,37 +1386,124 @@ function _createMdxContent(props) {
                 style: {
                   color: "#D8DEE9"
                 },
-                children: "length"
+                children: "title"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#81A1C1"
+                },
+                children: "}</h2>"
+              })]
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: "          "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#81A1C1"
+                },
+                children: "<h2>"
               }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
                   color: "#D8DEE9FF"
                 },
-                children: " "
+                children: " rootId: "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#81A1C1"
+                },
+                children: "{"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9"
+                },
+                children: "templateParams"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: "."
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9"
+                },
+                children: "mountId"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#81A1C1"
+                },
+                children: "}</h2>"
+              })]
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: "        "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#81A1C1"
+                },
+                children: "</"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#8FBCBB"
+                },
+                children: "Root"
               }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
                   color: "#81A1C1"
                 },
                 children: ">"
+              })]
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: "        "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#81A1C1"
+                },
+                children: "<h1>"
               }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
                   color: "#D8DEE9FF"
                 },
-                children: " "
+                children: "bottom"
               }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
-                  color: "#B48EAD"
+                  color: "#81A1C1"
                 },
-                children: "0"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                children: "</h1>"
+              })]
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
                   color: "#D8DEE9FF"
                 },
-                children: ") "
+                children: "      "
               }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
-                  color: "#ECEFF4"
+                  color: "#81A1C1"
                 },
-                children: "{"
+                children: "</"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#8FBCBB"
+                },
+                children: "Body"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#81A1C1"
+                },
+                children: ">"
               })]
             }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
               className: "line",
@@ -1259,149 +1514,19 @@ function _createMdxContent(props) {
                 children: "    "
               }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
-                  color: "#D8DEE9"
+                  color: "#81A1C1"
                 },
-                children: "returnVal"
+                children: "</"
               }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
-                  color: "#D8DEE9FF"
+                  color: "#8FBCBB"
                 },
-                children: " "
+                children: "Html"
               }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
                   color: "#81A1C1"
                 },
-                children: "+="
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "`"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#EBCB8B"
-                },
-                children: "\\n"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "${"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9"
-                },
-                children: "futureLines"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "."
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#88C0D0"
-                },
-                children: "map"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "("
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9"
-                },
-                children: "l"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#A3BE8C"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#81A1C1"
-                },
-                children: "=>"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#A3BE8C"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "`"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#A3BE8C"
-                },
-                children: "  "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "${"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9"
-                },
-                children: "l"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "}`"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: ")."
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#88C0D0"
-                },
-                children: "join"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "("
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "'"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#EBCB8B"
-                },
-                children: "\\n"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "'"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: ")"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "}`"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#81A1C1"
-                },
-                children: ";"
+                children: ">"
               })]
             }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
               className: "line",
@@ -1409,37 +1534,7 @@ function _createMdxContent(props) {
                 style: {
                   color: "#D8DEE9FF"
                 },
-                children: "  "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "}"
-              })]
-            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-              className: "line"
-            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
-              className: "line",
-              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: "  "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#81A1C1"
-                },
-                children: "return"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9"
-                },
-                children: "returnVal"
+                children: "  )"
               }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
                   color: "#81A1C1"
@@ -1460,454 +1555,10 @@ function _createMdxContent(props) {
           })
         })]
       })]
-    }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.h3, {
-      id: "getdependencyreleaseline",
-      children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.a, {
-        className: "header-anchor",
-        "aria-hidden": "true",
-        href: "#getdependencyreleaseline",
-        children: "#"
-      }), "getDependencyReleaseLine"]
-    }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.h4, {
-      id: "params-1",
-      children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.a, {
-        className: "header-anchor",
-        "aria-hidden": "true",
-        href: "#params-1",
-        children: "#"
-      }), "Params"]
-    }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.ul, {
-      children: ["\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.li, {
-        children: "changesets"
-      }), "\n"]
-    }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.p, {
-      children: ["当前关联的所有 changeset 信息，类型为 ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
-        children: "getReleaseLine"
-      }), " changeset 类型数组。"]
-    }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.ul, {
-      children: ["\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.li, {
-        children: "dependenciesUpdated"
-      }), "\n"]
-    }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.div, {
-      className: "language-ts",
-      children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.div, {
-        className: ""
-      }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.div, {
-        className: "modern-code-content",
-        children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.button, {
-          className: "copy"
-        }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.pre, {
-          className: "shiki",
-          style: {
-            backgroundColor: "#2e3440ff"
-          },
-          children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.code, {
-            children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
-              className: "line",
-              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#81A1C1"
-                },
-                children: "type"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#8FBCBB"
-                },
-                children: "ModCompWithPackage"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#81A1C1"
-                },
-                children: "="
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "{"
-              })]
-            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
-              className: "line",
-              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: "  name"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#81A1C1"
-                },
-                children: ":"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#8FBCBB"
-                },
-                children: "string"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#81A1C1"
-                },
-                children: ";"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#616E88"
-                },
-                children: "// 依赖模块名称"
-              })]
-            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
-              className: "line",
-              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: "  type"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#81A1C1"
-                },
-                children: ":"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#8FBCBB"
-                },
-                children: "VersionType"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#81A1C1"
-                },
-                children: ";"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#616E88"
-                },
-                children: "// 依赖模块的升级类型"
-              })]
-            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
-              className: "line",
-              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: "  oldVersion"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#81A1C1"
-                },
-                children: ":"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#8FBCBB"
-                },
-                children: "string"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#81A1C1"
-                },
-                children: ";"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#616E88"
-                },
-                children: "// 依赖模块当前版本号"
-              })]
-            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
-              className: "line",
-              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: "  newVersion"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#81A1C1"
-                },
-                children: ":"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#8FBCBB"
-                },
-                children: "string"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#81A1C1"
-                },
-                children: ";"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#616E88"
-                },
-                children: "// 依赖模块新版本号"
-              })]
-            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
-              className: "line",
-              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: "  changesets"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#81A1C1"
-                },
-                children: ":"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#8FBCBB"
-                },
-                children: "string"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: "[]"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#81A1C1"
-                },
-                children: ";"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#616E88"
-                },
-                children: "// 关联的 changeset id 列表"
-              })]
-            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
-              className: "line",
-              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: "  packageJson"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#81A1C1"
-                },
-                children: ":"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#8FBCBB"
-                },
-                children: "PackageJSON"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#81A1C1"
-                },
-                children: ";"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#616E88"
-                },
-                children: "// 依赖模块完整的 package.json 内容"
-              })]
-            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
-              className: "line",
-              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: "  dir"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#81A1C1"
-                },
-                children: ":"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#8FBCBB"
-                },
-                children: "string"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#81A1C1"
-                },
-                children: ";"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#616E88"
-                },
-                children: "// 依赖模块的路径(绝对路径)"
-              })]
-            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
-              className: "line",
-              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "}"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#81A1C1"
-                },
-                children: ";"
-              })]
-            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-              className: "line"
-            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
-              className: "line",
-              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#81A1C1"
-                },
-                children: "type"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#8FBCBB"
-                },
-                children: "DependenciesUpdated"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#81A1C1"
-                },
-                children: "="
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#8FBCBB"
-                },
-                children: "ModCompWithPackage"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: "[]"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#81A1C1"
-                },
-                children: ";"
-              })]
-            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-              className: "line"
-            })]
-          })
-        })]
-      })]
-    }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.h4, {
-      id: "返回值-1",
-      children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.a, {
-        className: "header-anchor",
-        "aria-hidden": "true",
-        href: "#返回值-1",
-        children: "#"
-      }), "返回值"]
     }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.p, {
-      children: "Changelog 内容。"
-    }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.h4, {
-      id: "默认实现-1",
-      children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.a, {
-        className: "header-anchor",
-        "aria-hidden": "true",
-        href: "#默认实现-1",
-        children: "#"
-      }), "默认实现"]
-    }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.p, {
-      children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
-        children: "@changesets/cli/changelog"
-      }), " 默认会使用 changesets 信息展示对应的 ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
-        children: "Updated dependencies + commit id"
-      }), "，以列表形式展示。然后根据 ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
-        children: "dependenciesUpdated"
-      }), " 信息展示对应的依赖包包名和新版本号，作为列表的子列表项。"]
+      children: "The above JSX component will generate the following HTML template:"
     }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.div, {
-      className: "language-ts",
+      className: "language-html",
       children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.div, {
         className: ""
       }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.div, {
@@ -1926,231 +1577,31 @@ function _createMdxContent(props) {
                 style: {
                   color: "#81A1C1"
                 },
-                children: "async"
+                children: "<!DOCTYPE"
               }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
                   color: "#D8DEE9FF"
                 },
                 children: " "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#8FBCBB"
+                },
+                children: "html"
               }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
                   color: "#81A1C1"
                 },
-                children: "function"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#88C0D0"
-                },
-                children: "getDependencyReleaseLine"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "("
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9"
-                },
-                children: "changesets"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: ","
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9"
-                },
-                children: "dependenciesUpdated"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: ")"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "{"
-              })]
-            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
-              className: "line",
-              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: "  "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9"
-                },
-                children: "console"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "."
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#88C0D0"
-                },
-                children: "log"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: "("
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "'"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#A3BE8C"
-                },
-                children: "getDependencyReleaseLine"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "'"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: ","
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9"
-                },
-                children: "changesets"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: ","
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9"
-                },
-                children: "dependenciesUpdated"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: ")"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#81A1C1"
-                },
-                children: ";"
-              })]
-            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
-              className: "line",
-              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: "  "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#81A1C1"
-                },
-                children: "if"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: " ("
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9"
-                },
-                children: "dependenciesUpdated"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "."
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9"
-                },
-                children: "length"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#81A1C1"
-                },
-                children: "==="
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#B48EAD"
-                },
-                children: "0"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: ") "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#81A1C1"
-                },
-                children: "return"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "''"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#81A1C1"
-                },
-                children: ";"
+                children: ">"
               })]
             }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-              className: "line"
+              className: "line",
+              children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#81A1C1"
+                },
+                children: "<html>"
+              })
             }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
               className: "line",
               children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
@@ -2162,52 +1613,7 @@ function _createMdxContent(props) {
                 style: {
                   color: "#81A1C1"
                 },
-                children: "const"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9"
-                },
-                children: "changesetLinks"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#81A1C1"
-                },
-                children: "="
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9"
-                },
-                children: "changesets"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "."
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#88C0D0"
-                },
-                children: "map"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: "("
+                children: "<head>"
               })]
             }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
               className: "line",
@@ -2218,9 +1624,9 @@ function _createMdxContent(props) {
                 children: "    "
               }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
-                  color: "#D8DEE9"
+                  color: "#81A1C1"
                 },
-                children: "changeset"
+                children: "<meta"
               }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
                   color: "#D8DEE9FF"
@@ -2228,226 +1634,39 @@ function _createMdxContent(props) {
                 children: " "
               }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
-                  color: "#81A1C1"
+                  color: "#8FBCBB"
                 },
-                children: "=>"
-              })]
-            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
-              className: "line",
-              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: "      "
+                children: "charset"
               }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
                   color: "#ECEFF4"
-                },
-                children: "`"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#A3BE8C"
-                },
-                children: "- Updated dependencies"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "${"
-              })]
-            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
-              className: "line",
-              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#A3BE8C"
-                },
-                children: "        "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9"
-                },
-                children: "changeset"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "."
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9"
-                },
-                children: "commit"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#A3BE8C"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#81A1C1"
-                },
-                children: "?"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#A3BE8C"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "`"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#A3BE8C"
-                },
-                children: " ["
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "${"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9"
-                },
-                children: "changeset"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "."
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9"
-                },
-                children: "commit"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "}"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#A3BE8C"
-                },
-                children: "]"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "`"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#A3BE8C"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#81A1C1"
-                },
-                children: ":"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#A3BE8C"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "''"
-              })]
-            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
-              className: "line",
-              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#A3BE8C"
-                },
-                children: "      "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "}`"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: ","
-              })]
-            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
-              className: "line",
-              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: "  )"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#81A1C1"
-                },
-                children: ";"
-              })]
-            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-              className: "line"
-            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
-              className: "line",
-              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: "  "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#81A1C1"
-                },
-                children: "const"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9"
-                },
-                children: "updatedDepenenciesList"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#81A1C1"
                 },
                 children: "="
               }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
+                  color: "#ECEFF4"
+                },
+                children: "\""
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#A3BE8C"
+                },
+                children: "utf-8"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: "\""
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
                   color: "#D8DEE9FF"
                 },
                 children: " "
               }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
-                  color: "#D8DEE9"
+                  color: "#81A1C1"
                 },
-                children: "dependenciesUpdated"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "."
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#88C0D0"
-                },
-                children: "map"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: "("
+                children: "/>"
               })]
             }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
               className: "line",
@@ -2458,94 +1677,42 @@ function _createMdxContent(props) {
                 children: "    "
               }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
-                  color: "#D8DEE9"
-                },
-                children: "dependency"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
                   color: "#81A1C1"
                 },
-                children: "=>"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                children: "<meta"
+              })]
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
                   color: "#D8DEE9FF"
                 },
-                children: " "
+                children: "      "
               }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
-                  color: "#ECEFF4"
-                },
-                children: "`"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#A3BE8C"
-                },
-                children: "  - "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "${"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9"
-                },
-                children: "dependency"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "."
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9"
+                  color: "#8FBCBB"
                 },
                 children: "name"
               }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
                   color: "#ECEFF4"
                 },
-                children: "}"
+                children: "="
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: "\""
               }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
                   color: "#A3BE8C"
                 },
-                children: "@"
+                children: "viewport"
               }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
                   color: "#ECEFF4"
                 },
-                children: "${"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9"
-                },
-                children: "dependency"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "."
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9"
-                },
-                children: "newVersion"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "}`"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: ","
+                children: "\""
               })]
             }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
               className: "line",
@@ -2553,47 +1720,118 @@ function _createMdxContent(props) {
                 style: {
                   color: "#D8DEE9FF"
                 },
-                children: "  )"
+                children: "      "
               }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
-                  color: "#81A1C1"
+                  color: "#8FBCBB"
                 },
-                children: ";"
+                children: "content"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: "="
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: "\""
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#A3BE8C"
+                },
+                children: "width=device-width, initial-scale=1.0, shrink-to-fit=no, viewport-fit=cover, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: "\""
               })]
-            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-              className: "line"
             }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
               className: "line",
               children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
                   color: "#D8DEE9FF"
                 },
-                children: "  "
+                children: "    "
               }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
                   color: "#81A1C1"
                 },
-                children: "return"
+                children: "/>"
+              })]
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: "    "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#81A1C1"
+                },
+                children: "<meta"
               }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
                   color: "#D8DEE9FF"
                 },
-                children: " ["
+                children: " "
               }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
-                  color: "#81A1C1"
+                  color: "#8FBCBB"
                 },
-                children: "..."
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9"
-                },
-                children: "changesetLinks"
+                children: "http-equiv"
               }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
                   color: "#ECEFF4"
                 },
-                children: ","
+                children: "="
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: "\""
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#A3BE8C"
+                },
+                children: "x-ua-compatible"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: "\""
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: " "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#8FBCBB"
+                },
+                children: "content"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: "="
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: "\""
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#A3BE8C"
+                },
+                children: "ie=edge"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: "\""
               }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
                   color: "#D8DEE9FF"
@@ -2603,180 +1841,1205 @@ function _createMdxContent(props) {
                 style: {
                   color: "#81A1C1"
                 },
-                children: "..."
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9"
-                },
-                children: "updatedDepenenciesList"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                children: "/>"
+              })]
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
                   color: "#D8DEE9FF"
                 },
-                children: "]"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "."
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#88C0D0"
-                },
-                children: "join"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: "("
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "'"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#EBCB8B"
-                },
-                children: "\\n"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "'"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: ")"
+                children: "    "
               }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
                   color: "#81A1C1"
                 },
-                children: ";"
+                children: "<meta"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: " "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#8FBCBB"
+                },
+                children: "name"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: "="
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: "\""
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#A3BE8C"
+                },
+                children: "renderer"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: "\""
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: " "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#8FBCBB"
+                },
+                children: "content"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: "="
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: "\""
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#A3BE8C"
+                },
+                children: "webkit"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: "\""
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: " "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#81A1C1"
+                },
+                children: "/>"
+              })]
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: "    "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#81A1C1"
+                },
+                children: "<meta"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: " "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#8FBCBB"
+                },
+                children: "name"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: "="
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: "\""
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#A3BE8C"
+                },
+                children: "layoutmode"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: "\""
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: " "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#8FBCBB"
+                },
+                children: "content"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: "="
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: "\""
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#A3BE8C"
+                },
+                children: "standard"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: "\""
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: " "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#81A1C1"
+                },
+                children: "/>"
+              })]
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: "    "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#81A1C1"
+                },
+                children: "<meta"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: " "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#8FBCBB"
+                },
+                children: "name"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: "="
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: "\""
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#A3BE8C"
+                },
+                children: "imagemode"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: "\""
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: " "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#8FBCBB"
+                },
+                children: "content"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: "="
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: "\""
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#A3BE8C"
+                },
+                children: "force"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: "\""
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: " "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#81A1C1"
+                },
+                children: "/>"
+              })]
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: "    "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#81A1C1"
+                },
+                children: "<meta"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: " "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#8FBCBB"
+                },
+                children: "name"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: "="
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: "\""
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#A3BE8C"
+                },
+                children: "wap-font-scale"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: "\""
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: " "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#8FBCBB"
+                },
+                children: "content"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: "="
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: "\""
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#A3BE8C"
+                },
+                children: "no"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: "\""
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: " "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#81A1C1"
+                },
+                children: "/>"
+              })]
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: "    "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#81A1C1"
+                },
+                children: "<meta"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: " "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#8FBCBB"
+                },
+                children: "name"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: "="
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: "\""
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#A3BE8C"
+                },
+                children: "format-detection"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: "\""
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: " "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#8FBCBB"
+                },
+                children: "content"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: "="
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: "\""
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#A3BE8C"
+                },
+                children: "telephone=no"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: "\""
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: " "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#81A1C1"
+                },
+                children: "/>"
+              })]
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: "    "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#81A1C1"
+                },
+                children: "<script>"
+              })]
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: "      "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#81A1C1"
+                },
+                children: "..."
+              })]
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: "    "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#81A1C1"
+                },
+                children: "</script>"
+              })]
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: "    "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#81A1C1"
+                },
+                children: "<script"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: " "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#8FBCBB"
+                },
+                children: "defer"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: " "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#8FBCBB"
+                },
+                children: "src"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: "="
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: "\""
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#A3BE8C"
+                },
+                children: "/static/js/lib-react.js"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: "\""
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#81A1C1"
+                },
+                children: "></script>"
+              })]
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: "    "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#81A1C1"
+                },
+                children: "<script"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: " "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#8FBCBB"
+                },
+                children: "defer"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: " "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#8FBCBB"
+                },
+                children: "src"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: "="
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: "\""
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#A3BE8C"
+                },
+                children: "/static/js/lib-polyfill.js"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: "\""
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#81A1C1"
+                },
+                children: "></script>"
+              })]
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: "    "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#81A1C1"
+                },
+                children: "<script"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: " "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#8FBCBB"
+                },
+                children: "defer"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: " "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#8FBCBB"
+                },
+                children: "src"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: "="
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: "\""
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#A3BE8C"
+                },
+                children: "/static/js/lib-router.js"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: "\""
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#81A1C1"
+                },
+                children: "></script>"
+              })]
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: "    "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#81A1C1"
+                },
+                children: "<script"
+              })]
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: "      "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#8FBCBB"
+                },
+                children: "defer"
+              })]
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: "      "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#8FBCBB"
+                },
+                children: "src"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: "="
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: "\""
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#A3BE8C"
+                },
+                children: "/static/js/vendors-node_modules_pnpm_loadable_component_5_15_2_react_18_2_0_node_modules_loadable_compon-3fb0cf.js"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: "\""
+              })]
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: "    "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#81A1C1"
+                },
+                children: "></script>"
+              })]
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: "    "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#81A1C1"
+                },
+                children: "<script"
+              })]
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: "      "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#8FBCBB"
+                },
+                children: "defer"
+              })]
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: "      "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#8FBCBB"
+                },
+                children: "src"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: "="
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: "\""
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#A3BE8C"
+                },
+                children: "/static/js/packages_runtime_plugin-router-legacy_dist_js_treeshaking_runtime_index_js-packages_runtime_p-28f4c9.js"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: "\""
+              })]
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: "    "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#81A1C1"
+                },
+                children: "></script>"
+              })]
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: "    "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#81A1C1"
+                },
+                children: "<script"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: " "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#8FBCBB"
+                },
+                children: "defer"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: " "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#8FBCBB"
+                },
+                children: "src"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: "="
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: "\""
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#A3BE8C"
+                },
+                children: "/static/js/sub.js"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: "\""
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#81A1C1"
+                },
+                children: "></script>"
+              })]
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: "    "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#81A1C1"
+                },
+                children: "<link"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: " "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#8FBCBB"
+                },
+                children: "href"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: "="
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: "\""
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#A3BE8C"
+                },
+                children: "https://www.baidu.com"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: "\""
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: " "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#81A1C1"
+                },
+                children: "/>"
+              })]
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: "  "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#81A1C1"
+                },
+                children: "</head>"
+              })]
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+              className: "line"
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: "  "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#81A1C1"
+                },
+                children: "<body>"
+              })]
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: "    "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#81A1C1"
+                },
+                children: "<div"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: " "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#8FBCBB"
+                },
+                children: "id"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: "="
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: "\""
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#A3BE8C"
+                },
+                children: "root"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: "\""
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#81A1C1"
+                },
+                children: ">"
+              })]
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: "      {/* "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9"
+                },
+                children: "<"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: "?- html ?> */}"
+              })]
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: "      "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#81A1C1"
+                },
+                children: "<h1"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: " "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#8FBCBB"
+                },
+                children: "style"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: "="
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: "\""
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#A3BE8C"
+                },
+                children: "color:red"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: "\""
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#81A1C1"
+                },
+                children: ">"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: "Some Params："
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#81A1C1"
+                },
+                children: "</h1>"
+              })]
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: "      "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#81A1C1"
+                },
+                children: "<h2>"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: "entryName：sub"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#81A1C1"
+                },
+                children: "</h2>"
+              })]
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: "      "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#81A1C1"
+                },
+                children: "<h2>"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: "title："
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#81A1C1"
+                },
+                children: "</h2>"
+              })]
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: "      "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#81A1C1"
+                },
+                children: "<h2>"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: "rootId: root"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#81A1C1"
+                },
+                children: "</h2>"
+              })]
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: "    "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#81A1C1"
+                },
+                children: "</div>"
+              })]
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: "    "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#81A1C1"
+                },
+                children: "<h1>"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: "bottom"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#81A1C1"
+                },
+                children: "</h1>"
+              })]
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: "    {/* "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9"
+                },
+                children: "<"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: "?- chunksMap.js ?> */}"
+              })]
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: "    {/* "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9"
+                },
+                children: "<"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: "?- SSRDataScript ?> */}"
+              })]
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: "  "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#81A1C1"
+                },
+                children: "</body>"
               })]
             }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
               className: "line",
               children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
-                  color: "#ECEFF4"
+                  color: "#81A1C1"
                 },
-                children: "}"
+                children: "</html>"
               })
-            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-              className: "line"
-            })]
-          })
-        })]
-      })]
-    }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.p, {
-      children: "展示效果为："
-    }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.div, {
-      className: "language-markdown",
-      children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.div, {
-        className: ""
-      }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.div, {
-        className: "modern-code-content",
-        children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.button, {
-          className: "copy"
-        }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.pre, {
-          className: "shiki",
-          style: {
-            backgroundColor: "#2e3440ff"
-          },
-          children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.code, {
-            children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
-              className: "line",
-              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "-"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: " Updated dependencies "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "["
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#88C0D0"
-                },
-                children: "f0438ab"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "]"
-              })]
-            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
-              className: "line",
-              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "-"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: " Updated dependencies "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "["
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#88C0D0"
-                },
-                children: "f0438ab"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "]"
-              })]
-            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
-              className: "line",
-              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: "  "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "-"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: " module-3@2.0.0"
-              })]
-            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
-              className: "line",
-              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: "  "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "-"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: " module-1@0.2.0"
-              })]
             }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
               className: "line"
             })]
@@ -2784,46 +3047,59 @@ function _createMdxContent(props) {
         })]
       })]
     }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.h2, {
-      id: "配置",
+      id: "html-synxtax",
       children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.a, {
         className: "header-anchor",
         "aria-hidden": "true",
-        href: "#配置",
+        href: "#html-synxtax",
         children: "#"
-      }), "配置"]
-    }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.p, {
-      children: ["Changesets 配置文件中 ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
-        children: "changelog"
-      }), " 字段，该字段用于标记 Changelog 信息的获取途径。"]
+      }), "Html Synxtax"]
     }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.p, {
-      children: "该配置可以为字符串，直接声明获取 Changelog 信息模块的模块名称或者路径。"
+      children: "Modern.js also supports HTML syntax. By default, an HTML template is built into the Modern.js application project to generate HTML code."
     }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.p, {
-      children: ["该配置还支持配置数组，数组中第一个元素为获取 Changelog 信息模块的模块名称或者路径，第二个元素为传入对应函数的参数值，会作为 ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
-        children: "getReleaseLine"
-      }), " 和 ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
-        children: "getDependencyReleaseLine"
-      }), " 函数的第三个参数传入。"]
+      children: ["Based on HTML syntax templates, Modern.js provides ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.strong, {
+        children: "Custom HTML Fragments"
+      }), " and ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.strong, {
+        children: "Fully Custom HTML Templates"
+      }), " two ways to customize templates."]
     }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.h3, {
-      id: "配置相对路径",
+      id: "custom-html-fragments",
       children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.a, {
         className: "header-anchor",
         "aria-hidden": "true",
-        href: "#配置相对路径",
+        href: "#custom-html-fragments",
         children: "#"
-      }), "配置相对路径"]
+      }), "Custom HTML Fragments"]
     }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.p, {
-      children: ["changelog 配置如果为相对路径为 ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
-        children: ".changesets"
-      }), " 目录下的相对路径。"]
-    }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.p, {
-      children: ["例如创建 ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
-        children: ".changeset/my-changelog-config.js"
-      }), " 文件，定义如下内容："]
+      children: ["In the application root directory, create the ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
+        children: "config/html/"
+      }), " directory, which supports the creation of four kinds of HTML fragments."]
+    }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.ul, {
+      children: ["\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.li, {
+        children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
+          children: "top.html"
+        })
+      }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.li, {
+        children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
+          children: "head.html"
+        })
+      }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.li, {
+        children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
+          children: "body.html"
+        })
+      }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.li, {
+        children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
+          children: "bottom.html"
+        })
+      }), "\n"]
+    }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.p, {
+      children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.strong, {
+        children: "These fragments will be injected into the default HTML template."
+      })
     }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.div, {
-      className: "language-ts",
+      className: "language-html",
       children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.div, {
-        className: "modern-code-title",
-        children: ".changeset/my-changelog-config.js"
+        className: ""
       }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.div, {
         className: "modern-code-content",
         children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.button, {
@@ -2840,147 +3116,135 @@ function _createMdxContent(props) {
                 style: {
                   color: "#81A1C1"
                 },
-                children: "async"
+                children: "<!DOCTYPE"
               }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
                   color: "#D8DEE9FF"
                 },
                 children: " "
               }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#81A1C1"
-                },
-                children: "function"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#88C0D0"
-                },
-                children: "getReleaseLine"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "("
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9"
-                },
-                children: "changeset"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: ","
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9"
-                },
-                children: "type"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: ")"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "{}"
-              })]
-            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-              className: "line"
-            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
-              className: "line",
-              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#81A1C1"
-                },
-                children: "async"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#81A1C1"
-                },
-                children: "function"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#88C0D0"
-                },
-                children: "getDependencyReleaseLine"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "("
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9"
-                },
-                children: "changesets"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: ","
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9"
-                },
-                children: "dependenciesUpdated"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: ")"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "{}"
-              })]
-            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-              className: "line"
-            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
-              className: "line",
-              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
                   color: "#8FBCBB"
                 },
-                children: "module"
+                children: "html"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#81A1C1"
+                },
+                children: ">"
+              })]
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+              className: "line",
+              children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#81A1C1"
+                },
+                children: "<html>"
+              })
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: "  "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#81A1C1"
+                },
+                children: "<head>"
+              })]
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: "    "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9"
+                },
+                children: "<"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: "%= meta %>"
+              })]
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: "    "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#81A1C1"
+                },
+                children: "<title>"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9"
+                },
+                children: "<"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: "%= title %>"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#81A1C1"
+                },
+                children: "</title>"
+              })]
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: "    "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9"
+                },
+                children: "<"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: "%= topTemplate %>"
+              })]
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+              className: "line"
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: "    "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#81A1C1"
+                },
+                children: "<script>"
+              })]
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: "      "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9"
+                },
+                children: "window"
               }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
                   color: "#ECEFF4"
@@ -2988,9 +3252,9 @@ function _createMdxContent(props) {
                 children: "."
               }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
-                  color: "#8FBCBB"
+                  color: "#D8DEE9"
                 },
-                children: "exports"
+                children: "__assetPrefix__"
               }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
                   color: "#D8DEE9FF"
@@ -3010,57 +3274,248 @@ function _createMdxContent(props) {
                 style: {
                   color: "#ECEFF4"
                 },
-                children: "{"
-              })]
-            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
-              className: "line",
-              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: "  "
+                children: "'"
               }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
-                  color: "#D8DEE9"
+                  color: "#A3BE8C"
                 },
-                children: "getReleaseLine"
+                children: "<%= assetPrefix %>"
               }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
                   color: "#ECEFF4"
                 },
-                children: ","
-              })]
-            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
-              className: "line",
-              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: "  "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9"
-                },
-                children: "getDependencyReleaseLine"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: ","
-              })]
-            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
-              className: "line",
-              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "}"
+                children: "'"
               }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
                   color: "#81A1C1"
                 },
                 children: ";"
               })]
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: "    "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#81A1C1"
+                },
+                children: "</script>"
+              })]
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: "    "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9"
+                },
+                children: "<"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: "%= headTemplate %>"
+              })]
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+              className: "line",
+              children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: "    {/* webpack inject css  */}"
+              })
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: "  "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#81A1C1"
+                },
+                children: "</head>"
+              })]
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: "  "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#81A1C1"
+                },
+                children: "<body>"
+              })]
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: "    "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#81A1C1"
+                },
+                children: "<noscript>"
+              })]
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+              className: "line",
+              children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: "      We're sorry but react app doesn't work properly without JavaScript"
+              })
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+              className: "line",
+              children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: "      enabled. Please enable it to continue."
+              })
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: "    "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#81A1C1"
+                },
+                children: "</noscript>"
+              })]
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: "    "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#81A1C1"
+                },
+                children: "<div"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: " "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#8FBCBB"
+                },
+                children: "id"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: "="
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: "\""
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9"
+                },
+                children: "<"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#A3BE8C"
+                },
+                children: "%= mountId %>"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#ECEFF4"
+                },
+                children: "\""
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#81A1C1"
+                },
+                children: "></div>"
+              })]
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: "    "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9"
+                },
+                children: "<"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: "%= bodyTemplate %>"
+              })]
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+              className: "line",
+              children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: "    {/* webpack inject js  */}"
+              })
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: "    {/* "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9"
+                },
+                children: "<"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: "?- bottomTemplate ?> */}"
+              })]
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: "  "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#81A1C1"
+                },
+                children: "</body>"
+              })]
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+              className: "line",
+              children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#81A1C1"
+                },
+                children: "</html>"
+              })
             }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
               className: "line"
             })]
@@ -3068,199 +3523,21 @@ function _createMdxContent(props) {
         })]
       })]
     }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.p, {
-      children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
-        children: "changlog"
-      }), " 配置为 ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
-        children: "./my-changelog-config.js"
-      }), " 即可:"]
+      children: ["HTML Fragments support the use ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.a, {
+        href: "https://lodash.com/docs/4.17.15#template",
+        target: "_blank",
+        rel: "nofollow",
+        children: "Lodash template"
+      }), "。"]
+    }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.p, {
+      children: ["For example, insert a script in ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
+        children: "body.html"
+      }), ":"]
     }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.div, {
-      className: "language-json",
+      className: "language-html",
       children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.div, {
         className: "modern-code-title",
-        children: ".changesets/config.json"
-      }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.div, {
-        className: "modern-code-content",
-        children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.button, {
-          className: "copy"
-        }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.pre, {
-          className: "shiki",
-          style: {
-            backgroundColor: "#2e3440ff"
-          },
-          children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.code, {
-            children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-              className: "line",
-              children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "{"
-              })
-            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
-              className: "line",
-              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: "  "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "\""
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#8FBCBB"
-                },
-                children: "changelog"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "\""
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: ":"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "\""
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#A3BE8C"
-                },
-                children: "./my-changelog-config.js"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "\""
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: ","
-              })]
-            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
-              className: "line",
-              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: "   "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9"
-                },
-                children: "..."
-              })]
-            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-              className: "line",
-              children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "}"
-              })
-            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-              className: "line"
-            })]
-          })
-        })]
-      })]
-    }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.h3, {
-      id: "使用模块工程方案",
-      children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.a, {
-        className: "header-anchor",
-        "aria-hidden": "true",
-        href: "#使用模块工程方案",
-        children: "#"
-      }), "使用模块工程方案"]
-    }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.p, {
-      children: "自定义 Changelog 还可以使用模块工程方案进行管理，提供通用方案。"
-    }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.h4, {
-      id: "使用-npx-modern-jscreate-创建模块工程方案",
-      children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.a, {
-        className: "header-anchor",
-        "aria-hidden": "true",
-        href: "#使用-npx-modern-jscreate-创建模块工程方案",
-        children: "#"
-      }), "使用 ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
-        children: "npx @modern-js/create"
-      }), " 创建模块工程方案。"]
-    }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.div, {
-      className: "language-md",
-      children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.div, {
-        className: ""
-      }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.div, {
-        className: "modern-code-content",
-        children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.button, {
-          className: "copy"
-        }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.pre, {
-          className: "shiki",
-          style: {
-            backgroundColor: "#2e3440ff"
-          },
-          children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.code, {
-            children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-              className: "line",
-              children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: "? 请选择你想创建的工程类型 模块"
-              })
-            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-              className: "line",
-              children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: "? 请填写项目名称 custom-changelog"
-              })
-            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-              className: "line",
-              children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: "? 请选择开发语言 TS"
-              })
-            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-              className: "line",
-              children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: "? 请选择包管理工具 pnpm"
-              })
-            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-              className: "line"
-            })]
-          })
-        })]
-      })]
-    }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.h4, {
-      id: "实现自定义内容",
-      children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.a, {
-        className: "header-anchor",
-        "aria-hidden": "true",
-        href: "#实现自定义内容",
-        children: "#"
-      }), "实现自定义内容。"]
-    }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.div, {
-      className: "language-ts",
-      children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.div, {
-        className: "modern-code-title",
-        children: "src/index.ts"
+        children: "config/html/body.html"
       }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.div, {
         className: "modern-code-content",
         children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.button, {
@@ -3277,195 +3554,22 @@ function _createMdxContent(props) {
                 style: {
                   color: "#81A1C1"
                 },
-                children: "export"
+                children: "<script"
               }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
                   color: "#D8DEE9FF"
                 },
                 children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#81A1C1"
-                },
-                children: "async"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#81A1C1"
-                },
-                children: "function"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#88C0D0"
-                },
-                children: "getReleaseLine"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "()"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "{}"
-              })]
-            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-              className: "line"
-            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
-              className: "line",
-              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#81A1C1"
-                },
-                children: "export"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#81A1C1"
-                },
-                children: "async"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#81A1C1"
-                },
-                children: "function"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#88C0D0"
-                },
-                children: "getDependencyReleaseLine"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "()"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "{}"
-              })]
-            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-              className: "line"
-            })]
-          })
-        })]
-      })]
-    }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.h4, {
-      id: "将模块发布到-npm",
-      children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.a, {
-        className: "header-anchor",
-        "aria-hidden": "true",
-        href: "#将模块发布到-npm",
-        children: "#"
-      }), "将模块发布到 NPM。"]
-    }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.h4, {
-      id: "在目标仓库根目录安装对应模块例如-custom-changelog",
-      children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.a, {
-        className: "header-anchor",
-        "aria-hidden": "true",
-        href: "#在目标仓库根目录安装对应模块例如-custom-changelog",
-        children: "#"
-      }), "在目标仓库根目录安装对应模块，例如 ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
-        children: "custom-changelog"
-      }), "。"]
-    }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.h4, {
-      id: "配置-changeset-的-changelog-配置为包名称",
-      children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.a, {
-        className: "header-anchor",
-        "aria-hidden": "true",
-        href: "#配置-changeset-的-changelog-配置为包名称",
-        children: "#"
-      }), "配置 changeset 的 changelog 配置为包名称。"]
-    }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.div, {
-      className: "language-json",
-      children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.div, {
-        className: "modern-code-title",
-        children: ".changesets/config.json"
-      }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.div, {
-        className: "modern-code-content",
-        children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.button, {
-          className: "copy"
-        }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.pre, {
-          className: "shiki",
-          style: {
-            backgroundColor: "#2e3440ff"
-          },
-          children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.code, {
-            children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-              className: "line",
-              children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "{"
-              })
-            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
-              className: "line",
-              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: "  "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "\""
               }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
                   color: "#8FBCBB"
                 },
-                children: "changelog"
+                children: "src"
               }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
                   color: "#ECEFF4"
                 },
-                children: "\""
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: ":"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: " "
+                children: "="
               }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
                   color: "#ECEFF4"
@@ -3475,7 +3579,7 @@ function _createMdxContent(props) {
                 style: {
                   color: "#A3BE8C"
                 },
-                children: "custom-changelog"
+                children: "//example.com/assets/a.js"
               }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
                   color: "#ECEFF4"
@@ -3483,59 +3587,107 @@ function _createMdxContent(props) {
                 children: "\""
               }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
-                  color: "#ECEFF4"
+                  color: "#81A1C1"
                 },
-                children: ","
+                children: "></script>"
               })]
-            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
-              className: "line",
-              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: "   "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9"
-                },
-                children: "..."
-              })]
-            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-              className: "line",
-              children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "}"
-              })
             }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
               className: "line"
             })]
           })
         })]
       })]
-    }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.h3, {
-      id: "使用-monorepo-工程方案",
-      children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.a, {
-        className: "header-anchor",
-        "aria-hidden": "true",
-        href: "#使用-monorepo-工程方案",
-        children: "#"
-      }), "使用 Monorepo 工程方案"]
-    }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.p, {
-      children: "如果你当前仓库为 Monorepo 工程方案，可以直接使用模块子项目进行管理。"
-    }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.h4, {
-      id: "执行-pnpm-run-new-创建模块子项目",
-      children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.a, {
-        className: "header-anchor",
-        "aria-hidden": "true",
-        href: "#执行-pnpm-run-new-创建模块子项目",
-        children: "#"
-      }), "执行 ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
-        children: "pnpm run new"
-      }), " 创建模块子项目。"]
     }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.div, {
-      className: "language-md",
+      className: "modern-directive info",
+      children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.p, {
+        className: "modern-directive-title",
+        children: "INFO"
+      }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.div, {
+        className: "modern-directive-content",
+        children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.p, {
+          children: ["\nThe implementation of the custom HTML fragment is to merge the fragment with the built-in template of the frame. Since ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
+            children: "<title>"
+          }), " already exists in the default template of the frame, the ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
+            children: "<title>"
+          }), " in the custom HTML template cannot take effect. Please pass ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.a, {
+            href: "/v2/en/configure/app/html/title.html",
+            children: "html.title"
+          }), " to modify the page title."]
+        })
+      })]
+    }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.h3, {
+      id: "fully-custom-html-templates",
+      children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.a, {
+        className: "header-anchor",
+        "aria-hidden": "true",
+        href: "#fully-custom-html-templates",
+        children: "#"
+      }), "Fully Custom HTML Templates"]
+    }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.p, {
+      children: "In some cases, HTML snippets do not meet the customization requirements, Modern.js provide a fully customized way."
+    }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.div, {
+      className: "modern-directive caution",
+      children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.p, {
+        className: "modern-directive-title",
+        children: "CAUTION"
+      }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.div, {
+        className: "modern-directive-content",
+        children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.p, {
+          children: "\nIt is not recommended to override the default HTML template directly, and some features may be lost. Even if it needs to be replaced, it is recommended to build on the built-in template and modify it as needed."
+        })
+      })]
+    }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.p, {
+      children: ["In the ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
+        children: "config/html/"
+      }), " directory, create a index.html file that will override the default HTML template."]
+    }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.div, {
+      className: "modern-directive info",
+      children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.p, {
+        className: "modern-directive-title",
+        children: "INFO"
+      }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.div, {
+        className: "modern-directive-content",
+        children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.p, {
+          children: ["\nThe internal default HTML template can be viewed in ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
+            children: "node_modules/.modern-js/${entryName}/index.html"
+          }), "."]
+        })
+      })]
+    }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.h3, {
+      id: "template-params-1",
+      children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.a, {
+        className: "header-anchor",
+        "aria-hidden": "true",
+        href: "#template-params-1",
+        children: "#"
+      }), "Template Params"]
+    }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.p, {
+      children: ["The parameters used in the template can be defined by the ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.a, {
+        href: "/v2/en/configure/app/html/template-parameters.html",
+        children: "html.templateParameters"
+      }), "."]
+    }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.h3, {
+      id: "config-by-entry",
+      children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.a, {
+        className: "header-anchor",
+        "aria-hidden": "true",
+        href: "#config-by-entry",
+        children: "#"
+      }), "Config By Entry"]
+    }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.p, {
+      children: ["The fragment in the ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
+        children: "config/html/"
+      }), " directory are valid for all entries in the application. If you want to customize the HTML by entry, you can create a new directory named with the ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.strong, {
+        children: "entry name"
+      }), " in the ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
+        children: "config/html/"
+      }), " directory, and then customize the HTML snippets in this directory."]
+    }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.p, {
+      children: ["For example, the following HTML fragment is only valid for ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
+        children: "entry1"
+      }), ":"]
+    }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.div, {
+      className: "language-bash",
       children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.div, {
         className: ""
       }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.div, {
@@ -3552,334 +3704,89 @@ function _createMdxContent(props) {
               className: "line",
               children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
-                  color: "#D8DEE9FF"
-                },
-                children: "? 请选择你想创建的工程类型 模块"
-              })
-            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-              className: "line",
-              children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: "? 请填写子项目名称 custom-changelog"
-              })
-            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-              className: "line",
-              children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: "? 请填写子项目目录名称 custom-changelog"
-              })
-            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-              className: "line",
-              children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: "? 请选择开发语言 TS"
-              })
-            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-              className: "line"
-            })]
-          })
-        })]
-      })]
-    }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.h4, {
-      id: "实现自定义内容-1",
-      children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.a, {
-        className: "header-anchor",
-        "aria-hidden": "true",
-        href: "#实现自定义内容-1",
-        children: "#"
-      }), "实现自定义内容。"]
-    }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.div, {
-      className: "language-ts",
-      children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.div, {
-        className: "modern-code-title",
-        children: "src/index.ts"
-      }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.div, {
-        className: "modern-code-content",
-        children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.button, {
-          className: "copy"
-        }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.pre, {
-          className: "shiki",
-          style: {
-            backgroundColor: "#2e3440ff"
-          },
-          children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.code, {
-            children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
-              className: "line",
-              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#81A1C1"
-                },
-                children: "export"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#81A1C1"
-                },
-                children: "async"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#81A1C1"
-                },
-                children: "function"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
                   color: "#88C0D0"
                 },
-                children: "getReleaseLine"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "()"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "{}"
-              })]
-            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-              className: "line"
-            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
-              className: "line",
-              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#81A1C1"
-                },
-                children: "export"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#81A1C1"
-                },
-                children: "async"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#81A1C1"
-                },
-                children: "function"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#88C0D0"
-                },
-                children: "getDependencyReleaseLine"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "()"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "{}"
-              })]
-            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-              className: "line"
-            })]
-          })
-        })]
-      })]
-    }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.h4, {
-      id: "在-monorepo-根目录添加子项目模块依赖例如-custom-changelog",
-      children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.a, {
-        className: "header-anchor",
-        "aria-hidden": "true",
-        href: "#在-monorepo-根目录添加子项目模块依赖例如-custom-changelog",
-        children: "#"
-      }), "在 Monorepo 根目录添加子项目模块依赖，例如 ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
-        children: "custom-changelog"
-      }), "。"]
-    }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.div, {
-      className: "language-json",
-      children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.div, {
-        className: "modern-code-title",
-        children: "package.json"
-      }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.div, {
-        className: "modern-code-content",
-        children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.button, {
-          className: "copy"
-        }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.pre, {
-          className: "shiki",
-          style: {
-            backgroundColor: "#2e3440ff"
-          },
-          children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.code, {
-            children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-              className: "line",
-              children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "{"
+                children: "."
               })
-            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
-              className: "line",
-              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: "  "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "\""
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#8FBCBB"
-                },
-                children: "devDependencies"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "\""
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: ":"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "{"
-              })]
-            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
-              className: "line",
-              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: "    "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "\""
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#8FBCBB"
-                },
-                children: "custom-changelog"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "\""
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: ":"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "\""
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#A3BE8C"
-                },
-                children: "workspace: *"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "\""
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: ","
-              })]
-            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
-              className: "line",
-              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: "    "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9"
-                },
-                children: "..."
-              })]
-            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
-              className: "line",
-              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: "  "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "}"
-              })]
             }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
               className: "line",
               children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
-                  color: "#ECEFF4"
+                  color: "#D8DEE9FF"
                 },
-                children: "}"
+                children: "├── config/"
+              })
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+              className: "line",
+              children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: "│   └── html/"
+              })
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+              className: "line",
+              children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: "│       └── entry1"
+              })
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+              className: "line",
+              children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: "│           ├── head.html"
+              })
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+              className: "line",
+              children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: "│           └── body.html"
+              })
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+              className: "line",
+              children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: "└── src/"
+              })
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+              className: "line",
+              children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: "    ├── entry1/"
+              })
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+              className: "line",
+              children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: "    │   └── routes"
+              })
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+              className: "line",
+              children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: "    └── entry2/"
+              })
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+              className: "line",
+              children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "#D8DEE9FF"
+                },
+                children: "        └── routes"
               })
             }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
               className: "line"
@@ -3887,119 +3794,6 @@ function _createMdxContent(props) {
           })
         })]
       })]
-    }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.h4, {
-      id: "配置-changeset-的-changelog-配置为包名称-1",
-      children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.a, {
-        className: "header-anchor",
-        "aria-hidden": "true",
-        href: "#配置-changeset-的-changelog-配置为包名称-1",
-        children: "#"
-      }), "配置 changeset 的 changelog 配置为包名称。"]
-    }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.div, {
-      className: "language-json",
-      children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.div, {
-        className: "modern-code-title",
-        children: ".changesets/config.json"
-      }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.div, {
-        className: "modern-code-content",
-        children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.button, {
-          className: "copy"
-        }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.pre, {
-          className: "shiki",
-          style: {
-            backgroundColor: "#2e3440ff"
-          },
-          children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.code, {
-            children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-              className: "line",
-              children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "{"
-              })
-            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
-              className: "line",
-              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: "  "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "\""
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#8FBCBB"
-                },
-                children: "changelog"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "\""
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: ":"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "\""
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#A3BE8C"
-                },
-                children: "custom-changelog"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "\""
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: ","
-              })]
-            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
-              className: "line",
-              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9FF"
-                },
-                children: "   "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#D8DEE9"
-                },
-                children: "..."
-              })]
-            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-              className: "line",
-              children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "#ECEFF4"
-                },
-                children: "}"
-              })
-            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-              className: "line"
-            })]
-          })
-        })]
-      })]
-    }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.p, {
-      children: "该模块发布到 NPM 后，依然可以和模块类型一样供其他仓库使用。"
     })]
   });
 }
