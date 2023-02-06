@@ -176,6 +176,8 @@ var nprogress = __webpack_require__(33906);
 ;// CONCATENATED MODULE: ../../packages/cli/doc-core/src/theme-default/index.css
 // extracted by mini-css-extract-plugin
 
+// EXTERNAL MODULE: ../../packages/cli/doc-core/node_modules/virtual-global-styles.js
+var virtual_global_styles = __webpack_require__(20456);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/react@18.2.0/node_modules/react/index.js
 var react = __webpack_require__(52983);
 // EXTERNAL MODULE: ../../node_modules/.pnpm/react-helmet-async@1.3.0_biqbaboplfbrettd7655fr4n2y/node_modules/react-helmet-async/lib/index.module.js
@@ -1289,7 +1291,7 @@ const Tabs_excluded=["children"];function isTabItem(item){if(item&&typeof item==
 },
 /******/ __webpack_require__ => { // webpackRuntimeModules
 /******/ var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-/******/ __webpack_require__.O(0, [92986,87991,58193,86728], () => (__webpack_exec__(76645), __webpack_exec__(74224)));
+/******/ __webpack_require__.O(0, [92986,87991,58193,26447], () => (__webpack_exec__(76645), __webpack_exec__(74224)));
 /******/ var __webpack_exports__ = __webpack_require__.O();
 /******/ }
 ]);
