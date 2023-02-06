@@ -1,7 +1,7 @@
 "use strict";
-(self["webpackChunk_modern_js_main_doc_website"] = self["webpackChunk_modern_js_main_doc_website"] || []).push([[29761],{
+(self["webpackChunk_modern_js_main_doc_website"] = self["webpackChunk_modern_js_main_doc_website"] || []).push([[13771],{
 
-/***/ 14959:
+/***/ 93287:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -16,19 +16,19 @@ __webpack_require__.r(__webpack_exports__);
 /*@jsxRuntime automatic @jsxImportSource react*/
 
 const frontmatter = {
-  "sidebar_position": 3
+  "sidebar_position": 2
 };
 const toc = [{
-  "id": "func",
-  "text": "func",
+  "id": "element",
+  "text": "element",
   "depth": 2
 }, {
   "id": "params",
   "text": "params",
   "depth": 2
 }];
-const title = `enableFunc`;
-const content = "\"---\\nsidebar_position: 3\\n---\\n\\n# enableFunc\\n\\nEnable functionality to support application and module engineering scenarios.\\n\\nThis method is available on the `onForged` API parameter.\\n\\nIts type is defined as:\\n\\n```ts\\nexport enum ActionFunction {\\n  UnBundle = 'unbundle',\\n  TailwindCSS = 'tailwindcss',\\n  BFF = 'bff',\\n  MicroFrontend = 'micro_frontend',\\n  I18n = 'i18n',\\n  Test = 'test',\\n  E2ETest = 'e2e_test',\\n  Doc = 'doc',\\n  Storybook = 'storybook',\\n  RuntimeApi = 'runtimeApi',\\n  SSG = 'ssg',\\n  Polyfill = 'polyfill',\\n  Deploy = 'deploy',\\n}\\nexport type ForgedAPI = {\\n  enableFunc: (\\n    func: ActionFunction,\\n    params?: Record<string, unknown> | undefined,\\n  ) => Promise<void>;\\n  ...\\n};\\n```\\n\\n## func\\n\\nThe function name is passed according to the functions supported by the different engineering solutions.\\n\\n## params\\n\\nFor other parameters when the function is enabled, please refer to[MWA New Command](/guides/topic-detail/generator/config/mwa)和[Module New Command](/guides/topic-detail/generator/config/module).\\n\"";
+const title = `createElement`;
+const content = "\"---\\nsidebar_position: 2\\n---\\n\\n# createElement\\n\\nCreate engineering elements that only support application engineering solutions.\\n\\nThis method is available on the `onForged` API parameter.\\n\\nIts type is defined as:\\n\\n```ts\\nexport enum ActionElement {\\n  Entry = 'entry',\\n  Server = 'server',\\n}\\nexport type ForgedAPI = {\\n  createElement: (\\n    element: ActionElement,\\n    params: Record<string, unknown>,\\n  ) => Promise<void>;\\n  ...\\n};\\n```\\n\\n## element\\n\\nProject element type, supports entry and server.\\n\\n## params\\n\\nFor other parameters of creating elements, please refer to[App New Command](/guides/topic-detail/generator/config/app).\\n\"";
 function _createMdxContent(props) {
   const _components = Object.assign({
     h1: "h1",
@@ -43,15 +43,15 @@ function _createMdxContent(props) {
   }, props.components);
   return (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
     children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.h1, {
-      id: "enablefunc",
+      id: "createelement",
       children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.a, {
         className: "header-anchor",
         "aria-hidden": "true",
-        href: "#enablefunc",
+        href: "#createelement",
         children: "#"
-      }), "enableFunc"]
+      }), "createElement"]
     }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.p, {
-      children: "Enable functionality to support application and module engineering scenarios."
+      children: "Create engineering elements that only support application engineering solutions."
     }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.p, {
       children: ["This method is available on the ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
         children: "onForged"
@@ -98,7 +98,7 @@ function _createMdxContent(props) {
                 style: {
                   color: "var(--shiki-token-function)"
                 },
-                children: "ActionFunction"
+                children: "ActionElement"
               }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
                   color: "var(--shiki-color-text)"
@@ -111,7 +111,7 @@ function _createMdxContent(props) {
                 style: {
                   color: "var(--shiki-color-text)"
                 },
-                children: "  UnBundle "
+                children: "  Entry "
               }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
                   color: "var(--shiki-token-keyword)"
@@ -126,7 +126,7 @@ function _createMdxContent(props) {
                 style: {
                   color: "var(--shiki-token-string-expression)"
                 },
-                children: "'unbundle'"
+                children: "'entry'"
               }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
                   color: "var(--shiki-token-punctuation)"
@@ -139,7 +139,7 @@ function _createMdxContent(props) {
                 style: {
                   color: "var(--shiki-color-text)"
                 },
-                children: "  TailwindCSS "
+                children: "  Server "
               }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
                   color: "var(--shiki-token-keyword)"
@@ -154,315 +154,7 @@ function _createMdxContent(props) {
                 style: {
                   color: "var(--shiki-token-string-expression)"
                 },
-                children: "'tailwindcss'"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "var(--shiki-token-punctuation)"
-                },
-                children: ","
-              })]
-            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
-              className: "line",
-              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "var(--shiki-color-text)"
-                },
-                children: "  BFF "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "var(--shiki-token-keyword)"
-                },
-                children: "="
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "var(--shiki-color-text)"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "var(--shiki-token-string-expression)"
-                },
-                children: "'bff'"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "var(--shiki-token-punctuation)"
-                },
-                children: ","
-              })]
-            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
-              className: "line",
-              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "var(--shiki-color-text)"
-                },
-                children: "  MicroFrontend "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "var(--shiki-token-keyword)"
-                },
-                children: "="
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "var(--shiki-color-text)"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "var(--shiki-token-string-expression)"
-                },
-                children: "'micro_frontend'"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "var(--shiki-token-punctuation)"
-                },
-                children: ","
-              })]
-            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
-              className: "line",
-              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "var(--shiki-color-text)"
-                },
-                children: "  I18n "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "var(--shiki-token-keyword)"
-                },
-                children: "="
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "var(--shiki-color-text)"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "var(--shiki-token-string-expression)"
-                },
-                children: "'i18n'"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "var(--shiki-token-punctuation)"
-                },
-                children: ","
-              })]
-            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
-              className: "line",
-              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "var(--shiki-color-text)"
-                },
-                children: "  Test "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "var(--shiki-token-keyword)"
-                },
-                children: "="
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "var(--shiki-color-text)"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "var(--shiki-token-string-expression)"
-                },
-                children: "'test'"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "var(--shiki-token-punctuation)"
-                },
-                children: ","
-              })]
-            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
-              className: "line",
-              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "var(--shiki-color-text)"
-                },
-                children: "  E2ETest "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "var(--shiki-token-keyword)"
-                },
-                children: "="
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "var(--shiki-color-text)"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "var(--shiki-token-string-expression)"
-                },
-                children: "'e2e_test'"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "var(--shiki-token-punctuation)"
-                },
-                children: ","
-              })]
-            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
-              className: "line",
-              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "var(--shiki-color-text)"
-                },
-                children: "  Doc "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "var(--shiki-token-keyword)"
-                },
-                children: "="
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "var(--shiki-color-text)"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "var(--shiki-token-string-expression)"
-                },
-                children: "'doc'"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "var(--shiki-token-punctuation)"
-                },
-                children: ","
-              })]
-            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
-              className: "line",
-              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "var(--shiki-color-text)"
-                },
-                children: "  Storybook "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "var(--shiki-token-keyword)"
-                },
-                children: "="
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "var(--shiki-color-text)"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "var(--shiki-token-string-expression)"
-                },
-                children: "'storybook'"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "var(--shiki-token-punctuation)"
-                },
-                children: ","
-              })]
-            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
-              className: "line",
-              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "var(--shiki-color-text)"
-                },
-                children: "  RuntimeApi "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "var(--shiki-token-keyword)"
-                },
-                children: "="
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "var(--shiki-color-text)"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "var(--shiki-token-string-expression)"
-                },
-                children: "'runtimeApi'"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "var(--shiki-token-punctuation)"
-                },
-                children: ","
-              })]
-            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
-              className: "line",
-              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "var(--shiki-color-text)"
-                },
-                children: "  SSG "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "var(--shiki-token-keyword)"
-                },
-                children: "="
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "var(--shiki-color-text)"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "var(--shiki-token-string-expression)"
-                },
-                children: "'ssg'"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "var(--shiki-token-punctuation)"
-                },
-                children: ","
-              })]
-            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
-              className: "line",
-              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "var(--shiki-color-text)"
-                },
-                children: "  Polyfill "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "var(--shiki-token-keyword)"
-                },
-                children: "="
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "var(--shiki-color-text)"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "var(--shiki-token-string-expression)"
-                },
-                children: "'polyfill'"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "var(--shiki-token-punctuation)"
-                },
-                children: ","
-              })]
-            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
-              className: "line",
-              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "var(--shiki-color-text)"
-                },
-                children: "  Deploy "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "var(--shiki-token-keyword)"
-                },
-                children: "="
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "var(--shiki-color-text)"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "var(--shiki-token-string-expression)"
-                },
-                children: "'deploy'"
+                children: "'server'"
               }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
                   color: "var(--shiki-token-punctuation)"
@@ -531,7 +223,7 @@ function _createMdxContent(props) {
                 style: {
                   color: "var(--shiki-token-function)"
                 },
-                children: "enableFunc"
+                children: "createElement"
               }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
                   color: "var(--shiki-token-keyword)"
@@ -549,7 +241,7 @@ function _createMdxContent(props) {
                 style: {
                   color: "var(--shiki-color-text)"
                 },
-                children: "    func"
+                children: "    element"
               }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
                   color: "var(--shiki-token-keyword)"
@@ -564,7 +256,7 @@ function _createMdxContent(props) {
                 style: {
                   color: "var(--shiki-token-function)"
                 },
-                children: "ActionFunction"
+                children: "ActionElement"
               }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
                   color: "var(--shiki-token-punctuation)"
@@ -582,7 +274,7 @@ function _createMdxContent(props) {
                 style: {
                   color: "var(--shiki-token-keyword)"
                 },
-                children: "?:"
+                children: ":"
               }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
                   color: "var(--shiki-color-text)"
@@ -622,22 +314,7 @@ function _createMdxContent(props) {
                 style: {
                   color: "var(--shiki-color-text)"
                 },
-                children: "> "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "var(--shiki-token-keyword)"
-                },
-                children: "|"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "var(--shiki-color-text)"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "var(--shiki-token-constant)"
-                },
-                children: "undefined"
+                children: ">"
               }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
                   color: "var(--shiki-token-punctuation)"
@@ -710,15 +387,15 @@ function _createMdxContent(props) {
         })]
       })]
     }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.h2, {
-      id: "func",
+      id: "element",
       children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.a, {
         className: "header-anchor",
         "aria-hidden": "true",
-        href: "#func",
+        href: "#element",
         children: "#"
-      }), "func"]
+      }), "element"]
     }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.p, {
-      children: "The function name is passed according to the functions supported by the different engineering solutions."
+      children: "Project element type, supports entry and server."
     }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.h2, {
       id: "params",
       children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.a, {
@@ -728,12 +405,9 @@ function _createMdxContent(props) {
         children: "#"
       }), "params"]
     }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.p, {
-      children: ["For other parameters when the function is enabled, please refer to", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.a, {
-        href: "/v2/en/guides/topic-detail/generator/config/mwa.html",
-        children: "MWA New Command"
-      }), "和", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.a, {
-        href: "/v2/en/guides/topic-detail/generator/config/module.html",
-        children: "Module New Command"
+      children: ["For other parameters of creating elements, please refer to", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.a, {
+        href: "/v2/en/guides/topic-detail/generator/config/app.html",
+        children: "App New Command"
       }), "."]
     })]
   });

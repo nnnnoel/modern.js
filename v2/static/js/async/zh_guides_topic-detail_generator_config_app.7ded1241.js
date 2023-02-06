@@ -1,7 +1,7 @@
 "use strict";
-(self["webpackChunk_modern_js_main_doc_website"] = self["webpackChunk_modern_js_main_doc_website"] || []).push([[74771],{
+(self["webpackChunk_modern_js_main_doc_website"] = self["webpackChunk_modern_js_main_doc_website"] || []).push([[1986],{
 
-/***/ 1520:
+/***/ 4658:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -19,12 +19,12 @@ const frontmatter = {
   "sidebar_position": 2
 };
 const toc = [{
-  "id": "project-creation",
-  "text": "Project creation",
+  "id": "项目创建",
+  "text": "项目创建",
   "depth": 2
 }, {
-  "id": "new-command",
-  "text": "New Command",
+  "id": "new-命令",
+  "text": "New 命令",
   "depth": 2
 }, {
   "id": "actiontype",
@@ -43,12 +43,12 @@ const toc = [{
   "text": "function",
   "depth": 3
 }, {
-  "id": "bff-parameters",
-  "text": "BFF parameters",
+  "id": "bff-相关参数",
+  "text": "BFF 相关参数",
   "depth": 4
 }];
-const title = `MWA`;
-const content = "\"---\\nsidebar_position: 2\\n---\\n\\n# MWA\\n\\n## Project creation\\n\\nWhen creating a project, the configuration used by `@modern-js/create` when using the `--config` parameter, and the configuration used when modifying and adding input in the generator plugin.\\n\\nThe application project creation parameters are [Generator Configuration](/guides/topic-detail/generator/config/common).\\n\\n## New Command\\n\\nThe new command configuration in the application project can be used through the `--config` parameter configuration when executing the new command, or when creating elements and enabling functions in the generator plugin.\\n\\n### actionType\\n\\nThe action type (actionType) of the New command , the type supports two types:\\n\\n- element: reate engineering elements\\n\\n- function: enable function\\n\\n:::info\\nThis parameter is not required when using the enable function and creating elements in the generator plugin, it is automatically added in the generator plugin.\\n\\n:::\\n\\n### element\\n\\nElement name (element), supports two options:\\n\\n- Create an application entry(entry)\\n\\n- Create customized server dir(server)\\n\\nThe entry also need to be used in conjunction with the specific configuration, which is described as follows:\\n\\n#### name\\n\\nEntry name (name), character `string` type.\\n\\n### function\\n\\nOptional function name (function), supports the following options:\\n\\n- Tailwind CSS(tailwindcss)\\n\\n- BFF(bff)\\n\\n- SSG(ssg)\\n\\n- Micro Frontend(micro_frontend)\\n\\n- Unit Test / Integration Test(test)\\n\\n- Storybook(mwa_storybook)\\n\\n- UA-based Polyfill Feature'(polyfill)\\n\\n- Global Proxy(proxy)\\n\\n`bff` also need to be used in conjunction with configuration, as described below:\\n\\n#### BFF parameters\\n\\n##### bffType\\n\\nBFF type (bffType), supports two options:\\n\\n- Function mode(function)\\n\\n- Framework mode(framework)\\n\\n##### framework\\n\\nBFF runtime framework (framework)，supports two options：\\n\\n- Express(express)\\n\\n- Koa(koa)\\n\"";
+const title = `Web 应用`;
+const content = "\"---\\nsidebar_position: 2\\n---\\n\\n# Web 应用\\n\\n## 项目创建\\n\\n创建项目时配置，`@modern-js/create` 使用 `--config` 参数时使用的配置，也是在生成器插件中修改和添加 input 时使用的配置。\\n\\n应用项目创建参数都为[通用配置](/guides/topic-detail/generator/config/common)。\\n\\n## New 命令\\n\\n应用项目中 new 命令配置， 可以在执行 new 命令时通过 `--config` 参数配置，也可在生成器插件中创建元素和启用功能时使用。\\n\\n### actionType\\n\\nNew 命令的操作类型(actionType)，类型支持两种：\\n\\n- element 创建工程元素\\n\\n- function 启用功能\\n\\n:::info\\n在生成器插件中使用启用功能和创建元素时不需要该参数，生成器插件中自动添加该参数。\\n\\n:::\\n\\n### element\\n\\n元素名称(element)，支持两个选项：\\n\\n- 创建应用入口(entry)\\n\\n- 新建自定义 Web Serve 源码目录(server)\\n\\n入口还需要配置具体的配合使用，介绍如下：\\n\\n#### name\\n\\n入口名称(name), 字符串类型。\\n\\n### function\\n\\n可选功能名称(function)，支持如下选项:\\n\\n- Tailwind CSS(tailwindcss)\\n\\n- BFF(bff)\\n\\n- SSG(ssg)\\n\\n- 微前端(micro_frontend)\\n\\n- 单元测试(test)\\n\\n- Storybook(mwa_storybook)\\n\\n- 启用「基于 UA 的 Polyfill」功能(polyfill)\\n\\n- 启用「全局代理」(proxy)\\n\\n`bff` 和还需要配置具体的配合使用，介绍如下：\\n\\n#### BFF 相关参数\\n\\n##### bffType\\n\\nBFF 类型(bffType)，支持两个选项：\\n\\n- 函数模式(function)\\n\\n- 框架模式(framework)\\n\\n##### framework\\n\\nBFF 运行时框架(framework)，支持两个选项：\\n\\n- Express(express)\\n\\n- Koa(koa)\\n\"";
 function _createMdxContent(props) {
   const _components = Object.assign({
     h1: "h1",
@@ -65,44 +65,44 @@ function _createMdxContent(props) {
   }, props.components);
   return (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
     children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.h1, {
-      id: "mwa",
+      id: "web-应用",
       children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.a, {
         className: "header-anchor",
         "aria-hidden": "true",
-        href: "#mwa",
+        href: "#web-应用",
         children: "#"
-      }), "MWA"]
+      }), "Web 应用"]
     }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.h2, {
-      id: "project-creation",
+      id: "项目创建",
       children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.a, {
         className: "header-anchor",
         "aria-hidden": "true",
-        href: "#project-creation",
+        href: "#项目创建",
         children: "#"
-      }), "Project creation"]
+      }), "项目创建"]
     }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.p, {
-      children: ["When creating a project, the configuration used by ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
+      children: ["创建项目时配置，", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
         children: "@modern-js/create"
-      }), " when using the ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
+      }), " 使用 ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
         children: "--config"
-      }), " parameter, and the configuration used when modifying and adding input in the generator plugin."]
+      }), " 参数时使用的配置，也是在生成器插件中修改和添加 input 时使用的配置。"]
     }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.p, {
-      children: ["The application project creation parameters are ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.a, {
-        href: "/v2/en/guides/topic-detail/generator/config/common.html",
-        children: "Generator Configuration"
-      }), "."]
+      children: ["应用项目创建参数都为", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.a, {
+        href: "/v2/guides/topic-detail/generator/config/common.html",
+        children: "通用配置"
+      }), "。"]
     }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.h2, {
-      id: "new-command",
+      id: "new-命令",
       children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.a, {
         className: "header-anchor",
         "aria-hidden": "true",
-        href: "#new-command",
+        href: "#new-命令",
         children: "#"
-      }), "New Command"]
+      }), "New 命令"]
     }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.p, {
-      children: ["The new command configuration in the application project can be used through the ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
+      children: ["应用项目中 new 命令配置， 可以在执行 new 命令时通过 ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
         children: "--config"
-      }), " parameter configuration when executing the new command, or when creating elements and enabling functions in the generator plugin."]
+      }), " 参数配置，也可在生成器插件中创建元素和启用功能时使用。"]
     }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.h3, {
       id: "actiontype",
       children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.a, {
@@ -112,15 +112,15 @@ function _createMdxContent(props) {
         children: "#"
       }), "actionType"]
     }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.p, {
-      children: "The action type (actionType) of the New command , the type supports two types:"
+      children: "New 命令的操作类型(actionType)，类型支持两种："
     }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.ul, {
       children: ["\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.li, {
         children: ["\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.p, {
-          children: "element: reate engineering elements"
+          children: "element 创建工程元素"
         }), "\n"]
       }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.li, {
         children: ["\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.p, {
-          children: "function: enable function"
+          children: "function 启用功能"
         }), "\n"]
       }), "\n"]
     }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.div, {
@@ -131,7 +131,7 @@ function _createMdxContent(props) {
       }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.div, {
         className: "modern-directive-content",
         children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.p, {
-          children: "\nThis parameter is not required when using the enable function and creating elements in the generator plugin, it is automatically added in the generator plugin."
+          children: "\n在生成器插件中使用启用功能和创建元素时不需要该参数，生成器插件中自动添加该参数。"
         })
       })]
     }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.h3, {
@@ -143,19 +143,19 @@ function _createMdxContent(props) {
         children: "#"
       }), "element"]
     }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.p, {
-      children: "Element name (element), supports two options:"
+      children: "元素名称(element)，支持两个选项："
     }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.ul, {
       children: ["\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.li, {
         children: ["\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.p, {
-          children: "Create an application entry(entry)"
+          children: "创建应用入口(entry)"
         }), "\n"]
       }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.li, {
         children: ["\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.p, {
-          children: "Create customized server dir(server)"
+          children: "新建自定义 Web Serve 源码目录(server)"
         }), "\n"]
       }), "\n"]
     }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.p, {
-      children: "The entry also need to be used in conjunction with the specific configuration, which is described as follows:"
+      children: "入口还需要配置具体的配合使用，介绍如下："
     }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.h4, {
       id: "name",
       children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.a, {
@@ -164,10 +164,8 @@ function _createMdxContent(props) {
         href: "#name",
         children: "#"
       }), "name"]
-    }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.p, {
-      children: ["Entry name (name), character ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
-        children: "string"
-      }), " type."]
+    }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.p, {
+      children: "入口名称(name), 字符串类型。"
     }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.h3, {
       id: "function",
       children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.a, {
@@ -177,7 +175,7 @@ function _createMdxContent(props) {
         children: "#"
       }), "function"]
     }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.p, {
-      children: "Optional function name (function), supports the following options:"
+      children: "可选功能名称(function)，支持如下选项:"
     }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.ul, {
       children: ["\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.li, {
         children: ["\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.p, {
@@ -193,11 +191,11 @@ function _createMdxContent(props) {
         }), "\n"]
       }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.li, {
         children: ["\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.p, {
-          children: "Micro Frontend(micro_frontend)"
+          children: "微前端(micro_frontend)"
         }), "\n"]
       }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.li, {
         children: ["\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.p, {
-          children: "Unit Test / Integration Test(test)"
+          children: "单元测试(test)"
         }), "\n"]
       }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.li, {
         children: ["\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.p, {
@@ -205,25 +203,25 @@ function _createMdxContent(props) {
         }), "\n"]
       }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.li, {
         children: ["\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.p, {
-          children: "UA-based Polyfill Feature'(polyfill)"
+          children: "启用「基于 UA 的 Polyfill」功能(polyfill)"
         }), "\n"]
       }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.li, {
         children: ["\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.p, {
-          children: "Global Proxy(proxy)"
+          children: "启用「全局代理」(proxy)"
         }), "\n"]
       }), "\n"]
     }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.p, {
       children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
         children: "bff"
-      }), " also need to be used in conjunction with configuration, as described below:"]
+      }), " 和还需要配置具体的配合使用，介绍如下："]
     }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.h4, {
-      id: "bff-parameters",
+      id: "bff-相关参数",
       children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.a, {
         className: "header-anchor",
         "aria-hidden": "true",
-        href: "#bff-parameters",
+        href: "#bff-相关参数",
         children: "#"
-      }), "BFF parameters"]
+      }), "BFF 相关参数"]
     }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.h5, {
       id: "bfftype",
       children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.a, {
@@ -233,15 +231,15 @@ function _createMdxContent(props) {
         children: "#"
       }), "bffType"]
     }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.p, {
-      children: "BFF type (bffType), supports two options:"
+      children: "BFF 类型(bffType)，支持两个选项："
     }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.ul, {
       children: ["\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.li, {
         children: ["\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.p, {
-          children: "Function mode(function)"
+          children: "函数模式(function)"
         }), "\n"]
       }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.li, {
         children: ["\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.p, {
-          children: "Framework mode(framework)"
+          children: "框架模式(framework)"
         }), "\n"]
       }), "\n"]
     }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.h5, {
@@ -253,7 +251,7 @@ function _createMdxContent(props) {
         children: "#"
       }), "framework"]
     }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.p, {
-      children: "BFF runtime framework (framework)，supports two options："
+      children: "BFF 运行时框架(framework)，支持两个选项："
     }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.ul, {
       children: ["\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.li, {
         children: ["\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.p, {
