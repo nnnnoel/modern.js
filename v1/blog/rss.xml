@@ -2,14 +2,14 @@
 <rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/">
     <channel>
         <title>Modern.js - 现代 Web 工程体系 Blog</title>
-        <link>https://modernjs.dev/v1/v1/blog</link>
+        <link>https://modernjs.dev/v1/blog</link>
         <description>Modern.js - 现代 Web 工程体系 Blog</description>
         <lastBuildDate>Tue, 01 Nov 2022 10:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <item>
             <title><![CDATA[2022-09 ~ 2022-10 主要更新]]></title>
-            <link>https://modernjs.dev/v1/v1/blog/2022-09~2022-10</link>
+            <link>https://modernjs.dev/v1/blog/2022-09~2022-10</link>
             <guid>2022-09~2022-10</guid>
             <pubDate>Tue, 01 Nov 2022 10:00:00 GMT</pubDate>
             <description><![CDATA[Modern.js 9-10 月最新版本为 v1.21.0，本双月的主要更新有：]]></description>
@@ -19,7 +19,7 @@
         </item>
         <item>
             <title><![CDATA[2022-07 ~ 2022-08 主要更新]]></title>
-            <link>https://modernjs.dev/v1/v1/blog/2022-07~2022-08</link>
+            <link>https://modernjs.dev/v1/blog/2022-07~2022-08</link>
             <guid>2022-07~2022-08</guid>
             <pubDate>Mon, 05 Sep 2022 10:00:00 GMT</pubDate>
             <description><![CDATA[Modern.js 7-8 月最新版本为 v1.17.0，本双月的主要更新有：]]></description>
