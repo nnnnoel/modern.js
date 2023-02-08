@@ -13,7 +13,7 @@
 
 const frontmatter = (/* unused pure expression or super */ null && (undefined));
 const toc = (/* unused pure expression or super */ null && ([]));
-const content = "\"```js title=\\\"modern.config.ts\\\"\\nimport appTools, { defineConfig } from '@modern-js/app-tools';\\nimport garfishPlugin from '@modern-js/plugin-garfish';\\n\\nexport default defineConfig({\\n  runtime: {\\n    router: true,\\n    state: true,\\n    masterApp: true,\\n  },\\n  plugins: [appTools(), garfishPlugin()],\\n});\\n```\\n\"";
+const content = "\"```js title=\\\"modern.config.ts\\\"\\nimport appTools, { defineConfig } from '@modern-js/app-tools';\\nimport garfishPlugin from '@modern-js/plugin-garfish';\\n\\nexport default defineConfig({\\n  runtime: {\\n    router: true,\\n    masterApp: {\\n      apps: [{\\n        name: 'SubConvention',\\n        entry: 'http://localhost:3002',\\n        // activeWhen: '/SubConvention'\\n      }, {\\n        name: 'SubCustom',\\n        entry: 'http://localhost:3003'\\n        // activeWhen: '/SubConvention'\\n      }]\\n    },\\n  },\\n  plugins: [appTools(), garfishPlugin()],\\n});\\n\\n```\\n\"";
 function _createMdxContent(props) {
   const _components = Object.assign({
     div: "div",
@@ -200,7 +200,43 @@ function _createMdxContent(props) {
               style: {
                 color: "var(--shiki-color-text)"
               },
-              children: "    state"
+              children: "    masterApp"
+            }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+              style: {
+                color: "var(--shiki-token-keyword)"
+              },
+              children: ":"
+            }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+              style: {
+                color: "var(--shiki-color-text)"
+              },
+              children: " {"
+            })]
+          }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
+            className: "line",
+            children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+              style: {
+                color: "var(--shiki-color-text)"
+              },
+              children: "      apps"
+            }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+              style: {
+                color: "var(--shiki-token-keyword)"
+              },
+              children: ":"
+            }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+              style: {
+                color: "var(--shiki-color-text)"
+              },
+              children: " [{"
+            })]
+          }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
+            className: "line",
+            children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+              style: {
+                color: "var(--shiki-color-text)"
+              },
+              children: "        name"
             }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
               style: {
                 color: "var(--shiki-token-keyword)"
@@ -213,9 +249,9 @@ function _createMdxContent(props) {
               children: " "
             }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
               style: {
-                color: "var(--shiki-token-constant)"
+                color: "var(--shiki-token-string-expression)"
               },
-              children: "true"
+              children: "'SubConvention'"
             }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
               style: {
                 color: "var(--shiki-token-punctuation)"
@@ -228,7 +264,7 @@ function _createMdxContent(props) {
               style: {
                 color: "var(--shiki-color-text)"
               },
-              children: "    masterApp"
+              children: "        entry"
             }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
               style: {
                 color: "var(--shiki-token-keyword)"
@@ -241,9 +277,125 @@ function _createMdxContent(props) {
               children: " "
             }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
               style: {
-                color: "var(--shiki-token-constant)"
+                color: "var(--shiki-token-string-expression)"
               },
-              children: "true"
+              children: "'http://localhost:3002'"
+            }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+              style: {
+                color: "var(--shiki-token-punctuation)"
+              },
+              children: ","
+            })]
+          }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
+            className: "line",
+            children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+              style: {
+                color: "var(--shiki-color-text)"
+              },
+              children: "        "
+            }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+              style: {
+                color: "var(--shiki-token-comment)"
+              },
+              children: "// activeWhen: '/SubConvention'"
+            })]
+          }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
+            className: "line",
+            children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+              style: {
+                color: "var(--shiki-color-text)"
+              },
+              children: "      }"
+            }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+              style: {
+                color: "var(--shiki-token-punctuation)"
+              },
+              children: ","
+            }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+              style: {
+                color: "var(--shiki-color-text)"
+              },
+              children: " {"
+            })]
+          }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
+            className: "line",
+            children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+              style: {
+                color: "var(--shiki-color-text)"
+              },
+              children: "        name"
+            }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+              style: {
+                color: "var(--shiki-token-keyword)"
+              },
+              children: ":"
+            }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+              style: {
+                color: "var(--shiki-color-text)"
+              },
+              children: " "
+            }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+              style: {
+                color: "var(--shiki-token-string-expression)"
+              },
+              children: "'SubCustom'"
+            }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+              style: {
+                color: "var(--shiki-token-punctuation)"
+              },
+              children: ","
+            })]
+          }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
+            className: "line",
+            children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+              style: {
+                color: "var(--shiki-color-text)"
+              },
+              children: "        entry"
+            }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+              style: {
+                color: "var(--shiki-token-keyword)"
+              },
+              children: ":"
+            }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+              style: {
+                color: "var(--shiki-color-text)"
+              },
+              children: " "
+            }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+              style: {
+                color: "var(--shiki-token-string-expression)"
+              },
+              children: "'http://localhost:3003'"
+            })]
+          }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
+            className: "line",
+            children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+              style: {
+                color: "var(--shiki-color-text)"
+              },
+              children: "        "
+            }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+              style: {
+                color: "var(--shiki-token-comment)"
+              },
+              children: "// activeWhen: '/SubConvention'"
+            })]
+          }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+            className: "line",
+            children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+              style: {
+                color: "var(--shiki-color-text)"
+              },
+              children: "      }]"
+            })
+          }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
+            className: "line",
+            children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+              style: {
+                color: "var(--shiki-color-text)"
+              },
+              children: "    }"
             }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
               style: {
                 color: "var(--shiki-token-punctuation)"
@@ -324,6 +476,8 @@ function _createMdxContent(props) {
               },
               children: "});"
             })
+          }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+            className: "line"
           }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
             className: "line"
           })]

@@ -69,7 +69,7 @@ const toc = [{
   "depth": 4
 }];
 const title = `开发主应用`;
-const content = "\"---\\nsidebar_position: 3\\ntitle: 开发主应用\\n---\\n# 开发主应用\\n\\n在上一章 [体验微前端](./c02-development.md) 通过一个示例演示了如何创建和配置微前端子应用，通过本章你可以进一步了解如何开发主应用，以及它的常见配置。\\n\\n在通过 `@modern-js/create` 命令创建应用工程后，可以在项目中执行 `pnpm run new`（实际执行了 `modern new` 命令），在选择了「微前端」模式后，会安装微前端依赖依赖，只需手动注册插件即可。\\n\\nimport EnableMicroFrontend from \\\"@site-docs/components/enable-micro-frontend\\\";\\n\\n<EnableMicroFrontend />\\n\\n## 注册子应用信息\\n\\n当在 `masterApp` 配置上提供了信息后，将会认为该应用为主应用，目前存在两种子应用信息的配置方式，这两种方式分别应用于不同的场景。\\n\\n### 直接注册子应用信息\\n\\n可以直接通过配置注册子应用信息：\\n\\n:::tip 提示\\n可以通过 API [defineConfig](/apis/app/runtime/app/define-config) 在运行时进行配置。\\n当参数为函数时无法被序列化到产物代码，所以在涉及到函数之类的配置时请通过 defineConfig 来进行配置\\n\\n:::\\n\\nimport MicroRuntimeConfig from \\\"@site-docs/components/micro-runtime-config\\\";\\n\\n<MicroRuntimeConfig />\\n\\n### 自定义远程应用列表\\n\\n通过该函数可以拉取远程的子应用列表，并将其注册至运行时框架：\\n\\n```ts title=\\\"App.tsx\\\"\\ndefineConfig(App, {\\n  masterApp: {\\n    manifest: {\\n      getAppList: async () => {\\n        // 可以从其他远程接口获取\\n        return [\\n          {\\n            name: 'DashBoard',\\n            entry: 'http://127.0.0.1:8081/',\\n          },\\n          {\\n            name: 'TableList',\\n            entry: 'http://localhost:8082',\\n          },\\n        ];\\n      },\\n    },\\n  },\\n});\\n```\\n\\n## 渲染子应用\\n\\n在微前端中分为两种加载子应用的方式：\\n\\n1. **子应用组件** 获取到每个子应用的组件，之后就可以像使用普通的 `React` 组件一样渲染微前端的子应用。\\n2. **集中式路由** 通过集中式的路由配置，自动根据当前页面 `pathname` 激活渲染对应的子应用。\\n\\n### 子应用组件\\n\\n开发者使用 `useModuleApps` 方法可以获取到各个子应用的组件。\\n\\n再通过 `router` 组件的结合运用，开发者可以自控式的根据不同的路由渲染不同的子应用。\\n\\n假设我们的子应用列表配置如下：\\n\\n<EnableMicroFrontend />\\n\\n编辑主应用 `App.tsx` 文件如下：\\n\\n```tsx title=主应用：App.tsx\\nimport { useModuleApps } from '@modern-js/plugin-garfish/runtime';\\nimport { Route, Switch } from '@modern-js/runtime/router';\\n\\nfunction App() {\\n  const { DashBoard, TableList } = useModuleApps();\\n\\n  return (\\n    <div>\\n      <Route path=\\\"/dashboard\\\">\\n        <DashBoard\\n          loadable={{\\n            loading: ({ pastDelay, error }: any) => {\\n              if (error) {\\n                return <div>error: {error?.message}</div>;\\n              } else if (pastDelay) {\\n                return <div>loading</div>;\\n              } else {\\n                return null;\\n              }\\n            },\\n          }}\\n        />\\n      </Route>\\n      <Route path=\\\"/table\\\">\\n        <TableList />\\n      </Route>\\n    </div>\\n  );\\n}\\n```\\n\\n这里通过 `Route` 组件自定义了 **DashBoard** 的激活路由为 **/dashboard**， **TableList** 的激活路由为 **/table**。\\n\\n### 集中式路由\\n\\n**集中式路由** 是将子应用的激活路由集中配置的方式。我们给子应用列表信息添加 `activeWhen` 字段来启用 **集中式路由**。\\n\\n<MicroRuntimeConfig />\\n\\n然后在主应用中使用 `useModuleApp` 方法获取 `MApp` 组件, 并在主应用渲染 `MApp`。\\n\\n```tsx title=主应用：App.tsx\\nimport { useModuleApp } from '@modern-js/plugin-runtime';\\n\\nfunction App() {\\n  const { MApp } = useModuleApps();\\n\\n  return (\\n    <div>\\n      <MApp />\\n    </div>\\n  );\\n}\\n```\\n\\n这样启动应用后，访问 `/dashboard` 路由，会渲染 `Dashboard` 子应用，访问 `/table` 路由，会渲染 `TableList` 子应用。\\n\\n### 两种模式混用\\n\\n当然 **子应用组件** 和 **集中式路由** 是可以混合使用的。\\n\\n- 一部分子应用作为 **子应用组件** 激活，另外一部分作为 **集中式路由** 激活。\\n- 一部分子应用既可以作为 **集中式路由** 激活，也可以作为 **子应用组件** 激活。\\n\\n### 添加 loading\\n\\n通过配置 `loadable` 配置，可以为「集中式路由」、「子应用」添加 loading 组件，并可以考虑错误、超时、闪烁等情况的出现，从而为用户提供更好的用户体验。该功能的设计与实现参考至 [react-loadable](https://github.com/jamiebuilds/react-loadable)，基本功能较为相似。\\n\\n```tsx\\nfunction Loading() {\\n  return <div>Loading...</div>;\\n}\\n\\nfunction App(){\\n  return <>\\n    <DashBoard\\n      loadable={{\\n        loading: Loading,\\n      }}\\n    />\\n  <>\\n}\\n```\\n\\n#### 增加错误状态\\n\\n当微前端子应用加载失败或渲染失败时，`loading component` 将会接收 `error` 参数（若没有错误时 error 是 null）\\n\\n```tsx\\nfunction Loading({ error }) {\\n  if (error) {\\n    return <div>Error msg {error?.message}</div>;\\n  } else {\\n    return <div>Loading...</div>;\\n  }\\n}\\n```\\n\\n#### 避免 loading 闪退\\n\\n有时 loading 组件的显示时间可能小于 200ms，这个时候会出现 loading 组件闪退的情况。许多用户研究证明，loading 闪退的情况会导致用户感知加载内容的耗时比实际耗时更长，在 loading 小于 200ms 时，不展示内容，用户会认为它更快。\\n\\n所以 loading 组件还提供了 `pastDelay` 参数，超过设置的延迟展示时才会为 true，可以通过 `delay` 参数设置延迟的时长\\n\\n```tsx\\nfunction Loading({ error, pastDelay }) {\\n  if (error) {\\n    return <div>Error! {error?.message}</div>;\\n  } else if (pastDelay) {\\n    return <div>Loading...</div>;\\n  } else {\\n    return null;\\n  }\\n}\\n```\\n\\n`delay` 的默认值为 `200ms`，可以通过 `loadable` 中的 `delay` 来设置延迟展示的时间\\n\\n```tsx\\n\\nfunction App(){\\n  return <>\\n    <DashBoard\\n      loadable={{\\n        loading: Loading,\\n        delay: 300 // 0.3 seconds\\n      }}\\n    />\\n  <>\\n}\\n```\\n\\n#### 增加超时状态\\n\\n有时因为网络的原因，从而导致微前端子应用加载失败，从而导致一直展示 loading 的状态，这对于用户而言非常糟糕，因为他们不知道合适才会获得具体的响应，他们是否需要刷新页面，通过增加超时状态可以很好的解决该问题。\\n\\nloading 组件在超时时会获得 `timeOut` 参数，当微前端应用加载超时时将会获得 `timeOut` 属性值为 true\\n\\n```tsx\\nfunction Loading({ error, timeOut, pastDelay }) {\\n  if (error) {\\n    return <div>Error! {error?.message}</div>;\\n  } else if (timeOut) {\\n    return <div>Loading timed out, please refresh the page... </div>;\\n  } else if (pastDelay) {\\n    return <div>Loading...</div>;\\n  } else {\\n    return null;\\n  }\\n}\\n```\\n\\n超时状态是关闭的，可以通过在 `loadable` 中设置 `timeout` 参数开启\\n\\n```tsx\\n\\nfunction App(){\\n  return <>\\n    <DashBoard\\n      loadable={{\\n        loading: Loading,\\n        timeOut: 10000 // 10s\\n      }}\\n    />\\n  <>\\n}\\n```\\n\"";
+const content = "\"---\\nsidebar_position: 3\\ntitle: 开发主应用\\n---\\n# 开发主应用\\n\\n在上一章 [体验微前端](/guides/topic-detail/micro-frontend/c02-development.md) 通过一个示例演示了如何创建和配置微前端子应用，通过本章你可以进一步了解如何开发主应用，以及它的常见配置。\\n\\n在通过 `@modern-js/create` 命令创建应用工程后，可以在项目中执行 `pnpm run new`（实际执行了 `modern new` 命令），在选择了「微前端」模式后，会安装微前端依赖依赖，只需手动注册插件即可。\\n\\nimport EnableMicroFrontend from \\\"@site-docs/components/enable-micro-frontend\\\";\\n\\n<EnableMicroFrontend />\\n\\n## 注册子应用信息\\n\\n当在 `masterApp` 配置上提供了信息后，将会认为该应用为主应用，目前存在两种子应用信息的配置方式，这两种方式分别应用于不同的场景。\\n\\n### 直接注册子应用信息\\n\\n可以直接通过配置注册子应用信息：\\n\\n:::tip 提示\\n可以通过 API [defineConfig](/apis/app/runtime/app/define-config) 在运行时进行配置。\\n当参数为函数时无法被序列化到产物代码，所以在涉及到函数之类的配置时请通过 defineConfig 来进行配置\\n\\n:::\\n\\nimport MicroRuntimeConfig from \\\"@site-docs/components/micro-runtime-config\\\";\\n\\n<MicroRuntimeConfig />\\n\\n### 自定义远程应用列表\\n\\n通过该函数可以拉取远程的子应用列表，并将其注册至运行时框架：\\n\\n```ts title=\\\"App.tsx\\\"\\ndefineConfig(App, {\\n  masterApp: {\\n    manifest: {\\n      getAppList: async () => {\\n        // 可以从其他远程接口获取\\n        return [{\\n          name: 'SubConvention',\\n          entry: 'http://localhost:3002',\\n          // activeWhen: '/SubConvention'\\n        }, {\\n          name: 'SubCustom',\\n          entry: 'http://localhost:3003'\\n          // activeWhen: '/SubConvention'\\n        }];\\n      },\\n    },\\n  },\\n});\\n```\\n\\n## 渲染子应用\\n\\n在微前端中分为两种加载子应用的方式：\\n\\n1. **子应用组件** 获取到每个子应用的组件，之后就可以像使用普通的 `React` 组件一样渲染微前端的子应用。\\n2. **集中式路由** 通过集中式的路由配置，自动根据当前页面 `pathname` 激活渲染对应的子应用。\\n\\n### 子应用组件\\n\\n开发者使用 `useModuleApps` 方法可以获取到各个子应用的组件。\\n\\n再通过 `router` 组件的结合运用，开发者可以自控式的根据不同的路由渲染不同的子应用。\\n\\n假设我们的子应用列表配置如下：\\n\\n<EnableMicroFrontend />\\n\\n编辑主应用 `App.tsx` 文件如下：\\n\\n```js title=\\\"App.tsx\\\"\\nimport { useModuleApps } from '@modern-js/plugin-garfish/runtime';\\n\\nimport { RouterProvider, Route, createBrowserRouter, createRoutesFromElements, BrowserRouter, Link, Outlet } from '@modern-js/runtime/router';\\n\\nconst AppLayout = () => (\\n  <>\\n    <div><Link to={'/SubConvention'}>加载约定式路由子应用</Link></div>\\n    <div><Link to={'/SubCustom'}>加载自控式路由子应用</Link></div>\\n    <div><Link to={'/'}>卸载子应用</Link></div>\\n    <Outlet />\\n  </>\\n)\\n\\nexport default () => {\\n  const { apps, MApp } = useModuleApps();\\n\\n  // 使用的不是 MApp 组件，需要使用 createBrowserRouter 来创建路由\\n  const router = createBrowserRouter(\\n    createRoutesFromElements(\\n      <Route path=\\\"/\\\" element={<AppLayout />}>\\n        {apps.map(app => {\\n          const { Component } = app;\\n          // 模糊匹配，path 需要写成类似 abc/* 的模式\\n          return (\\n            <Route\\n              key={app.name}\\n              path={`${app.name}/*`}\\n              element={\\n              <Component\\n                loadable={{\\n                  loading: ({ pastDelay, error }: any) => {\\n                    if (error) {\\n                      return <div>error: {error?.message}</div>;\\n                    } else if (pastDelay) {\\n                      return <div>loading</div>;\\n                    } else {\\n                      return null;\\n                    }\\n                  },\\n                }}\\n              />\\n              }\\n            />\\n          )\\n        })}\\n      </Route>\\n    )\\n  );\\n\\n  return (\\n    // 方法一：使用 MApp 自动根据配置的 activeWhen 参数加载子应用(本项目配置在 modern.config.ts 中)\\n    // <BrowserRouter>\\n    //   <MApp />\\n    // </BrowserRouter>\\n\\n    // 方法二：手动写 Route 组件方式加载子应用，方便于需要鉴权等需要前置操作的场景\\n    <>\\n      <RouterProvider router={router} />\\n    </>\\n  );\\n};\\n```\\n\\n这里通过 `Route` 组件自定义了 **SubConvention** 的激活路由为 **/SubConvention**， **SubCustom** 的激活路由为 **/SubCustom**。\\n\\n### 集中式路由\\n\\n**集中式路由** 是将子应用的激活路由集中配置的方式。我们给子应用列表信息添加 `activeWhen` 字段来启用 **集中式路由**。\\n\\n<MicroRuntimeConfig />\\n\\n然后在主应用中使用 `useModuleApp` 方法获取 `MApp` 组件, 并在主应用渲染 `MApp`。\\n\\n```tsx title=主应用：App.tsx\\nimport { useModuleApp } from '@modern-js/plugin-runtime';\\n\\nfunction App() {\\n  const { MApp } = useModuleApps();\\n\\n  return (\\n    <div>\\n      <MApp />\\n    </div>\\n  );\\n}\\n```\\n\\n这样启动应用后，访问 `/SubCustom` 路由，会渲染 `SubCustom` 子应用，访问 `/SubConvention` 路由，会渲染 `SubConvention` 子应用。\\n\\n### 两种模式混用\\n\\n当然 **子应用组件** 和 **集中式路由** 是可以混合使用的。\\n\\n- 一部分子应用作为 **子应用组件** 激活，另外一部分作为 **集中式路由** 激活。\\n- 一部分子应用既可以作为 **集中式路由** 激活，也可以作为 **子应用组件** 激活。\\n\\n### 添加 loading\\n\\n通过配置 `loadable` 配置，可以为「集中式路由」、「子应用」添加 loading 组件，并可以考虑错误、超时、闪烁等情况的出现，从而为用户提供更好的用户体验。该功能的设计与实现参考至 [react-loadable](https://github.com/jamiebuilds/react-loadable)，基本功能较为相似。\\n\\n```tsx\\nfunction Loading() {\\n  return <div>Loading...</div>;\\n}\\n\\nfunction App(){\\n  return <>\\n    <SubCustom\\n      loadable={{\\n        loading: Loading,\\n      }}\\n    />\\n  <>\\n}\\n```\\n\\n#### 增加错误状态\\n\\n当微前端子应用加载失败或渲染失败时，`loading component` 将会接收 `error` 参数（若没有错误时 error 是 null）\\n\\n```tsx\\nfunction Loading({ error }) {\\n  if (error) {\\n    return <div>Error msg {error?.message}</div>;\\n  } else {\\n    return <div>Loading...</div>;\\n  }\\n}\\n```\\n\\n#### 避免 loading 闪退\\n\\n有时 loading 组件的显示时间可能小于 200ms，这个时候会出现 loading 组件闪退的情况。许多用户研究证明，loading 闪退的情况会导致用户感知加载内容的耗时比实际耗时更长，在 loading 小于 200ms 时，不展示内容，用户会认为它更快。\\n\\n所以 loading 组件还提供了 `pastDelay` 参数，超过设置的延迟展示时才会为 true，可以通过 `delay` 参数设置延迟的时长\\n\\n```tsx\\nfunction Loading({ error, pastDelay }) {\\n  if (error) {\\n    return <div>Error! {error?.message}</div>;\\n  } else if (pastDelay) {\\n    return <div>Loading...</div>;\\n  } else {\\n    return null;\\n  }\\n}\\n```\\n\\n`delay` 的默认值为 `200ms`，可以通过 `loadable` 中的 `delay` 来设置延迟展示的时间\\n\\n```tsx\\n\\nfunction App(){\\n  return <>\\n    <SubCustom\\n      loadable={{\\n        loading: Loading,\\n        delay: 300 // 0.3 seconds\\n      }}\\n    />\\n  <>\\n}\\n```\\n\\n#### 增加超时状态\\n\\n有时因为网络的原因，从而导致微前端子应用加载失败，从而导致一直展示 loading 的状态，这对于用户而言非常糟糕，因为他们不知道合适才会获得具体的响应，他们是否需要刷新页面，通过增加超时状态可以很好的解决该问题。\\n\\nloading 组件在超时时会获得 `timeOut` 参数，当微前端应用加载超时时将会获得 `timeOut` 属性值为 true\\n\\n```tsx\\nfunction Loading({ error, timeOut, pastDelay }) {\\n  if (error) {\\n    return <div>Error! {error?.message}</div>;\\n  } else if (timeOut) {\\n    return <div>Loading timed out, please refresh the page... </div>;\\n  } else if (pastDelay) {\\n    return <div>Loading...</div>;\\n  } else {\\n    return null;\\n  }\\n}\\n```\\n\\n超时状态是关闭的，可以通过在 `loadable` 中设置 `timeout` 参数开启\\n\\n```tsx\\n\\nfunction App(){\\n  return <>\\n    <SubCustom\\n      loadable={{\\n        loading: Loading,\\n        timeOut: 10000 // 10s\\n      }}\\n    />\\n  <>\\n}\\n```\\n\"";
 function _createMdxContent(props) {
   const _components = Object.assign({
     h1: "h1",
@@ -99,7 +99,7 @@ function _createMdxContent(props) {
       }), "开发主应用"]
     }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.p, {
       children: ["在上一章 ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.a, {
-        href: "/c02-development.html",
+        href: "/guides/topic-detail/micro-frontend/c02-development.html",
         children: "体验微前端"
       }), " 通过一个示例演示了如何创建和配置微前端子应用，通过本章你可以进一步了解如何开发主应用，以及它的常见配置。"]
     }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.p, {
@@ -302,7 +302,158 @@ function _createMdxContent(props) {
                 style: {
                   color: "var(--shiki-color-text)"
                 },
-                children: " ["
+                children: " [{"
+              })]
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-color-text)"
+                },
+                children: "          name"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-token-keyword)"
+                },
+                children: ":"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-color-text)"
+                },
+                children: " "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-token-string-expression)"
+                },
+                children: "'SubConvention'"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-token-punctuation)"
+                },
+                children: ","
+              })]
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-color-text)"
+                },
+                children: "          entry"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-token-keyword)"
+                },
+                children: ":"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-color-text)"
+                },
+                children: " "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-token-string-expression)"
+                },
+                children: "'http://localhost:3002'"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-token-punctuation)"
+                },
+                children: ","
+              })]
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-color-text)"
+                },
+                children: "          "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-token-comment)"
+                },
+                children: "// activeWhen: '/SubConvention'"
+              })]
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-color-text)"
+                },
+                children: "        }"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-token-punctuation)"
+                },
+                children: ","
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-color-text)"
+                },
+                children: " {"
+              })]
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-color-text)"
+                },
+                children: "          name"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-token-keyword)"
+                },
+                children: ":"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-color-text)"
+                },
+                children: " "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-token-string-expression)"
+                },
+                children: "'SubCustom'"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-token-punctuation)"
+                },
+                children: ","
+              })]
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-color-text)"
+                },
+                children: "          entry"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-token-keyword)"
+                },
+                children: ":"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-color-text)"
+                },
+                children: " "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-token-string-expression)"
+                },
+                children: "'http://localhost:3003'"
+              })]
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-color-text)"
+                },
+                children: "          "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-token-comment)"
+                },
+                children: "// activeWhen: '/SubConvention'"
               })]
             }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
               className: "line",
@@ -310,161 +461,7 @@ function _createMdxContent(props) {
                 style: {
                   color: "var(--shiki-color-text)"
                 },
-                children: "          {"
-              })
-            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
-              className: "line",
-              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "var(--shiki-color-text)"
-                },
-                children: "            name"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "var(--shiki-token-keyword)"
-                },
-                children: ":"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "var(--shiki-color-text)"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "var(--shiki-token-string-expression)"
-                },
-                children: "'DashBoard'"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "var(--shiki-token-punctuation)"
-                },
-                children: ","
-              })]
-            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
-              className: "line",
-              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "var(--shiki-color-text)"
-                },
-                children: "            entry"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "var(--shiki-token-keyword)"
-                },
-                children: ":"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "var(--shiki-color-text)"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "var(--shiki-token-string-expression)"
-                },
-                children: "'http://127.0.0.1:8081/'"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "var(--shiki-token-punctuation)"
-                },
-                children: ","
-              })]
-            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
-              className: "line",
-              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "var(--shiki-color-text)"
-                },
-                children: "          }"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "var(--shiki-token-punctuation)"
-                },
-                children: ","
-              })]
-            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-              className: "line",
-              children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "var(--shiki-color-text)"
-                },
-                children: "          {"
-              })
-            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
-              className: "line",
-              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "var(--shiki-color-text)"
-                },
-                children: "            name"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "var(--shiki-token-keyword)"
-                },
-                children: ":"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "var(--shiki-color-text)"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "var(--shiki-token-string-expression)"
-                },
-                children: "'TableList'"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "var(--shiki-token-punctuation)"
-                },
-                children: ","
-              })]
-            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
-              className: "line",
-              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "var(--shiki-color-text)"
-                },
-                children: "            entry"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "var(--shiki-token-keyword)"
-                },
-                children: ":"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "var(--shiki-color-text)"
-                },
-                children: " "
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "var(--shiki-token-string-expression)"
-                },
-                children: "'http://localhost:8082'"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "var(--shiki-token-punctuation)"
-                },
-                children: ","
-              })]
-            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
-              className: "line",
-              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "var(--shiki-color-text)"
-                },
-                children: "          }"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "var(--shiki-token-punctuation)"
-                },
-                children: ","
-              })]
-            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-              className: "line",
-              children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "var(--shiki-color-text)"
-                },
-                children: "        ];"
+                children: "        }];"
               })
             }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
               className: "line",
@@ -566,10 +563,10 @@ function _createMdxContent(props) {
         children: "App.tsx"
       }), " 文件如下："]
     }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.div, {
-      className: "language-tsx",
+      className: "language-js",
       children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.div, {
         className: "modern-code-title",
-        children: "主应用：App.tsx"
+        children: "App.tsx"
       }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.div, {
         className: "modern-code-content",
         children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.button, {
@@ -613,6 +610,8 @@ function _createMdxContent(props) {
                 },
                 children: ";"
               })]
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+              className: "line"
             }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
               className: "line",
               children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
@@ -624,7 +623,7 @@ function _createMdxContent(props) {
                 style: {
                   color: "var(--shiki-color-text)"
                 },
-                children: " { Route"
+                children: " { RouterProvider"
               }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
                   color: "var(--shiki-token-punctuation)"
@@ -634,7 +633,57 @@ function _createMdxContent(props) {
                 style: {
                   color: "var(--shiki-color-text)"
                 },
-                children: " Switch } "
+                children: " Route"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-token-punctuation)"
+                },
+                children: ","
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-color-text)"
+                },
+                children: " createBrowserRouter"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-token-punctuation)"
+                },
+                children: ","
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-color-text)"
+                },
+                children: " createRoutesFromElements"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-token-punctuation)"
+                },
+                children: ","
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-color-text)"
+                },
+                children: " BrowserRouter"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-token-punctuation)"
+                },
+                children: ","
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-color-text)"
+                },
+                children: " Link"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-token-punctuation)"
+                },
+                children: ","
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-color-text)"
+                },
+                children: " Outlet } "
               }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
                   color: "var(--shiki-token-keyword)"
@@ -664,7 +713,7 @@ function _createMdxContent(props) {
                 style: {
                   color: "var(--shiki-token-keyword)"
                 },
-                children: "function"
+                children: "const"
               }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
                   color: "var(--shiki-color-text)"
@@ -674,12 +723,328 @@ function _createMdxContent(props) {
                 style: {
                   color: "var(--shiki-token-function)"
                 },
-                children: "App"
+                children: "AppLayout"
               }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
                   color: "var(--shiki-color-text)"
                 },
-                children: "() {"
+                children: " "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-token-keyword)"
+                },
+                children: "="
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-color-text)"
+                },
+                children: " () "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-token-keyword)"
+                },
+                children: "=>"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-color-text)"
+                },
+                children: " ("
+              })]
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+              className: "line",
+              children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-color-text)"
+                },
+                children: "  <>"
+              })
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-color-text)"
+                },
+                children: "    <"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-token-string-expression)"
+                },
+                children: "div"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-color-text)"
+                },
+                children: "><"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-token-constant)"
+                },
+                children: "Link"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-color-text)"
+                },
+                children: " "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-token-function)"
+                },
+                children: "to"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-token-keyword)"
+                },
+                children: "="
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-color-text)"
+                },
+                children: "{"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-token-string-expression)"
+                },
+                children: "'/SubConvention'"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-color-text)"
+                },
+                children: "}>加载约定式路由子应用</"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-token-constant)"
+                },
+                children: "Link"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-color-text)"
+                },
+                children: "></"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-token-string-expression)"
+                },
+                children: "div"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-color-text)"
+                },
+                children: ">"
+              })]
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-color-text)"
+                },
+                children: "    <"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-token-string-expression)"
+                },
+                children: "div"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-color-text)"
+                },
+                children: "><"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-token-constant)"
+                },
+                children: "Link"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-color-text)"
+                },
+                children: " "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-token-function)"
+                },
+                children: "to"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-token-keyword)"
+                },
+                children: "="
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-color-text)"
+                },
+                children: "{"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-token-string-expression)"
+                },
+                children: "'/SubCustom'"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-color-text)"
+                },
+                children: "}>加载自控式路由子应用</"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-token-constant)"
+                },
+                children: "Link"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-color-text)"
+                },
+                children: "></"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-token-string-expression)"
+                },
+                children: "div"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-color-text)"
+                },
+                children: ">"
+              })]
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-color-text)"
+                },
+                children: "    <"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-token-string-expression)"
+                },
+                children: "div"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-color-text)"
+                },
+                children: "><"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-token-constant)"
+                },
+                children: "Link"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-color-text)"
+                },
+                children: " "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-token-function)"
+                },
+                children: "to"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-token-keyword)"
+                },
+                children: "="
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-color-text)"
+                },
+                children: "{"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-token-string-expression)"
+                },
+                children: "'/'"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-color-text)"
+                },
+                children: "}>卸载子应用</"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-token-constant)"
+                },
+                children: "Link"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-color-text)"
+                },
+                children: "></"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-token-string-expression)"
+                },
+                children: "div"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-color-text)"
+                },
+                children: ">"
+              })]
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-color-text)"
+                },
+                children: "    <"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-token-constant)"
+                },
+                children: "Outlet"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-color-text)"
+                },
+                children: " />"
+              })]
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+              className: "line",
+              children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-color-text)"
+                },
+                children: "  </>"
+              })
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+              className: "line",
+              children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-color-text)"
+                },
+                children: ")"
+              })
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+              className: "line"
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-token-keyword)"
+                },
+                children: "export"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-color-text)"
+                },
+                children: " "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-token-keyword)"
+                },
+                children: "default"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-color-text)"
+                },
+                children: " () "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-token-keyword)"
+                },
+                children: "=>"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-color-text)"
+                },
+                children: " {"
               })]
             }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
               className: "line",
@@ -702,7 +1067,7 @@ function _createMdxContent(props) {
                 style: {
                   color: "var(--shiki-token-constant)"
                 },
-                children: "DashBoard"
+                children: "apps"
               }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
                   color: "var(--shiki-token-punctuation)"
@@ -717,7 +1082,7 @@ function _createMdxContent(props) {
                 style: {
                   color: "var(--shiki-token-constant)"
                 },
-                children: "TableList"
+                children: "MApp"
               }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
                   color: "var(--shiki-color-text)"
@@ -755,14 +1120,9 @@ function _createMdxContent(props) {
                 children: "  "
               }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
-                  color: "var(--shiki-token-keyword)"
+                  color: "var(--shiki-token-comment)"
                 },
-                children: "return"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "var(--shiki-color-text)"
-                },
-                children: " ("
+                children: "// 使用的不是 MApp 组件，需要使用 createBrowserRouter 来创建路由"
               })]
             }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
               className: "line",
@@ -770,17 +1130,65 @@ function _createMdxContent(props) {
                 style: {
                   color: "var(--shiki-color-text)"
                 },
-                children: "    <"
+                children: "  "
               }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
-                  color: "var(--shiki-token-string-expression)"
+                  color: "var(--shiki-token-keyword)"
                 },
-                children: "div"
+                children: "const"
               }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
                   color: "var(--shiki-color-text)"
                 },
-                children: ">"
+                children: " "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-token-constant)"
+                },
+                children: "router"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-color-text)"
+                },
+                children: " "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-token-keyword)"
+                },
+                children: "="
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-color-text)"
+                },
+                children: " "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-token-function)"
+                },
+                children: "createBrowserRouter"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-color-text)"
+                },
+                children: "("
+              })]
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-color-text)"
+                },
+                children: "    "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-token-function)"
+                },
+                children: "createRoutesFromElements"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-color-text)"
+                },
+                children: "("
               })]
             }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
               className: "line",
@@ -813,12 +1221,37 @@ function _createMdxContent(props) {
                 style: {
                   color: "var(--shiki-token-string-expression)"
                 },
-                children: "\"/dashboard\""
+                children: "\"/\""
               }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
                   color: "var(--shiki-color-text)"
                 },
-                children: ">"
+                children: " "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-token-function)"
+                },
+                children: "element"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-token-keyword)"
+                },
+                children: "="
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-color-text)"
+                },
+                children: "{<"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-token-constant)"
+                },
+                children: "AppLayout"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-color-text)"
+                },
+                children: " />}>"
               })]
             }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
               className: "line",
@@ -826,12 +1259,32 @@ function _createMdxContent(props) {
                 style: {
                   color: "var(--shiki-color-text)"
                 },
-                children: "        <"
+                children: "        {"
               }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
                   color: "var(--shiki-token-constant)"
                 },
-                children: "DashBoard"
+                children: "apps"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-token-function)"
+                },
+                children: ".map"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-color-text)"
+                },
+                children: "(app "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-token-keyword)"
+                },
+                children: "=>"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-color-text)"
+                },
+                children: " {"
               })]
             }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
               className: "line",
@@ -840,6 +1293,215 @@ function _createMdxContent(props) {
                   color: "var(--shiki-color-text)"
                 },
                 children: "          "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-token-keyword)"
+                },
+                children: "const"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-color-text)"
+                },
+                children: " { "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-token-constant)"
+                },
+                children: "Component"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-color-text)"
+                },
+                children: " } "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-token-keyword)"
+                },
+                children: "="
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-color-text)"
+                },
+                children: " app;"
+              })]
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-color-text)"
+                },
+                children: "          "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-token-comment)"
+                },
+                children: "// 模糊匹配，path 需要写成类似 abc/* 的模式"
+              })]
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-color-text)"
+                },
+                children: "          "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-token-keyword)"
+                },
+                children: "return"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-color-text)"
+                },
+                children: " ("
+              })]
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-color-text)"
+                },
+                children: "            <"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-token-constant)"
+                },
+                children: "Route"
+              })]
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-color-text)"
+                },
+                children: "              "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-token-function)"
+                },
+                children: "key"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-token-keyword)"
+                },
+                children: "="
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-color-text)"
+                },
+                children: "{"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-token-constant)"
+                },
+                children: "app"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-color-text)"
+                },
+                children: ".name}"
+              })]
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-color-text)"
+                },
+                children: "              "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-token-function)"
+                },
+                children: "path"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-token-keyword)"
+                },
+                children: "="
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-color-text)"
+                },
+                children: "{"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-token-string-expression)"
+                },
+                children: "`"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-token-keyword)"
+                },
+                children: "${"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-token-constant)"
+                },
+                children: "app"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-color-text)"
+                },
+                children: ".name"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-token-keyword)"
+                },
+                children: "}"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-token-string-expression)"
+                },
+                children: "/*`"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-color-text)"
+                },
+                children: "}"
+              })]
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-color-text)"
+                },
+                children: "              "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-token-function)"
+                },
+                children: "element"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-token-keyword)"
+                },
+                children: "="
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-color-text)"
+                },
+                children: "{"
+              })]
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-color-text)"
+                },
+                children: "              <"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-token-constant)"
+                },
+                children: "Component"
+              })]
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-color-text)"
+                },
+                children: "                "
               }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
                   color: "var(--shiki-token-function)"
@@ -862,7 +1524,7 @@ function _createMdxContent(props) {
                 style: {
                   color: "var(--shiki-color-text)"
                 },
-                children: "            "
+                children: "                  "
               }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
                   color: "var(--shiki-token-function)"
@@ -925,7 +1587,7 @@ function _createMdxContent(props) {
                 style: {
                   color: "var(--shiki-color-text)"
                 },
-                children: "              "
+                children: "                    "
               }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
                   color: "var(--shiki-token-keyword)"
@@ -943,7 +1605,7 @@ function _createMdxContent(props) {
                 style: {
                   color: "var(--shiki-color-text)"
                 },
-                children: "                "
+                children: "                      "
               }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
                   color: "var(--shiki-token-keyword)"
@@ -991,7 +1653,7 @@ function _createMdxContent(props) {
                 style: {
                   color: "var(--shiki-color-text)"
                 },
-                children: "              } "
+                children: "                    } "
               }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
                   color: "var(--shiki-token-keyword)"
@@ -1019,7 +1681,7 @@ function _createMdxContent(props) {
                 style: {
                   color: "var(--shiki-color-text)"
                 },
-                children: "                "
+                children: "                      "
               }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
                   color: "var(--shiki-token-keyword)"
@@ -1057,7 +1719,7 @@ function _createMdxContent(props) {
                 style: {
                   color: "var(--shiki-color-text)"
                 },
-                children: "              } "
+                children: "                    } "
               }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
                   color: "var(--shiki-token-keyword)"
@@ -1075,7 +1737,7 @@ function _createMdxContent(props) {
                 style: {
                   color: "var(--shiki-color-text)"
                 },
-                children: "                "
+                children: "                      "
               }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
                   color: "var(--shiki-token-keyword)"
@@ -1103,7 +1765,7 @@ function _createMdxContent(props) {
                 style: {
                   color: "var(--shiki-color-text)"
                 },
-                children: "              }"
+                children: "                    }"
               })
             }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
               className: "line",
@@ -1111,7 +1773,7 @@ function _createMdxContent(props) {
                 style: {
                   color: "var(--shiki-color-text)"
                 },
-                children: "            }"
+                children: "                  }"
               }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
                   color: "var(--shiki-token-punctuation)"
@@ -1124,7 +1786,7 @@ function _createMdxContent(props) {
                 style: {
                   color: "var(--shiki-color-text)"
                 },
-                children: "          }}"
+                children: "                }}"
               })
             }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
               className: "line",
@@ -1132,7 +1794,39 @@ function _createMdxContent(props) {
                 style: {
                   color: "var(--shiki-color-text)"
                 },
-                children: "        />"
+                children: "              />"
+              })
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+              className: "line",
+              children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-color-text)"
+                },
+                children: "              }"
+              })
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+              className: "line",
+              children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-color-text)"
+                },
+                children: "            />"
+              })
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+              className: "line",
+              children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-color-text)"
+                },
+                children: "          )"
+              })
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+              className: "line",
+              children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-color-text)"
+                },
+                children: "        })}"
               })
             }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
               className: "line",
@@ -1152,6 +1846,117 @@ function _createMdxContent(props) {
                 },
                 children: ">"
               })]
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+              className: "line",
+              children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-color-text)"
+                },
+                children: "    )"
+              })
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+              className: "line",
+              children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-color-text)"
+                },
+                children: "  );"
+              })
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+              className: "line"
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-color-text)"
+                },
+                children: "  "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-token-keyword)"
+                },
+                children: "return"
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-color-text)"
+                },
+                children: " ("
+              })]
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-color-text)"
+                },
+                children: "    "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-token-comment)"
+                },
+                children: "// 方法一：使用 MApp 自动根据配置的 activeWhen 参数加载子应用(本项目配置在 modern.config.ts 中)"
+              })]
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-color-text)"
+                },
+                children: "    "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-token-comment)"
+                },
+                children: "// <BrowserRouter>"
+              })]
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-color-text)"
+                },
+                children: "    "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-token-comment)"
+                },
+                children: "//   <MApp />"
+              })]
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-color-text)"
+                },
+                children: "    "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-token-comment)"
+                },
+                children: "// </BrowserRouter>"
+              })]
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+              className: "line"
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
+              className: "line",
+              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-color-text)"
+                },
+                children: "    "
+              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-token-comment)"
+                },
+                children: "// 方法二：手动写 Route 组件方式加载子应用，方便于需要鉴权等需要前置操作的场景"
+              })]
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+              className: "line",
+              children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+                style: {
+                  color: "var(--shiki-color-text)"
+                },
+                children: "    <>"
+              })
             }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
               className: "line",
               children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
@@ -1163,7 +1968,7 @@ function _createMdxContent(props) {
                 style: {
                   color: "var(--shiki-token-constant)"
                 },
-                children: "Route"
+                children: "RouterProvider"
               }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
                   color: "var(--shiki-color-text)"
@@ -1173,7 +1978,7 @@ function _createMdxContent(props) {
                 style: {
                   color: "var(--shiki-token-function)"
                 },
-                children: "path"
+                children: "router"
               }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
                   color: "var(--shiki-token-keyword)"
@@ -1181,69 +1986,18 @@ function _createMdxContent(props) {
                 children: "="
               }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
-                  color: "var(--shiki-token-string-expression)"
-                },
-                children: "\"/table\""
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
                   color: "var(--shiki-color-text)"
                 },
-                children: ">"
+                children: "{router} />"
               })]
-            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
+            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
               className: "line",
-              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
+              children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
                 style: {
                   color: "var(--shiki-color-text)"
                 },
-                children: "        <"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "var(--shiki-token-constant)"
-                },
-                children: "TableList"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "var(--shiki-color-text)"
-                },
-                children: " />"
-              })]
-            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
-              className: "line",
-              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "var(--shiki-color-text)"
-                },
-                children: "      </"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "var(--shiki-token-constant)"
-                },
-                children: "Route"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "var(--shiki-color-text)"
-                },
-                children: ">"
-              })]
-            }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
-              className: "line",
-              children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "var(--shiki-color-text)"
-                },
-                children: "    </"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "var(--shiki-token-string-expression)"
-                },
-                children: "div"
-              }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
-                style: {
-                  color: "var(--shiki-color-text)"
-                },
-                children: ">"
-              })]
+                children: "    </>"
+              })
             }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
               className: "line",
               children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
@@ -1258,7 +2012,7 @@ function _createMdxContent(props) {
                 style: {
                   color: "var(--shiki-color-text)"
                 },
-                children: "}"
+                children: "};"
               })
             }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.span, {
               className: "line"
@@ -1270,13 +2024,13 @@ function _createMdxContent(props) {
       children: ["这里通过 ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
         children: "Route"
       }), " 组件自定义了 ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.strong, {
-        children: "DashBoard"
+        children: "SubConvention"
       }), " 的激活路由为 ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.strong, {
-        children: "/dashboard"
+        children: "/SubConvention"
       }), "， ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.strong, {
-        children: "TableList"
+        children: "SubCustom"
       }), " 的激活路由为 ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.strong, {
-        children: "/table"
+        children: "/SubCustom"
       }), "。"]
     }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.h3, {
       id: "集中式路由",
@@ -1521,13 +2275,13 @@ function _createMdxContent(props) {
       })]
     }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.p, {
       children: ["这样启动应用后，访问 ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
-        children: "/dashboard"
+        children: "/SubCustom"
       }), " 路由，会渲染 ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
-        children: "Dashboard"
+        children: "SubCustom"
       }), " 子应用，访问 ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
-        children: "/table"
+        children: "/SubConvention"
       }), " 路由，会渲染 ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components.code, {
-        children: "TableList"
+        children: "SubConvention"
       }), " 子应用。"]
     }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.h3, {
       id: "两种模式混用",
@@ -1711,7 +2465,7 @@ function _createMdxContent(props) {
                 style: {
                   color: "var(--shiki-token-constant)"
                 },
-                children: "DashBoard"
+                children: "SubCustom"
               })]
             }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
               className: "line",
@@ -2333,7 +3087,7 @@ function _createMdxContent(props) {
                 style: {
                   color: "var(--shiki-token-constant)"
                 },
-                children: "DashBoard"
+                children: "SubCustom"
               })]
             }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
               className: "line",
@@ -2865,7 +3619,7 @@ function _createMdxContent(props) {
                 style: {
                   color: "var(--shiki-token-constant)"
                 },
-                children: "DashBoard"
+                children: "SubCustom"
               })]
             }), "\n", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components.span, {
               className: "line",
