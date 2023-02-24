@@ -13,4 +13,5 @@ export {
   Tabs,
   Button,
   Link,
+  HomeFooter,
 } from '@modern-js/doc-tools/theme';
