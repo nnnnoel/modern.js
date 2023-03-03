@@ -6,7 +6,7 @@ export type ModuleDocgenLanguage = 'zh' | 'en';
 
 export type PluginOptions = Pick<
   Options,
-  'entries' | 'languages' | 'doc' | 'demosDir' | 'supportDemoMDX'
+  'entries' | 'languages' | 'doc' | 'demosDir' | 'useTemplate'
 >;
 
 export type Options = {
@@ -33,11 +33,11 @@ export type Options = {
    */
   demosDir?: string;
   /**
-   * Support MDX in demo
-   * @zh 是否支持 demo 中使用 MDX
+   * useTemplate
+   * @zh 是否使用模板渲染
    * @default false
    */
-  supportDemoMDX?: boolean;
+  useTemplate?: boolean;
   /**
    * isProduction
    * @zh 是否是生产环境

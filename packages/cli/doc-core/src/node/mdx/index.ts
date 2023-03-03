@@ -16,6 +16,7 @@ import { rehypePluginPreWrapper } from './rehypePlugins/preWrapper';
 import { rehypePluginShiki } from './rehypePlugins/shiki';
 import { remarkPluginNormalizeLink } from './remarkPlugins/normalizeLink';
 import { remarkCheckDeadLinks } from './remarkPlugins/checkDeadLink';
+import { remarkTsxToReact } from './remarkPlugins/tsx2react';
 
 export async function createMDXOptions(
   userRoot: string,
@@ -41,6 +42,7 @@ export async function createMDXOptions(
       remarkPluginFrontMatter,
       [remarkPluginMDXFrontMatter, { name: 'frontmatter' }],
       remarkPluginToc,
+      remarkTsxToReact,
       [
         remarkPluginNormalizeLink,
         {

@@ -11,7 +11,7 @@ export const normalizeOptions = (options: Options): Required<Options> => {
     docgenDir = './node_modules/.docs',
     isTsProject = true,
     entries = {},
-    supportDemoMDX = true,
+    useTemplate = true,
   } = options;
   return {
     languages,
@@ -23,6 +23,6 @@ export const normalizeOptions = (options: Options): Required<Options> => {
     docgenDir,
     isTsProject,
     entries,
-    supportDemoMDX,
+    useTemplate,
   };
 };

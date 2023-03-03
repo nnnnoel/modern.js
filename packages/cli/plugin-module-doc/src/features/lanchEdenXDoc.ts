@@ -7,14 +7,18 @@ import { Options } from '../types';
 export async function launchEdenXDoc({
   languages,
   appDir,
+  demosDir,
   doc,
   isProduction,
   docgenDir,
+  useTemplate,
 }: Required<Options>) {
   const json = JSON.parse(
     fs.readFileSync(path.resolve(appDir, './package.json'), 'utf8'),
   );
-  const root = doc?.root ?? path.join(appDir, docgenDir);
+  const root = useTemplate
+    ? path.join(appDir, docgenDir)
+    : path.join(appDir, demosDir);
   const DEFAULT_LANG = languages[0];
   const { dev, build } = await import('@modern-js/doc-core');
 
@@ -57,6 +61,7 @@ export async function launchEdenXDoc({
           outlineTitle: lang === 'zh' ? '目录' : 'ON THIS PAGE',
         })),
       },
+      ...doc,
     },
   };
 

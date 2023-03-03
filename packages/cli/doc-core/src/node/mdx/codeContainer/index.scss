@@ -1,0 +1,29 @@
+.code-demo {
+  margin-top: 24px;
+  padding: 48px;
+  color: #282f38;
+  background-color: var(--color-bg-2);
+  border: 1px solid var(--color-border);
+  border-radius: 2px 2px 0 0;
+}
+
+
+
+.code-operations {
+  display: flex;
+  justify-content: center;
+  .ac-btn-expanded {
+    background-color: rgb(var(--gray-10)) !important;
+    color: rgb(var(--gray-1)) !important;
+    border-color: rgb(var(--gray-1)) !important;
+  }
+}
+
+.code-content {
+  position: relative;
+  overflow: hidden;
+}
+
+.code-content.show-all {
+  margin-top: 16px;
+}

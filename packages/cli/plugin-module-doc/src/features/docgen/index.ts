@@ -2,6 +2,7 @@ import path from 'path';
 import { fs, chalk, fastGlob } from '@modern-js/utils';
 import type { APIParseTools, ModuleDocgenLanguage, Options } from '../../types';
 // import frontMatter from 'front-matter';
+import { PropsMarkdownMap } from '../../components/api';
 import getProps from './getProps';
 import injectDemoCodes from './injectDemoCodes';
 
@@ -19,7 +20,7 @@ export const docgen = async ({
   languages,
   docgenDir,
   demosDir,
-  isTsProject,
+  useTemplate,
 }: Required<Options>) => {
   console.info('[module-doc-plugin]', 'Start to generate document...');
 
@@ -31,7 +32,7 @@ export const docgen = async ({
       const demoDir = path.resolve(demosDir, key);
       const moduleName = path.parse(demoDir).name;
       // 国际化目录规范和 EdenX Doc 一致
-      const outputPath = path.resolve(docgenDir, language, `${key}.md`);
+      const outputPath = path.resolve(docgenDir, language, `${key}.mdx`);
       const moduleSourceFilePath = path.resolve(appDir, value);
 
       // TODO: 增加用户可自定义模版，如没有定义模版则使用默认模版
@@ -39,7 +40,6 @@ export const docgen = async ({
       // const attributes = fmResult.attributes;
       const attributes = { file: moduleName };
       // let markdownBody = fmResult.body;
-      let markdownBody = TEMPLATE_MARKDOWN_BODY;
 
       // Inject Props doc
       const PropsMarkdown = getProps(
@@ -51,6 +51,12 @@ export const docgen = async ({
           language,
         },
       );
+      if (!useTemplate) {
+        PropsMarkdownMap.set(key, PropsMarkdown);
+        return;
+      }
+
+      let markdownBody = TEMPLATE_MARKDOWN_BODY;
 
       markdownBody = markdownBody.replace(PLACEHOLDER_PROP, PropsMarkdown);
 

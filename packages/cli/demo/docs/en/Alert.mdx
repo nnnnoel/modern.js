@@ -1,0 +1,54 @@
+# Alert
+
+## Demos
+
+
+### 基本用法 demo1
+点击按钮发射五彩纸屑吧～异步触发只需要在 onClick 中返回一个 Promise 即可。
+
+```jsx
+import React from 'react';
+import { AlertTest } from 'demo';
+
+export default () => {
+  return <AlertTest closable={true} content={'Here is an demo1'}></AlertTest>;
+};
+
+```
+
+### 基本用法 demo2
+demo2 点击按钮发射五彩纸屑吧～异步触发只需要在 onClick 中返回一个 Promise 即可。
+
+```jsx
+import React from 'react';
+import { AlertTest } from 'demo';
+
+export default () => {
+  return <AlertTest closable={false} content={'Here is an demo2 '}></AlertTest>;
+};
+
+```
+
+<API key='Alert'></API>
+
+
+## 属性/Props
+
+### InnerProps
+
+When displaying warning information to the user, the information that needs attention is displayed through the warning prompt.
+
+|Property|Description|Type|DefaultValue|
+|---|---|---|---|
+|position|position|string |`-`|
+|size|Size|string |`-`|
+|status|status|'danger' \| 'error' \| 'success' |`-`|
+
+### Alert
+
+Display warning information to the user. the Alert is used to display the information that needs attention.
+
+|Property|Description|Type|DefaultValue|Version|
+|---|---|---|---|---|
+|action|this is action|React.ReactNode |`-`|2.15.0|
+|closable|Whether Alert can be closed|boolean |`false`|-|

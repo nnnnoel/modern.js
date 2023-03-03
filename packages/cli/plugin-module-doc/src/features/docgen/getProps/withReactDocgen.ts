@@ -83,7 +83,7 @@ ${tableContent.join('\n')}
 export default function withReactDocgen({
   moduleSourceFilePath,
   attributes,
-}: InjectPropsParams): string {
+}: InjectPropsParams) {
   let mainComponent: string;
   const parseFiles = attributes.file ? attributes.file.split(',') : [];
   const propsTables: string[] = [];
