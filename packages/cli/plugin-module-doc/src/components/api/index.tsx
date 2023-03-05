@@ -1,8 +1,7 @@
 import ReactMarkdown from 'react-markdown';
+import { PropsMarkdownMap } from '../../constants';
 
-export default (props: { key: string }) => {
-  const md = PropsMarkdownMap.get(props.key);
+export default (props: { propsMd: string }) => {
+  const md = PropsMarkdownMap.get(props.propsMd);
   return md ? <ReactMarkdown>{md}</ReactMarkdown> : null;
 };
-
-export const PropsMarkdownMap = new Map<string, string>();

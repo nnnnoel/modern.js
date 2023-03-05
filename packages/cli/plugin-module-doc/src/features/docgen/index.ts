@@ -2,7 +2,7 @@ import path from 'path';
 import { fs, chalk, fastGlob } from '@modern-js/utils';
 import type { APIParseTools, ModuleDocgenLanguage, Options } from '../../types';
 // import frontMatter from 'front-matter';
-import { PropsMarkdownMap } from '../../components/api';
+import { PropsMarkdownMap } from '../../constants';
 import getProps from './getProps';
 import injectDemoCodes from './injectDemoCodes';
 

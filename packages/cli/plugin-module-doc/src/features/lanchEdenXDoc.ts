@@ -2,7 +2,9 @@ import path from 'path';
 import type { UserConfig } from '@modern-js/doc-core';
 import { pluginAutoSidebar } from '@modern-js/doc-plugin-auto-sidebar';
 import { fs, fastGlob } from '@modern-js/utils';
+import { demosVirtualModules } from '../virtualModule';
 import { Options } from '../types';
+import { remarkTsxToReact } from '../mdx/code-to-jsx';
 
 export async function launchEdenXDoc({
   languages,
@@ -29,6 +31,12 @@ export async function launchEdenXDoc({
       builderConfig: {
         dev: {
           port: 3333,
+        },
+        tools: {
+          webpackChain: (chain, { webpack, CHAIN_ID }) => {
+            // 新增插件
+            chain.plugin('demo-virtual-module').use(demosVirtualModules);
+          },
         },
       },
       plugins: [
@@ -60,6 +68,9 @@ export async function launchEdenXDoc({
           label: lang,
           outlineTitle: lang === 'zh' ? '目录' : 'ON THIS PAGE',
         })),
+      },
+      markdown: {
+        remarkPlugins: [remarkTsxToReact],
       },
       ...doc,
     },

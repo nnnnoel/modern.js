@@ -5,7 +5,7 @@ import { routeVMPlugin } from './routeData';
 import { siteDataVMPlugin } from './siteData';
 import { globalUIComponentsVMPlugin } from './globalUIComponents';
 import { globalStylesVMPlugin } from './globalStyles';
-import { demosVirtualModules } from './demos';
+// import { demosVirtualModules } from './demos';
 
 type VirtualModuleFactory = (
   userRoot: string,
@@ -42,7 +42,7 @@ export function builderDocVMPlugin(
             ),
           );
         }
-        webpackConfig.plugins!.push(demosVirtualModules);
+        // webpackConfig.plugins!.push(demosVirtualModules);
 
         webpackConfig.plugins!.push(...virtualModulePlugins);
       });

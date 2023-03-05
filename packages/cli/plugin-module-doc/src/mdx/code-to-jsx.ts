@@ -3,7 +3,8 @@ import type { Plugin } from 'unified';
 import type { Root } from 'mdast';
 import { visit } from 'unist-util-visit';
 import type { MdxjsEsm } from 'mdast-util-mdxjs-esm';
-import { PACKAGE_ROOT, demosVirtualModules } from '../constants';
+import { demosVirtualModules } from '../virtualModule';
+import { PACKAGE_ROOT } from '../constants';
 /**
  * remark plugin to transform code to jsx
  */
@@ -11,25 +12,26 @@ export const remarkTsxToReact: Plugin<[], Root> = () => {
   return tree => {
     const demos: MdxjsEsm[] = [];
     let index = 0;
+    // FIXME: fix path
+    demos.push(getASTNodeImport(`API`, join(PACKAGE_ROOT, 'dist/esm/api.js')));
     demos.push(
       getASTNodeImport(
         `CodeContainer`,
-        join(PACKAGE_ROOT, 'src/node/mdx/codeContainer'),
+        join(PACKAGE_ROOT, 'dist/esm/codeContainer.js'),
       ),
     );
-    debugger;
     visit(tree, 'code', node => {
       if (node.lang === 'jsx' || node.lang === 'tsx') {
         const code = node.value;
-
+        // FIXME: fix path
         const virtualModulePath = join(
-          PACKAGE_ROOT,
+          '/Users/bytedance/modern.js/packages/cli/doc-core',
           'node_modules',
-          `virtual-demo${index}.js`,
+          `virtual-demo${++index}.js`,
         );
         demosVirtualModules.writeModule(virtualModulePath, code);
 
-        demos.push(getASTNodeImport(`Demo${index++}`, virtualModulePath));
+        demos.push(getASTNodeImport(`Demo${index}`, virtualModulePath));
         Object.assign(node, {
           type: 'mdxJsxFlowElement',
           name: 'CodeContainer',

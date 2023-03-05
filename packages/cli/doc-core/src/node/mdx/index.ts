@@ -16,7 +16,7 @@ import { rehypePluginPreWrapper } from './rehypePlugins/preWrapper';
 import { rehypePluginShiki } from './rehypePlugins/shiki';
 import { remarkPluginNormalizeLink } from './remarkPlugins/normalizeLink';
 import { remarkCheckDeadLinks } from './remarkPlugins/checkDeadLink';
-import { remarkTsxToReact } from './remarkPlugins/tsx2react';
+// import { remarkTsxToReact } from './remarkPlugins/tsx2react';
 
 export async function createMDXOptions(
   userRoot: string,
@@ -37,12 +37,14 @@ export async function createMDXOptions(
   const enableDeadLinksCheck = config.doc?.markdown?.checkDeadLinks ?? false;
   return {
     remarkPlugins: [
+      ...remarkPluginsFromConfig,
+      ...remarkPluginsFromPlugins,
       remarkPluginContainer,
       remarkGFM,
       remarkPluginFrontMatter,
       [remarkPluginMDXFrontMatter, { name: 'frontmatter' }],
       remarkPluginToc,
-      remarkTsxToReact,
+      // remarkTsxToReact,
       [
         remarkPluginNormalizeLink,
         {
@@ -58,8 +60,6 @@ export async function createMDXOptions(
           base: config.doc?.base || '',
         },
       ],
-      ...remarkPluginsFromConfig,
-      ...remarkPluginsFromPlugins,
     ].filter(Boolean) as PluggableList,
     rehypePlugins: [
       rehypeSlug,
